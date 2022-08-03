@@ -20,6 +20,8 @@ class Business(db.Model):
     closingHours = db.Column(db.Integer, nullable=False)
 
     user = db.relationship('User', back_populates='businesses')
+    reviews = db.relationship(
+        'Review', back_populates='business', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
