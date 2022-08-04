@@ -15,9 +15,9 @@ class Business(db.Model):
     state = db.Column(db.String(50), nullable=False)
     zipCode = db.Column(db.String(10), nullable=False)
     phoneNumber = db.Column(db.Integer, nullable=False)
-    priceRange = db.Column(db.Integer, nullable=False)
-    openingHours = db.Column(db.Integer, nullable=False)
-    closingHours = db.Column(db.Integer, nullable=False)
+    priceRange = db.Column(db.String(4), nullable=False)
+    hours = db.Column(db.String(100), nullable=False)
+
 
     user = db.relationship('User', back_populates='businesses')
     reviews = db.relationship(
@@ -36,6 +36,5 @@ class Business(db.Model):
             'zipCode': self.zipCode,
             'phoneNumber': self.phoneNumber,
             'priceRange': self.priceRange,
-            'openingHours': self.openingHours,
-            'closingHours': self.closingHours,
+            'hours': self.hours,
         }
