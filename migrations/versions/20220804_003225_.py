@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ed9ad4840deb
+Revision ID: fa10059ff7c5
 Revises: 
-Create Date: 2022-08-02 21:40:10.767640
+Create Date: 2022-08-04 00:32:25.770569
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ed9ad4840deb'
+revision = 'fa10059ff7c5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,7 @@ def upgrade():
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
-    sa.Column('profilePhoto', sa.Text(), nullable=False),
+    sa.Column('profilePhoto', sa.Text(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -40,9 +40,8 @@ def upgrade():
     sa.Column('state', sa.String(length=50), nullable=False),
     sa.Column('zipCode', sa.String(length=10), nullable=False),
     sa.Column('phoneNumber', sa.Integer(), nullable=False),
-    sa.Column('priceRange', sa.Integer(), nullable=False),
-    sa.Column('openingHours', sa.Integer(), nullable=False),
-    sa.Column('closingHours', sa.Integer(), nullable=False),
+    sa.Column('priceRange', sa.String(length=4), nullable=False),
+    sa.Column('hours', sa.String(length=100), nullable=False),
     sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
