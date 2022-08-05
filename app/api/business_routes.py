@@ -4,7 +4,8 @@ from flask import Blueprint, jsonify, request
 from app.models import db
 from flask_login import login_required, current_user
 from app.forms.new_business_form import AddBusiness
-from app.s3 import (allowed_file, get_unique_filename, upload_file_to_s3, delete_object_from_bucket)
+from app.s3 import (allowed_file, get_unique_filename,
+                    upload_file_to_s3, delete_object_from_bucket)
 
 
 business_routes = Blueprint('businesses', __name__)
@@ -46,8 +47,33 @@ def add_business():
 def business(business_id):
     # print(search_value)
     business = Business.query.get(business_id)
-    print('---------------------------------',business,'---------------------------------')
+    print('---------------------------------',
+          business, '---------------------------------')
     return business.to_dict()
+
+
+@business_routes.route('/<int:business_id>', methods=['PUT'])
+@login_required
+def update_business(business_id):
+    # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', business_id)
+    business = Business.query.get(business_id)
+    # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', playlist.to_dict())
+    form = AddBusiness()
+    # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', form.data)
+    business.name = form.data['name'],
+    business.description = form.data['description'],
+    business.cuisine = form.data['cuisine'],
+    business.image = form.data['image'],
+    business.address = form.data['address'],
+    business.city = form.data['city'],
+    business.state = form.data['state'],
+    business.zipCode = form.data['zipCode'],
+    business.phoneNumber = form.data['phoneNumber'],
+    business.priceRange = form.data['priceRange'],
+    business.hours = form.data['hours'],
+    db.session.commit()
+    return business.to_dict()
+
 
 @business_routes.route("/image", methods=["POST"])
 @login_required
@@ -56,7 +82,7 @@ def upload_image():
         print('----------error #1-----------')
         return {"errors": "image required"}, 400
 
-    print('line50',request.files)
+    print('line50', request.files)
 
     image = request.files["image"]
     print('--------image--------', image)
