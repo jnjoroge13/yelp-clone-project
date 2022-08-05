@@ -75,6 +75,16 @@ def update_business(business_id):
     return business.to_dict()
 
 
+@business_routes.route('/<int:business_id>', methods=['DELETE'])
+@login_required
+def delete_business(business_id):
+    business = Business.query.get(business_id)
+    db.session.delete(business)
+    db.session.commit()
+
+
+
+
 @business_routes.route("/image", methods=["POST"])
 @login_required
 def upload_image():
@@ -104,3 +114,12 @@ def upload_image():
     url = upload["url"]
 
     return {"image": url}
+
+
+@business_routes.route("/image", methods=["DELETE"])
+@login_required
+def delete_image():
+    source = request.form["image"]
+    response = delete_object_from_bucket(source)
+    print('------response-------', response)
+    return response
