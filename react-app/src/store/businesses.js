@@ -1,4 +1,5 @@
 const GET_Businesses = "businesses/GET_Businesses";
+const GET_One_Business = "businesses/GET_One_Business";
 const ADD_Business = "businesses/ADD_Business";
 const EDIT_Business = "businesses/EDIT_Business";
 const DELETE_Business = "businesses/DELETE_Business";
@@ -7,6 +8,12 @@ const actionGetBusinesses = (businesses) => {
 	return {
 		type: GET_Businesses,
 		businesses,
+	};
+};
+const actionGetOneBusinesses = (business) => {
+	return {
+		type: GET_One_Business,
+		business,
 	};
 };
 
@@ -35,6 +42,13 @@ export const thunkGetBusinesses = () => async (dispatch) => {
 	const res = await fetch("/api/businesses/");
 	const businesses = await res.json();
 	dispatch(actionGetBusinesses(businesses));
+	return res;
+};
+
+export const thunkGetOneBusiness = (businessId) => async (dispatch) => {
+	const res = await fetch(`/api/businesses/${businessId}`);
+	const business = await res.json();
+	dispatch(actionGetOneBusinesses(business));
 	return res;
 };
 
@@ -79,6 +93,10 @@ const businessReducer = (state = {}, action) => {
 			action.businesses.businesses.forEach((business) => {
 				newState[business.id] = business;
 			});
+			return newState;
+
+		case GET_One_Business:
+			newState[action.business.id] = action.business;
 			return newState;
 
 		case ADD_Business:

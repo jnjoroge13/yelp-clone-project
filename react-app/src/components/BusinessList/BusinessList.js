@@ -22,13 +22,14 @@ export default function BusinessList() {
 		history.push("/businesses/new");
 	};
 
+
 	return (
 		<div>
 			<button onClick={newBusinessBtn}>New Business</button>
 			{businessArray &&
 				businessArray.map((business) => (
 					<div>
-                        <p>name: {business.name} cuisine: {business.cuisine} description: {business.description} hours: {business.hours} image: <img width='100' src={business.image} /> price: {business.priceRange}</p>
+                        <p>name: {business.name} cuisine: {business.cuisine} description: {business.description} hours: {business.hours} image: <img width='100' src={business.image} /> price: {business.priceRange} id:{business.id}</p>
 					</div>
 				))}
 		</div>
