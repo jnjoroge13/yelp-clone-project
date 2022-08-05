@@ -121,7 +121,7 @@ def upload_image():
 def delete_image():
     source = request.form["image"]
     splitsource = source.split('/')
-    print('------splitsource-------', splitsource[3])
+    # print('------splitsource-------', splitsource[3])
     response = delete_object_from_bucket(splitsource[3])
     # print('------response-------', response)
     return response
