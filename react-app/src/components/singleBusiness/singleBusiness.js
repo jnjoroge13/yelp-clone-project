@@ -11,8 +11,16 @@ export default function SingleBusiness() {
     useEffect(() => {
         dispatch(thunkGetOneBusiness(businessId))
     },[businessId])
-    const business = useSelector(state=>state.businesses[businessId])
+    const business = useSelector(state => state.businesses[businessId])
+    const [editBusiness, setEditBusiness] = useState(false)
 
+
+    const openEditForm = () => {
+        setEditBusiness(true)
+    }
+    const closeEditForm = () => {
+        setEditBusiness(false)
+    }
     const onDelete = async(e) => {
         e.preventDefault();
 
@@ -44,9 +52,9 @@ export default function SingleBusiness() {
                 created by: {business?.user.username}
                 <img width='100' src={business?.image} />
             </p>
-            <button>Edit</button>
+            <button onClick={openEditForm}>Edit</button>
             <button onClick={onDelete}>Delete</button>
-            <EditBusinessForm/>
+            {editBusiness && <EditBusinessForm closeEditForm={closeEditForm}/>}
         </div>
     )
 }

@@ -4,7 +4,7 @@ import { thunkEditBusiness } from "../../store/businesses";
 import { useHistory, useParams } from "react-router-dom";
 import { thunkGetOneBusiness } from "../../store/businesses";
 
-export default function EditBusinessForm() {
+export default function EditBusinessForm({closeEditForm}) {
 	const dispatch = useDispatch();
 	const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
@@ -28,6 +28,7 @@ export default function EditBusinessForm() {
     const [errors, setErrors] = useState([])
     const [showErrors, SetShowErrors] = useState(false)
 
+
     useEffect(() => {
         setName(business?.name);
         setDescription(business?.description);
@@ -41,7 +42,9 @@ export default function EditBusinessForm() {
         setPhoneNumber(business?.phoneNumber);
         setPriceRange(business?.priceRange);
         setHours(business?.hours);
-    },[business])
+    }, [business])
+
+
     const onSubmit = async(e) => {
         e.preventDefault();
         SetShowErrors(true)
@@ -76,6 +79,7 @@ export default function EditBusinessForm() {
 
                 if (response === 'Business Updated') {
                     dispatch(thunkGetOneBusiness(businessId));
+                    closeEditForm()
                 }
             }
         // }
@@ -175,6 +179,7 @@ export default function EditBusinessForm() {
 				</div>
 				<div>
 					<button>Submit</button>
+					<button onClick={closeEditForm}>Cancel</button>
 				</div>
 			</form>
 		</div>
