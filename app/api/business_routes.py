@@ -120,6 +120,8 @@ def upload_image():
 @login_required
 def delete_image():
     source = request.form["image"]
-    response = delete_object_from_bucket(source)
-    print('------response-------', response)
+    splitsource = source.split('/')
+    print('------splitsource-------', splitsource[3])
+    response = delete_object_from_bucket(splitsource[3])
+    # print('------response-------', response)
     return response
