@@ -30,6 +30,7 @@ class Business(db.Model):
             'name': self.name,
             'description': self.description,
             'cuisine': self.cuisine,
+            'image': self.image,
             'address': self.address,
             'city': self.city,
             'state': self.state,
