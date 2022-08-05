@@ -17,6 +17,7 @@ export default function EditBusinessForm({closeEditForm}) {
 	const [description, setDescription] = useState(business?.description);
 	const [cuisine, setCuisine] = useState(business?.cuisine);
 	const [image, setImage] = useState(business?.image);
+	const [newImage, setNewImage] = useState(null);
 	const [imageLoading, setImageLoading] = useState(false);
 	const [address, setAddress] = useState(business?.address);
 	const [city, setCity] = useState(business?.city);
@@ -49,17 +50,41 @@ export default function EditBusinessForm({closeEditForm}) {
         e.preventDefault();
         SetShowErrors(true)
         if (!errors.length) {
-            // const formData = new FormData();
-            // formData.append('image', image)
-            // setImageLoading(true)
-            // const res = await fetch('/api/businesses/image', {
-            //     method: 'POST',
-            //     body: formData
-            // })
-            // if (res.ok) {
-            //     const jsonRes = await res.json();
-            //     setImageLoading(false);
+            if (newImage) {
+                const formData = new FormData();
+                formData.append('image', newImage)
+                setImageLoading(true)
+                const res = await fetch('/api/businesses/image', {
+                    method: 'POST',
+                    body: formData
+                })
 
+                if (res.ok) {
+                    const jsonRes = await res.json();
+                    setImageLoading(false);
+                    const business = {
+                        name,
+                        description,
+                        cuisine,
+                        address,
+                        city,
+                        state,
+                        zipCode,
+                        phoneNumber,
+                        priceRange,
+                        hours,
+                        image:jsonRes.image,
+                        id:businessId
+                    };
+
+                    const response = await dispatch(thunkEditBusiness(business));
+
+                    if (response === 'Business Updated') {
+                        dispatch(thunkGetOneBusiness(businessId));
+                        closeEditForm()
+                    }
+                }
+            } else {
                 const business = {
                     name,
                     description,
@@ -81,6 +106,7 @@ export default function EditBusinessForm({closeEditForm}) {
                     dispatch(thunkGetOneBusiness(businessId));
                     closeEditForm()
                 }
+            }
             }
         // }
     };
@@ -119,7 +145,7 @@ export default function EditBusinessForm({closeEditForm}) {
 				</div>
 				<div>
 					<label>Image:</label>
-					<input type="file" onChange={(e) => setImage(e.target.files[0])} />
+					<input type="file" onChange={(e) => setNewImage(e.target.files[0])} />
                     {image && <p >{image.name}</p>}
                     {(imageLoading) && <p >Uploading   <img src='https://i.gifer.com/ZZ5H.gif' alt='Uploading' ></img></p>}
 
