@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: fa10059ff7c5
+Revision ID: d372599c14da
 Revises: 
-Create Date: 2022-08-04 00:32:25.770569
+Create Date: 2022-08-04 22:00:28.773286
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'fa10059ff7c5'
+revision = 'd372599c14da'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,7 +23,7 @@ def upgrade():
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
-    sa.Column('profilePhoto', sa.Text(), nullable=True),
+    sa.Column('profileImage', sa.Text(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -32,7 +32,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('photo', sa.String(length=255), nullable=False),
+    sa.Column('image', sa.String(length=255), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
     sa.Column('cuisine', sa.String(length=50), nullable=False),
     sa.Column('address', sa.String(length=255), nullable=False),

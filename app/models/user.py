@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    profilePhoto = db.Column(db.Text, default='https://cdn-icons-png.flaticon.com/512/1053/1053244.png?w=360')
+    profileImage = db.Column(db.Text, default='https://cdn-icons-png.flaticon.com/512/1053/1053244.png?w=360')
 
     businesses = db.relationship('Business', back_populates='user')
     reviews = db.relationship('Review', back_populates='user')
@@ -32,5 +32,5 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'profilePhoto': self.profilePhoto
+            'profileImage': self.profileImage
         }

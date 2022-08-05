@@ -7,7 +7,7 @@ class Business(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     name = db.Column(db.String(50), nullable=False)
-    photo = db.Column(db.String(255), nullable=False)
+    image = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
     cuisine = db.Column(db.String(50), nullable=False)
     address = db.Column(db.String(255), nullable=False)

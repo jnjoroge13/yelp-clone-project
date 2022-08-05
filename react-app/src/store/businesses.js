@@ -47,7 +47,7 @@ export const thunkAddBusiness = (business) => async (dispatch) => {
 	});
 	const data = await response.json();
 	dispatch(actionAddBusiness(data));
-	return data;
+	return 'Business Added';
 };
 
 export const thunkEditBusiness = (business) => async (dispatch) => {
