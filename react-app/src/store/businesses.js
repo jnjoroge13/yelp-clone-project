@@ -75,7 +75,7 @@ export const thunkEditBusiness = (business) => async (dispatch) => {
 
 	const data = await response.json();
 	dispatch(actionEditBusiness(data));
-	return data;
+	return 'Business Updated';
 };
 
 export const thunkDeleteBusiness = (businessId) => async (dispatch) => {

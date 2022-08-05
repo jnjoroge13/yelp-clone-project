@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { thunkGetOneBusiness, thunkDeleteBusiness } from "../../store/businesses";
+import EditBusinessForm from "../EditBusinessForm/EditBusinessForm";
 
 export default function SingleBusiness() {
     const dispatch = useDispatch()
@@ -45,6 +46,7 @@ export default function SingleBusiness() {
             </p>
             <button>Edit</button>
             <button onClick={onDelete}>Delete</button>
+            <EditBusinessForm/>
         </div>
     )
 }

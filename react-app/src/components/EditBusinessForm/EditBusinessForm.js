@@ -1,41 +1,61 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkAddBusiness } from "../../store/businesses";
-import { useHistory } from "react-router-dom";
+import { thunkEditBusiness } from "../../store/businesses";
+import { useHistory, useParams } from "react-router-dom";
+import { thunkGetOneBusiness } from "../../store/businesses";
 
-export default function NewBusinessForm() {
+export default function EditBusinessForm() {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const sessionUser = useSelector((state) => state.session.user);
-	const [name, setName] = useState("");
-	const [description, setDescription] = useState("");
-	const [cuisine, setCuisine] = useState("Chinese");
-	const [image, setImage] = useState("");
+    const sessionUser = useSelector((state) => state.session.user);
+    const { businessId } = useParams()
+    useEffect(() => {
+        dispatch(thunkGetOneBusiness(businessId))
+    },[businessId])
+    const business = useSelector(state=>state.businesses[businessId])
+	const [name, setName] = useState(business?.name);
+	const [description, setDescription] = useState(business?.description);
+	const [cuisine, setCuisine] = useState(business?.cuisine);
+	const [image, setImage] = useState(business?.image);
 	const [imageLoading, setImageLoading] = useState(false);
-	const [address, setAddress] = useState("");
-	const [city, setCity] = useState("");
-	const [state, setState] = useState("");
-	const [zipCode, setZipCode] = useState("");
-	const [phoneNumber, setPhoneNumber] = useState("");
-	const [priceRange, setPriceRange] = useState('$');
-    const [hours, setHours] = useState("");
+	const [address, setAddress] = useState(business?.address);
+	const [city, setCity] = useState(business?.city);
+	const [state, setState] = useState(business?.state);
+	const [zipCode, setZipCode] = useState(business?.zipCode);
+	const [phoneNumber, setPhoneNumber] = useState(business?.phoneNumber);
+	const [priceRange, setPriceRange] = useState(business?.priceRange);
+    const [hours, setHours] = useState(business?.hours);
     const [errors, setErrors] = useState([])
-    const [showErrors,SetShowErrors] = useState(false)
+    const [showErrors, SetShowErrors] = useState(false)
 
+    useEffect(() => {
+        setName(business?.name);
+        setDescription(business?.description);
+        setCuisine(business?.cuisine);
+        setImage(business?.image);
+        setImageLoading(false);
+        setAddress(business?.address);
+        setCity(business?.city);
+        setState(business?.state);
+        setZipCode(business?.zipCode);
+        setPhoneNumber(business?.phoneNumber);
+        setPriceRange(business?.priceRange);
+        setHours(business?.hours);
+    },[business])
     const onSubmit = async(e) => {
         e.preventDefault();
         SetShowErrors(true)
         if (!errors.length) {
-            const formData = new FormData();
-            formData.append('image', image)
-            setImageLoading(true)
-            const res = await fetch('/api/businesses/image', {
-                method: 'POST',
-                body: formData
-            })
-            if (res.ok) {
-                const jsonRes = await res.json();
-                setImageLoading(false);
+            // const formData = new FormData();
+            // formData.append('image', image)
+            // setImageLoading(true)
+            // const res = await fetch('/api/businesses/image', {
+            //     method: 'POST',
+            //     body: formData
+            // })
+            // if (res.ok) {
+            //     const jsonRes = await res.json();
+            //     setImageLoading(false);
 
                 const business = {
                     name,
@@ -48,16 +68,17 @@ export default function NewBusinessForm() {
                     phoneNumber,
                     priceRange,
                     hours,
-                    image: jsonRes.image
+                    image,
+                    id:businessId
                 };
 
-                const response = await dispatch(thunkAddBusiness(business));
+                const response = await dispatch(thunkEditBusiness(business));
 
-                if (response === 'Business Added') {
-                    history.push('/businesses');
+                if (response === 'Business Updated') {
+                    dispatch(thunkGetOneBusiness(businessId));
                 }
             }
-        }
+        // }
     };
 
 
