@@ -22,6 +22,7 @@ export default function BusinessList() {
 		history.push("/businesses/new");
 	};
 
+
 	return (
 		<div>
 			<button onClick={newBusinessBtn}>New Business</button>

@@ -40,6 +40,15 @@ def add_business():
     # print('PLAY LIST!!!!!!!!!!!!!!!!!!', business.to_dict())
     return business.to_dict()
 
+
+@business_routes.route('/<int:business_id>')
+# @login_required
+def business(business_id):
+    # print(search_value)
+    business = Business.query.get(business_id)
+    print('---------------------------------',business,'---------------------------------')
+    return business.to_dict()
+
 @business_routes.route("/image", methods=["POST"])
 @login_required
 def upload_image():

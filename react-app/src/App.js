@@ -9,6 +9,7 @@ import NewBusinessForm from './components/NewBusinessForm/NewBusinessForm';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import HomePage from './components/HomePage/HomePage';
+import SingleBusiness from './components/singleBusiness/singleBusiness';
 import User from './components/User';
 import { authenticate } from './store/session';
 
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path='/businesses' exact={true}>
           <BusinessList />
+        </Route>
+        <Route path='/businesses/:businessId' exact={true}>
+          <SingleBusiness />
         </Route>
         <ProtectedRoute path='/businesses/new' exact={true}>
           <NewBusinessForm />
