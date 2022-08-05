@@ -38,12 +38,12 @@ function App() {
         <Route path='/businesses' exact={true}>
           <BusinessList />
         </Route>
-        <Route path='/businesses/:businessId' exact={true}>
-          <SingleBusiness />
-        </Route>
         <ProtectedRoute path='/businesses/new' exact={true}>
           <NewBusinessForm />
         </ProtectedRoute>
+        <Route path='/businesses/:businessId' exact={true}>
+          <SingleBusiness />
+        </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
