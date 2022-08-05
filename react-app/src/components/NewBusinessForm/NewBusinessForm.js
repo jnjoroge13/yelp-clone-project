@@ -10,66 +10,150 @@ export default function NewBusinessForm() {
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [cuisine, setCuisine] = useState("Chinese");
-	const [photo, setPhoto] = useState("");
+	const [image, setImage] = useState("");
+	const [imageLoading, setImageLoading] = useState(false);
 	const [address, setAddress] = useState("");
 	const [city, setCity] = useState("");
 	const [state, setState] = useState("");
 	const [zipCode, setZipCode] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [priceRange, setPriceRange] = useState(null);
-	const [hours, setHours] = useState("");
+    const [hours, setHours] = useState("");
+    const [errors, setErrors] = useState([])
+    const [showErrors,SetShowErrors] = useState(false)
+
+    const onSubmit = async(e) => {
+        e.preventDefault();
+        SetShowErrors(true)
+        if (!errors.length) {
+            const formData = new FormData();
+            formData.append('image', image)
+            setImageLoading(true)
+            const res = await fetch('/api/businesses/image', {
+                method: 'POST',
+                body: formData
+            })
+            if (res.ok) {
+                const jsonRes = await res.json();
+                setImageLoading(false);
+
+                const business = {
+                    name,
+                    description,
+                    cuisine,
+                    address,
+                    city,
+                    state,
+                    zipCode,
+                    phoneNumber,
+                    priceRange,
+                    hours,
+                    image: jsonRes.image
+                };
+
+                const response = await dispatch(thunkAddBusiness(business));
+
+                if (response === 'Business Added') {
+                    history.push('/businesses');
+                }
+            }
+        }
+    };
+
+
 	return (
 		<div>
-			<form>
+			<form onSubmit={onSubmit}>
 				<div>
-					<input placeholder="name" />
+					<input
+						placeholder="name"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
 				</div>
 				<div>
-					<textarea placeholder="description" />
+					<textarea
+						placeholder="description"
+						value={description}
+						onChange={(e) => setDescription(e.target.value)}
+					/>
 				</div>
 				<div>
-                    <select>
-                        <option>Chinese</option>
-                        <option>Burgers</option>
-                        <option>Korean</option>
-                        <option>Italian</option>
-                        <option>Brunch</option>
-                        <option>American</option>
-                        <option>Seafood</option>
-                        <option>Mexican</option>
-                        <option>Thai</option>
-                        <option>Other</option>
-                    </select>
-				</div>
-                <div>
-                    <label>Image:</label>
-					<input type="file" />
+					<select value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
+						<option>Chinese</option>
+						<option>Burgers</option>
+						<option>Korean</option>
+						<option>Italian</option>
+						<option>Brunch</option>
+						<option>American</option>
+						<option>Seafood</option>
+						<option>Mexican</option>
+						<option>Thai</option>
+						<option>Other</option>
+					</select>
 				</div>
 				<div>
-					<input placeholder="address" />
+					<label>Image:</label>
+					<input type="file" onChange={(e) => setImage(e.target.files[0])} />
+                    {image && <p >{image.name}</p>}
+                    {(imageLoading) && <p >Uploading   <img src='https://i.gifer.com/ZZ5H.gif' alt='Uploading' ></img></p>}
+
 				</div>
 				<div>
-					<input placeholder="city" />
+					<input
+						placeholder="address"
+						value={address}
+						onChange={(e) => setAddress(e.target.value)}
+					/>
 				</div>
 				<div>
-					<input placeholder="state" />
+					<input
+						placeholder="city"
+						value={city}
+						onChange={(e) => setCity(e.target.value)}
+					/>
 				</div>
 				<div>
-					<input placeholder="zipcode" />
+					<input
+						placeholder="state"
+						value={state}
+						onChange={(e) => setState(e.target.value)}
+					/>
 				</div>
 				<div>
-					<input placeholder="phone number" />
+					<input
+						placeholder="zipcode"
+						value={zipCode}
+						onChange={(e) => setZipCode(e.target.value)}
+					/>
 				</div>
 				<div>
-                <select>
-                        <option>$</option>
-                        <option>$$</option>
-                        <option>$$$</option>
-                        <option>$$$$</option>
-                    </select>
+					<input
+						placeholder="phone number"
+						value={phoneNumber}
+						onChange={(e) => setPhoneNumber(e.target.value)}
+					/>
 				</div>
 				<div>
-					<input placeholder="hours" />
+					<select
+						value={priceRange}
+						onChange={(e) => setPriceRange(e.target.value)}
+					>
+						<option>$</option>
+						<option>$$</option>
+						<option>$$$</option>
+						<option>$$$$</option>
+					</select>
+				</div>
+				<div>
+					<input
+						placeholder="hours"
+						value={hours}
+						onChange={(e) => setHours(e.target.value)}
+					/>
+				</div>
+				<div>
+					<button>Submit</button>
 				</div>
 			</form>
 		</div>
