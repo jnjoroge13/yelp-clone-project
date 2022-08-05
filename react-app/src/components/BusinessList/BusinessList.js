@@ -15,8 +15,8 @@ export default function BusinessList() {
 
 	useEffect(() => {
 		setBusinessArray(Object.values(businessSelector));
-		console.log(businessArray);
 	}, [businessSelector]);
+    console.log(businessArray);
 
 	const newBusinessBtn = () => {
 		history.push("/businesses/new");
