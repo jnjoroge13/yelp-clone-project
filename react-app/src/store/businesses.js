@@ -83,7 +83,7 @@ export const thunkDeleteBusiness = (businessId) => async (dispatch) => {
 		method: "DELETE",
 	});
 	dispatch(actionDeleteBusiness(businessId));
-	return response;
+	return 'Business Deleted';
 };
 
 const businessReducer = (state = {}, action) => {
