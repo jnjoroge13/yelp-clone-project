@@ -71,3 +71,4 @@ def delete_review(review_id):
     review = Review.query.get(review_id)
     db.session.delete(review)
     db.session.commit()
+    return 'Review Deleted'
