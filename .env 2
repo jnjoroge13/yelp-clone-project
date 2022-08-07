@@ -1,0 +1,8 @@
+FLASK_APP=app
+FLASK_ENV=development
+SECRET_KEY=lkasjdf09ajsdkfljalsiorj12n3490re9485309irefvn,u90818734902139489230
+DATABASE_URL=postgresql://bsk_app:password@localhost/bsk_db
+S3_AWS_REGION=us-west-1
+S3_BUCKET_NAME=bestkeptsecret
+S3_ACCESS_KEY_ID=AKIAYPIG2KWDLVBPXYLJ
+S3_SECRET_ACCESS_KEY=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
