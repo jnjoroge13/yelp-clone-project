@@ -1,5 +1,5 @@
 import imp
-from app.models import Business, business
+from app.models import Business
 from flask import Blueprint, jsonify, request
 from app.models import db
 from flask_login import login_required, current_user

@@ -1,4 +1,5 @@
 from .db import db
+from sqlalchemy.sql import func
 
 
 class Review(db.Model):
@@ -9,7 +10,7 @@ class Review(db.Model):
     businessId = db.Column(db.Integer, db.ForeignKey("businesses.id"), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     review = db.Column(db.Text, nullable=False)
-    createdAt = db.Column(db.DateTime(timezone=False), nullable=False)
+    createdAt  = db.Column(db.DateTime, default=func.now())
 
     user = db.relationship('User', back_populates='reviews')
     business = db.relationship('Business', back_populates='reviews')
