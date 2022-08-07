@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 export default function AllReviews() {
 	// const history = useHistory();
@@ -16,13 +16,8 @@ export default function AllReviews() {
     const convertDate = (createdAt) => {
         const d = new Date(createdAt)
         const addtime = addHours(4,d)
-        const saveConverted = addtime.toLocaleString();
-        // return(saveConverted)
-        // const date = createdAt.toLocaleString('en-US')
-        // // console.log(date)
         const now = Date.now()
-        // // console.log(now.getHours())
-        // // console.log(new Date(date))
+
         const hourDiff = Math.floor((now - addtime) / 1000 / 60 / 60)
         if (hourDiff < 1) {
             return(Math.floor((now-addtime)/1000/60)+' mins ago')
@@ -51,7 +46,7 @@ export default function AllReviews() {
 							review: {review.review} ;
 							created: {convertDate(review.createdAt)}
                         </p>
-                        <button>Edit</button>
+                        <Link to={`/reviews/${review.id}`}>Edit</Link>
 					</div>
 				))}
 		</div>

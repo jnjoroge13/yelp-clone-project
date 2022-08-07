@@ -32,13 +32,22 @@ def add_review():
     return review.to_dict()
 
 
-@review_routes.route('/<int:business_id>')
+@review_routes.route('/businessId/<int:business_id>')
 # @login_required
 def reviews(business_id):
     # print(search_value)
     reviews = Review.query.filter(Review.businessId==business_id).all()
     # (print('---------------------------------',review, '---------------------------------') for review in reviews)
     return {'reviews':[review.to_dict() for review in reviews]}
+
+
+@review_routes.route('/reviewId/<int:review_id>')
+@login_required
+def one_review(review_id):
+    review = Review.query.get(review_id)
+    print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', review)
+
+    return review.to_dict()
 
 
 @review_routes.route('/<int:review_id>', methods=['PUT'])

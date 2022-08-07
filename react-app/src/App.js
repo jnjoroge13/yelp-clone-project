@@ -10,6 +10,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import HomePage from './components/HomePage/HomePage';
 import SingleBusiness from './components/singleBusiness/singleBusiness';
+import EditReviewForm from './components/Reviews/EditReviewPage';
 import User from './components/User';
 import { authenticate } from './store/session';
 
@@ -44,6 +45,9 @@ function App() {
         <Route path='/businesses/:businessId' exact={true}>
           <SingleBusiness />
         </Route>
+        <ProtectedRoute path='/reviews/:reviewId' exact={true}>
+          <EditReviewForm />
+        </ProtectedRoute>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
