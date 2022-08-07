@@ -18,21 +18,13 @@ def reviews():
 @review_routes.route('/', methods=['POST'])
 @login_required
 def add_review():
-    form = Addreview()
+    form = AddReview()
 
     review = Review(
-        name=form.data['name'],
-        description=form.data['description'],
-        cuisine=form.data['cuisine'],
-        image=form.data['image'],
-        address=form.data['address'],
-        city=form.data['city'],
-        state=form.data['state'],
-        zipCode=form.data['zipCode'],
-        phoneNumber=form.data['phoneNumber'],
-        priceRange=form.data['priceRange'],
-        hours=form.data['hours'],
-        userId=current_user.id,
+        userId = form.data['userId'],
+        businessId = form.data['businessId'],
+        rating = form.data['rating'],
+        review = form.data['review']
     )
     db.session.add(review)
     db.session.commit()
@@ -56,19 +48,12 @@ def update_review(review_id):
     # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', review_id)
     review = Review.query.get(review_id)
     # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', playlist.to_dict())
-    form = Addreview()
+    form = AddReview()
     # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', form.data)
-    review.name = form.data['name'],
-    review.description = form.data['description'],
-    review.cuisine = form.data['cuisine'],
-    review.image = form.data['image'],
-    review.address = form.data['address'],
-    review.city = form.data['city'],
-    review.state = form.data['state'],
-    review.zipCode = form.data['zipCode'],
-    review.phoneNumber = form.data['phoneNumber'],
-    review.priceRange = form.data['priceRange'],
-    review.hours = form.data['hours'],
+    review.userId = form.data['userId'],
+    review.businessId = form.data['businessId'],
+    review.rating = form.data['rating'],
+    review.review = form.data['review'],
     db.session.commit()
     return review.to_dict()
 
