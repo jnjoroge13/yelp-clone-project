@@ -8,14 +8,15 @@ import {
 import EditBusinessForm from "../EditBusinessForm/EditBusinessForm";
 import AddReviewForm from "../Reviews/AddReviewForm";
 import { thunkGetReviews } from "../../store/reviews";
+import AllReviews from "../Reviews/AllReviews";
 
 export default function SingleBusiness() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { businessId } = useParams();
 	useEffect(() => {
-        dispatch(thunkGetOneBusiness(businessId));
-        dispatch(thunkGetReviews(businessId))
+		dispatch(thunkGetOneBusiness(businessId));
+		dispatch(thunkGetReviews(businessId));
 	}, [businessId]);
 	const business = useSelector((state) => state.businesses[businessId]);
 	const [editBusiness, setEditBusiness] = useState(false);
@@ -69,6 +70,7 @@ export default function SingleBusiness() {
 			<div>
 				<button onClick={openAddReviewForm}>Add Review</button>
 				{addReview && <AddReviewForm closeAddReviewForm={closeAddReviewForm} />}
+				<AllReviews/>
 			</div>
 		</div>
 	);
