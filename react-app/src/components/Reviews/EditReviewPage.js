@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkAddReview } from "../../store/reviews";
-import { useHistory, useParams } from "react-router-dom";
+import { thunkEditReview } from "../../store/reviews";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { thunkGetOneReview } from "../../store/reviews";
 
 export default function EditReviewForm({closeAddReviewForm}) {
@@ -29,19 +29,17 @@ export default function EditReviewForm({closeAddReviewForm}) {
         SetShowErrors(true)
         if (!errors.length) {
 
-                const newReview = {
+                const editReview = {
                     rating,
                     review,
-                    userId:sessionUser.id,
-                    // businessId: businessId
+                    id:currentReview.id
                 };
 
-                // const response = await dispatch(thunkAddReview(newReview));
+                const response = await dispatch(thunkEditReview(editReview));
 
-                // if (response === 'Review Added') {
-                //     dispatch(thunkGetOneBusiness(businessId));
-                //     closeAddReviewForm()
-                // }
+                if (response === 'Review Updated') {
+                    history.push(`/businesses/${currentReview?.business.id}`)
+                }
         }
     };
 
@@ -67,7 +65,7 @@ export default function EditReviewForm({closeAddReviewForm}) {
 				</div>
 				<div>
 					<button>Submit</button>
-					<button onClick={closeAddReviewForm}>Cancel</button>
+					<Link to={`/businesses/${currentReview?.business.id}`}>Cancel</Link>
 				</div>
 			</form>
 		</div>

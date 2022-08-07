@@ -65,7 +65,7 @@ export const thunkAddReview = (review) => async (dispatch) => {
 };
 
 export const thunkEditReview = (review) => async (dispatch) => {
-	const response = await fetch(`/api/reviews/${review.id}`, {
+	const response = await fetch(`/api/reviews/reviewId/${review.id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
