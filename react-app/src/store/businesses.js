@@ -1,5 +1,5 @@
 const GET_Businesses = "businesses/GET_Businesses";
-const GET_One_Business = "businesses/GET_One_Business";
+const GET_ONE_Business = "businesses/GET_ONE_Business";
 const ADD_Business = "businesses/ADD_Business";
 const EDIT_Business = "businesses/EDIT_Business";
 const DELETE_Business = "businesses/DELETE_Business";
@@ -12,7 +12,7 @@ const actionGetBusinesses = (businesses) => {
 };
 const actionGetOneBusinesses = (business) => {
 	return {
-		type: GET_One_Business,
+		type: GET_ONE_Business,
 		business,
 	};
 };
@@ -95,7 +95,7 @@ const businessReducer = (state = {}, action) => {
 			});
 			return newState;
 
-		case GET_One_Business:
+		case GET_ONE_Business:
 			newState[action.business.id] = action.business;
 			return newState;
 
