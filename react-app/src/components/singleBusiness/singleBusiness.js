@@ -47,6 +47,7 @@ export default function SingleBusiness() {
 
     return (
         <div>
+            <h1>b</h1>
             <p>
                 name: {business?.name} --
                 created by: {business?.user.username}
