@@ -15,7 +15,7 @@ export default function SingleBusiness() {
 	const { businessId } = useParams();
 	useEffect(() => {
         dispatch(thunkGetOneBusiness(businessId));
-        dispatch(thunkGetReviews())
+        dispatch(thunkGetReviews(businessId))
 	}, [businessId]);
 	const business = useSelector((state) => state.businesses[businessId]);
 	const [editBusiness, setEditBusiness] = useState(false);

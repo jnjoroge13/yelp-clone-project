@@ -10,7 +10,7 @@ review_routes = Blueprint('reviews', __name__)
 
 
 @review_routes.route('/')
-def reviews():
+def all_reviews():
     reviews = Review.query.all()
     return{'reviews': [review.to_dict() for review in reviews]}
 
@@ -32,14 +32,13 @@ def add_review():
     return review.to_dict()
 
 
-@review_routes.route('/<int:review_id>')
+@review_routes.route('/<int:business_id>')
 # @login_required
-def review(review_id):
+def reviews(business_id):
     # print(search_value)
-    review = Review.query.get(review_id)
-    print('---------------------------------',
-          review, '---------------------------------')
-    return review.to_dict()
+    reviews = Review.query.filter(Review.businessId==business_id).all()
+    # (print('---------------------------------',review, '---------------------------------') for review in reviews)
+    return {'reviews':[review.to_dict() for review in reviews]}
 
 
 @review_routes.route('/<int:review_id>', methods=['PUT'])

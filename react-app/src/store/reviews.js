@@ -38,10 +38,10 @@ const actionDeleteReview = (reviewId) => {
 	};
 };
 
-export const thunkGetReviews = () => async (dispatch) => {
-	const res = await fetch("/api/reviews/");
-	const reviews = await res.json();
-	dispatch(actionGetReviews(reviews));
+export const thunkGetReviews = (businessId) => async (dispatch) => {
+	const res = await fetch(`/api/reviews/${businessId}`);
+    const resData = await res.json();
+	dispatch(actionGetReviews(resData.reviews));
 	return res;
 };
 
@@ -90,7 +90,7 @@ const reviewReducer = (state = {}, action) => {
 	const newState = { ...state };
 	switch (action.type) {
 		case GET_REVIEWS:
-			action.reviews.reviews.forEach((review) => {
+			action.reviews.forEach((review) => {
 				newState[review.id] = review;
 			});
 			return newState;
