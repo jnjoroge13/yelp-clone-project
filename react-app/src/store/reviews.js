@@ -39,14 +39,14 @@ const actionDeleteReview = (reviewId) => {
 };
 
 export const thunkGetReviews = (businessId) => async (dispatch) => {
-	const res = await fetch(`/api/reviews/${businessId}`);
+	const res = await fetch(`/api/reviews/businessId/${businessId}`);
     const resData = await res.json();
 	dispatch(actionGetReviews(resData.reviews));
 	return res;
 };
 
 export const thunkGetOneReview = (reviewId) => async (dispatch) => {
-	const res = await fetch(`/api/reviews/${reviewId}`);
+	const res = await fetch(`/api/reviews/reviewId/${reviewId}`);
 	const review = await res.json();
 	dispatch(actionGetOneReview(review));
 	return res;
@@ -65,7 +65,7 @@ export const thunkAddReview = (review) => async (dispatch) => {
 };
 
 export const thunkEditReview = (review) => async (dispatch) => {
-	const response = await fetch(`/api/reviews/${review.id}`, {
+	const response = await fetch(`/api/reviews/reviewId/${review.id}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -96,8 +96,9 @@ const reviewReducer = (state = {}, action) => {
 			return newState;
 
 		case GET_ONE_REVIEW:
-			newState[action.review.id] = action.review;
-			return newState;
+			const State = { }
+			State[action.review.id] = action.review;
+			return State;
 
 		case ADD_REVIEW:
 			newState[action.review.id] = action.review;
