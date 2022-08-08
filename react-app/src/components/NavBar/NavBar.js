@@ -8,11 +8,6 @@ import "./NavBar.css";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
-	const [showDropdown, setShowDropdown] = useState(false);
-
-	const dropdown = () => {
-		setShowDropdown(!showDropdown);
-	};
 
 	const dispatch = useDispatch();
 	const onLogout = async (e) => {
@@ -52,27 +47,27 @@ const NavBar = () => {
 						Restaurants
 					</NavLink>
 					<div className="drop-down">
-						<img
-							className="navbar-profile-pic"
-							src={sessionUser?.profileImage}
-							onClick={dropdown}
-						/>
-						{showDropdown && (
-							<div className="drop-down-menu">
-								<div className="drop-down-divs">
-									<div className="drop-down-icons">
-										<i class="fa-regular fa-circle-user fa-xl"></i>
-									</div>
-									<p>About Me</p>
+						<button className="navbar-profile-pic-btn">
+							<img
+								className="navbar-profile-pic"
+								src={sessionUser?.profileImage}
+							/>
+						</button>
+
+						<div className="drop-down-menu">
+							<div className="drop-down-divs">
+								<div className="drop-down-icons">
+									<i className="fa-regular fa-circle-user fa-xl"></i>
 								</div>
-								<div className="drop-down-divs" onClick={onLogout}>
-									<div className="drop-down-icons">
-										<i class="fa fa-arrow-right-from-bracket fa-lg"></i>
-									</div>
-									<p>Logout</p>
-								</div>
+								<p>About Me</p>
 							</div>
-						)}
+							<div className="drop-down-divs" onClick={onLogout}>
+								<div className="drop-down-icons">
+									<i className="fa fa-arrow-right-from-bracket fa-lg"></i>
+								</div>
+								<p>Logout</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			)}

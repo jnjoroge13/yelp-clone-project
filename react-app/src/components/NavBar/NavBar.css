@@ -37,6 +37,7 @@
 
 .drop-down{
     position: relative;
+
 }
 
 .drop-down-menu{
@@ -52,6 +53,7 @@
     padding: 6px;
     width: 175px;
     border-color: #ebebeb;
+    opacity: 0;
 
 }
 
@@ -64,4 +66,14 @@
 
 .drop-down-divs:hover {
 	background-color: rgba(201, 200, 200, 0.228);
+}
+
+.navbar-profile-pic-btn:focus + .drop-down-menu{
+    opacity: 1;
+}
+
+.navbar-profile-pic-btn {
+    border: none;
+    background: none;
+    text-decoration: none;
 }
