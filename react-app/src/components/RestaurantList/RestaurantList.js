@@ -9,7 +9,7 @@ export default function RestaurantList() {
 	const dispatch = useDispatch();
 	const [restaurantArray, setRestaurantArray] = useState("");
 	const restaurantSelector = useSelector((state) => state.restaurants);
-
+	const allReviews = Object.values(useSelector((state) => state.reviews));
 
 	useEffect(() => {
 		dispatch(thunkGetRestaurants());
@@ -20,6 +20,13 @@ export default function RestaurantList() {
 		setRestaurantArray(Object.values(restaurantSelector));
 	}, [restaurantSelector]);
 
+	const getAverageRating = (restaurantId) => {
+		const restaurantReviews = allReviews.filter(review => review.restaurant.id == restaurantId)
+		const restaurantRatings = restaurantReviews.map(review => review.rating)
+		const averageRating = (restaurantRatings.reduce((a, b) => a + b, 0) / restaurantRatings.length)
+		const roundAverageRating = +averageRating.toFixed(2)
+		return roundAverageRating
+	}
 	const newRestaurantBtn = () => {
 		history.push("/restaurants/new");
 	};
@@ -36,7 +43,7 @@ export default function RestaurantList() {
 							name: {restaurant.name} cuisine: {restaurant.cuisine} description:{" "}
 							{restaurant.description} hours: {restaurant.hours} image:{" "}
 							<img width="100" src={restaurant.image} /> price:{" "}
-							{restaurant.priceRange} id:{restaurant.id}
+							{restaurant.priceRange} id:{restaurant.id} averageRating:{getAverageRating(restaurant.id) }
 						</p>
 					</NavLink>
 				))}
