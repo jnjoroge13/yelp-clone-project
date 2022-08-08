@@ -38,7 +38,7 @@ export default function RestaurantList() {
 		const firstReview = restaurantReviews[restaurantReviews.length - 1]?.review;
 
 		if (firstReview?.length > 136) {
-			return firstReview.slice(0, 136) + "...";
+			return (firstReview.slice(0, 136) + "...");
 		}
 		return firstReview;
 		// console.log(firstReview)
@@ -97,7 +97,7 @@ export default function RestaurantList() {
 								</div>
 								<div className="biz-info-cont">
 									<h3>
-										{i++}. {restaurant.name}
+										{i++}. <span>{restaurant.name}</span>
 									</h3>
 									<div>
 										<img
@@ -112,7 +112,7 @@ export default function RestaurantList() {
 										{restaurant.city}
 									</div>
 									<div>Hours: {restaurant.hours}</div>
-									<div>
+									<div className="biz-message">
 										<i class="fa-regular fa-message" />
 										<div>"{getOneReview(restaurant.id)}"</div>
 									</div>

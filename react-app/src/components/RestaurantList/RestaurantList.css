@@ -16,6 +16,7 @@
 }
 
 .biz-list-single{
+    text-decoration: none;
     padding: 24px;
     display: flex;
     height: 225px;
@@ -30,6 +31,12 @@
 
 .biz-list-single:hover {
     box-shadow: 0 0 10px #0000001a;
+}
+
+.biz-info-cont{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 .biz-image{
     width: 20%;
@@ -47,7 +54,27 @@ max-width: 225px;
 border-radius: 5px;
 }
 
+.biz-message{
+    display: flex;
+    gap: 7px;
+}
+.biz-message div{
+    color: rgba(110,112,114,1);
+}
+.biz-message i {
+    padding-top: 4px;
+}
 .biz-info-cont{
     width: 80%;
     height: 100%;
+}
+
+.biz-info-cont h3 span:hover{
+    text-decoration: underline;
+}
+
+.biz-info-cont h3,
+.biz-info-cont h3 span {
+    font-size: 1.3rem;
+    font-weight: 700;
 }
