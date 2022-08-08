@@ -93,3 +93,7 @@
 .login-signup-footer a:hover {
     text-decoration: underline;
 }
+
+.signup-text{
+    font-size: 0.9rem;
+}
