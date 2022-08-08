@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkAddReview } from "../../store/reviews";
 import { useHistory, useParams } from "react-router-dom";
 import { thunkGetOneRestaurant } from "../../store/restaurants";
+import { thunkGetReviews } from "../../store/reviews";
 
 export default function AddReviewForm({ closeAddReviewForm }) {
 	const dispatch = useDispatch();
@@ -29,6 +30,7 @@ export default function AddReviewForm({ closeAddReviewForm }) {
 
 			if (response === "Review Added") {
 				dispatch(thunkGetOneRestaurant(restaurantId));
+				dispatch(thunkGetReviews(restaurantId));
 				closeAddReviewForm();
 			}
 		}

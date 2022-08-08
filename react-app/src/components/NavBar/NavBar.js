@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import LogoutButton from "../auth/LogoutButton";
+import { NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
+import whiteLogo from "../assets/logo-white.png";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 import "./NavBar.css";
@@ -9,9 +9,11 @@ import "./NavBar.css";
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
 	const [showDropdown, setShowDropdown] = useState(false);
+	const location = useLocation();
+	console.log(location.pathname);
 
 	const openDropdown = () => {
-		if(showDropdown) return
+		if (showDropdown) return;
 		setShowDropdown(true);
 	};
 
@@ -24,38 +26,50 @@ const NavBar = () => {
 		if (!showDropdown) return;
 		const closeDropdown = () => {
 			setShowDropdown(false);
-		  };
-		document.addEventListener('click', closeDropdown);
+		};
+		document.addEventListener("click", closeDropdown);
 
 		return () => document.removeEventListener("click", closeDropdown);
-	  }, [showDropdown]);
-
+	}, [showDropdown]);
+	if (location.pathname == "/login" || location.pathname == '/sign-up') {
+		return (
+			<nav className="nav-bar-cont-login-signup">
+				<NavLink to="/" exact={true}>
+					<img className="navbar-logo" src={whiteLogo} />
+				</NavLink>
+			</nav>
+		);
+	}
 	return (
 		<nav className="nav-bar-cont">
 			<NavLink to="/" exact={true}>
 				<img className="navbar-logo" src={logo} />
 			</NavLink>
 			{!sessionUser && (
-				<ul>
-					<li>
-						<NavLink to="/login" exact={true} activeClassName="active">
-							Login
-						</NavLink>
-					</li>
-					<li>
-						<NavLink to="/sign-up" exact={true} activeClassName="active">
-							Sign Up
-						</NavLink>
-					</li>
-					<li>
-						<NavLink to="/users" exact={true} activeClassName="active">
-							Users
-						</NavLink>
-					</li>
-					<li>
-						<LogoutButton />
-					</li>
-				</ul>
+				<div className="nav-bar-right">
+					<NavLink className="nav-bar-restaurants" to="/restaurants">
+						Restaurants
+					</NavLink>
+					<NavLink
+						className="nav-bar-login-btn"
+						to="/login"
+						exact={true}
+						activeClassName="active"
+					>
+						Log In
+					</NavLink>
+					<NavLink
+						className="nav-bar-signup-btn"
+						to="/sign-up"
+						exact={true}
+						activeClassName="active"
+					>
+						Sign Up
+					</NavLink>
+					{/* <NavLink to="/users" exact={true} activeClassName="active">
+						Users
+					</NavLink> */}
+				</div>
 			)}
 			{sessionUser && (
 				<div className="nav-bar-right">

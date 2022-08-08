@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { thunkGetRestaurants } from "../../store/restaurants";
+import { thunkGetReviews } from "../../store/reviews";
 
 export default function RestaurantList() {
 	const history = useHistory();
@@ -9,6 +10,7 @@ export default function RestaurantList() {
 	const [restaurantArray, setRestaurantArray] = useState("");
 	const restaurantSelector = useSelector((state) => state.restaurants);
 
+	
 	useEffect(() => {
 		dispatch(thunkGetRestaurants());
 	}, []);
@@ -27,7 +29,9 @@ export default function RestaurantList() {
 			<button onClick={newRestaurantBtn}>New Restaurant</button>
 			{restaurantArray &&
 				restaurantArray.map((restaurant) => (
-					<NavLink to={`/restaurants/${restaurant.id}`}>
+					<NavLink
+						to={`/restaurants/${restaurant.id}`}
+					>
 						<p>
 							name: {restaurant.name} cuisine: {restaurant.cuisine} description:{" "}
 							{restaurant.description} hours: {restaurant.hours} image:{" "}

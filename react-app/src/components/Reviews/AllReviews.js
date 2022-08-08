@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { thunkDeleteReview } from "../../store/reviews";
+import { thunkGetReviews } from "../../store/reviews";
 import logo from '../assets/logo.png'
 import './Reviews.css'
 
 export default function AllReviews() {
 	// const history = useHistory();
 	const dispatch = useDispatch();
+	const { restaurantId } = useParams()
+	useEffect(() => {
+		dispatch(thunkGetReviews(restaurantId));
+	}, [restaurantId]);
 	const [reviewsArray, setReviewsArray] = useState("");
 	const reviewsSelector = useSelector((state) => state.reviews);
 	// console.log(Date.now().toUTCString())

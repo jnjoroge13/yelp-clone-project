@@ -14,13 +14,15 @@ export default function SingleRestaurant() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { restaurantId } = useParams();
-	useEffect(() => {
-		dispatch(thunkGetOneRestaurant(restaurantId));
-		dispatch(thunkGetReviews(restaurantId));
-	}, [restaurantId]);
 	const restaurant = useSelector((state) => state.restaurants[restaurantId]);
 	const [editRestaurant, setEditRestaurant] = useState(false);
 	const [addReview, setAddReview] = useState(false);
+	const [loaded,setLoaded] = useState(false)
+	useEffect(() => {
+		dispatch(thunkGetReviews(restaurantId))
+			.then(() => dispatch(thunkGetOneRestaurant(restaurantId)))
+			.then(()=>setLoaded(true))
+	}, [restaurantId,dispatch])
 
 	const openEditForm = () => {
 		setEditRestaurant(true);
@@ -58,7 +60,7 @@ export default function SingleRestaurant() {
 	};
 
 	return (
-		<div>
+		loaded && <div>
 			<p>
 				name: {restaurant?.name} -- created by: {restaurant?.user.username}
 				<img width="100" src={restaurant?.image} />
