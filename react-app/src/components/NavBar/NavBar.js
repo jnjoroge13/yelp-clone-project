@@ -31,7 +31,7 @@ const NavBar = () => {
 
 		return () => document.removeEventListener("click", closeDropdown);
 	}, [showDropdown]);
-	if (location.pathname == "/login") {
+	if (location.pathname == "/login" || location.pathname == '/sign-up') {
 		return (
 			<nav className="nav-bar-cont-login-signup">
 				<NavLink to="/" exact={true}>
