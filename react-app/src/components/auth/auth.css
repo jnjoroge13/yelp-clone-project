@@ -1,0 +1,95 @@
+.login-signup-cont {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    gap: 30px;
+    padding-top: 150px;
+}
+
+.login-signup-form-cont {
+    width: 300px;
+    padding: 0px 48px;
+}
+.login-signup-image-cont {
+    padding: 0px 48px;
+}
+.login-signup-form-cont input,
+.login-signup-form-cont button{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    border: 1.6px solid rgb(201, 200, 200);
+
+}
+.login-signup-form-cont input{
+    color: black;
+    font-size: 1rem;
+    box-sizing:border-box;
+    padding: 5px 9px;
+    /* background:none; */
+}
+.form-email{
+    margin-bottom: 10px;
+}
+
+.form-password {
+    margin-bottom: 25px;
+}
+
+.login-signup-form-cont button{
+    background-color: rgba(224,7,7,1);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    padding: 10px 13px;
+    border: none;
+    transition: all .4s ease-in;
+    cursor: pointer;
+}
+
+.login-signup-form-cont button:hover{
+    background-color: rgba(224, 7, 7, 0.74);
+}
+.login-signup-header{
+    text-align: center;
+    line-height: 2rem;
+    margin-bottom: 20px;
+}
+.login-signup-header h3{
+    color: rgba(224,7,7,1);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.login-signup-header p {
+    font-weight: 700;
+}
+.login-signup-header a {
+    text-decoration: none;
+    color: #0073bb;
+    font-weight: 700;
+}
+
+.login-signup-header a:hover {
+    text-decoration: underline;
+}
+
+.login-signup-footer {
+    text-align: right;
+    margin-top: 10px;
+}
+.login-signup-footer p{
+    color: #999;
+    font-size: 0.85rem;
+}
+.login-signup-footer a {
+    text-decoration: none;
+    color: #0073bb;
+    font-size: 0.85rem;
+}
+
+.login-signup-footer a:hover {
+    text-decoration: underline;
+}
