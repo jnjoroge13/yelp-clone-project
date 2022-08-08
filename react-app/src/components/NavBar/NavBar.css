@@ -15,6 +15,13 @@
 	padding: 24px 40px 0px 40px;
 }
 
+.nav-bar-cont-login-signup {
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 12px 0px;
+    background-color: rgba(224,7,7,1);
+}
 .nav-bar-right {
 	display: flex;
 	gap: 15px;
