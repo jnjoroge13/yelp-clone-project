@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { thunkDeleteReview } from "../../store/reviews";
+import logo from '../assets/logo.png'
+import './Reviews.css'
 
 export default function AllReviews() {
 	// const history = useHistory();
@@ -41,7 +43,7 @@ export default function AllReviews() {
 	// };
 
 	return (
-		<div>
+        <div>
 			<h3>Reviews:</h3>
 			{reviewsArray &&
 				reviewsArray.map((review) => (

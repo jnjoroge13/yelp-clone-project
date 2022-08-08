@@ -38,9 +38,9 @@ const actionDeleteReview = (reviewId) => {
 	};
 };
 
-export const thunkGetReviews = (businessId) => async (dispatch) => {
-	const res = await fetch(`/api/reviews/businessId/${businessId}`);
-    const resData = await res.json();
+export const thunkGetReviews = (restaurantId) => async (dispatch) => {
+	const res = await fetch(`/api/reviews/restaurantId/${restaurantId}`);
+	const resData = await res.json();
 	dispatch(actionGetReviews(resData.reviews));
 	return res;
 };
@@ -52,7 +52,6 @@ export const thunkGetOneReview = (reviewId) => async (dispatch) => {
 	return res;
 };
 
-
 export const thunkAddReview = (review) => async (dispatch) => {
 	const response = await fetch("/api/reviews/", {
 		method: "POST",
@@ -61,7 +60,7 @@ export const thunkAddReview = (review) => async (dispatch) => {
 	});
 	const data = await response.json();
 	dispatch(actionAddReview(data));
-	return 'Review Added';
+	return "Review Added";
 };
 
 export const thunkEditReview = (review) => async (dispatch) => {
@@ -75,7 +74,7 @@ export const thunkEditReview = (review) => async (dispatch) => {
 
 	const data = await response.json();
 	dispatch(actionEditReview(data));
-	return 'Review Updated';
+	return "Review Updated";
 };
 
 export const thunkDeleteReview = (reviewId) => async (dispatch) => {
@@ -83,7 +82,7 @@ export const thunkDeleteReview = (reviewId) => async (dispatch) => {
 		method: "DELETE",
 	});
 	dispatch(actionDeleteReview(reviewId));
-	return 'Review Deleted';
+	return "Review Deleted";
 };
 
 const reviewReducer = (state = {}, action) => {
@@ -96,7 +95,7 @@ const reviewReducer = (state = {}, action) => {
 			return newState;
 
 		case GET_ONE_REVIEW:
-			const State = { }
+			const State = {};
 			State[action.review.id] = action.review;
 			return State;
 

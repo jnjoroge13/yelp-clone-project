@@ -2,7 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired
 
-class AddBusiness(FlaskForm):
+
+class AddRestaurant(FlaskForm):
 
     name = StringField('Name', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
@@ -17,7 +18,8 @@ class AddBusiness(FlaskForm):
     hours = StringField('Hours', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
-class AddBusiness(FlaskForm):
+
+class AddRestaurant(FlaskForm):
 
     name = StringField('Name', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])

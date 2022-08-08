@@ -2,31 +2,31 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import {
-	thunkGetOneBusiness,
-	thunkDeleteBusiness,
-} from "../../store/businesses";
-import EditBusinessForm from "../EditBusinessForm/EditBusinessForm";
+	thunkGetOneRestaurant,
+	thunkDeleteRestaurant,
+} from "../../store/restaurants";
+import EditRestaurantForm from "../EditRestaurantForm/EditRestaurantForm";
 import AddReviewForm from "../Reviews/AddReviewForm";
 import { thunkGetReviews } from "../../store/reviews";
 import AllReviews from "../Reviews/AllReviews";
 
-export default function SingleBusiness() {
+export default function SingleRestaurant() {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { businessId } = useParams();
+	const { restaurantId } = useParams();
 	useEffect(() => {
-		dispatch(thunkGetOneBusiness(businessId));
-		dispatch(thunkGetReviews(businessId));
-	}, [businessId]);
-	const business = useSelector((state) => state.businesses[businessId]);
-	const [editBusiness, setEditBusiness] = useState(false);
+		dispatch(thunkGetOneRestaurant(restaurantId));
+		dispatch(thunkGetReviews(restaurantId));
+	}, [restaurantId]);
+	const restaurant = useSelector((state) => state.restaurants[restaurantId]);
+	const [editRestaurant, setEditRestaurant] = useState(false);
 	const [addReview, setAddReview] = useState(false);
 
 	const openEditForm = () => {
-		setEditBusiness(true);
+		setEditRestaurant(true);
 	};
 	const closeEditForm = () => {
-		setEditBusiness(false);
+		setEditRestaurant(false);
 	};
 	const openAddReviewForm = () => {
 		setAddReview(true);
@@ -38,9 +38,9 @@ export default function SingleBusiness() {
 		e.preventDefault();
 
 		const formData = new FormData();
-		formData.append("image", business.image);
+		formData.append("image", restaurant.image);
 
-		const awsRes = await fetch("/api/businesses/image", {
+		const awsRes = await fetch("/api/restaurants/image", {
 			method: "DELETE",
 			headers: {
 				Content_Type: "application/json",
@@ -49,28 +49,27 @@ export default function SingleBusiness() {
 		});
 		console.log(awsRes);
 		if (awsRes.ok) {
-			const res = await dispatch(thunkDeleteBusiness(businessId));
+			const res = await dispatch(thunkDeleteRestaurant(restaurantId));
 
-			if (res === "Business Deleted") {
-				history.push("/businesses");
+			if (res === "Restaurant Deleted") {
+				history.push("/restaurants");
 			}
 		}
 	};
 
 	return (
 		<div>
-			<h1>b</h1>
 			<p>
-				name: {business?.name} -- created by: {business?.user.username}
-				<img width="100" src={business?.image} />
+				name: {restaurant?.name} -- created by: {restaurant?.user.username}
+				<img width="100" src={restaurant?.image} />
 			</p>
 			<button onClick={openEditForm}>Edit</button>
 			<button onClick={onDelete}>Delete</button>
-			{editBusiness && <EditBusinessForm closeEditForm={closeEditForm} />}
+			{editRestaurant && <EditRestaurantForm closeEditForm={closeEditForm} />}
 			<div>
 				<button onClick={openAddReviewForm}>Add Review</button>
 				{addReview && <AddReviewForm closeAddReviewForm={closeAddReviewForm} />}
-				<AllReviews/>
+				<AllReviews />
 			</div>
 		</div>
 	);

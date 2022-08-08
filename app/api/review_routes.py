@@ -22,10 +22,10 @@ def add_review():
     form = AddReview()
 
     review = Review(
-        userId = form.data['userId'],
-        businessId = form.data['businessId'],
-        rating = form.data['rating'],
-        review = form.data['review']
+        userId=form.data['userId'],
+        restaurantId=form.data['restaurantId'],
+        rating=form.data['rating'],
+        review=form.data['review']
     )
     db.session.add(review)
     db.session.commit()
@@ -33,13 +33,13 @@ def add_review():
     return review.to_dict()
 
 
-@review_routes.route('/businessId/<int:business_id>')
+@review_routes.route('/restaurantId/<int:restaurant_id>')
 # @login_required
-def reviews(business_id):
+def reviews(restaurant_id):
     # print(search_value)
-    reviews = Review.query.filter(Review.businessId==business_id).all()
+    reviews = Review.query.filter(Review.restaurantId == restaurant_id).all()
     # (print('---------------------------------',review, '---------------------------------') for review in reviews)
-    return {'reviews':[review.to_dict() for review in reviews]}
+    return {'reviews': [review.to_dict() for review in reviews]}
 
 
 @review_routes.route('/reviewId/<int:review_id>')

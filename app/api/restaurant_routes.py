@@ -1,28 +1,28 @@
 import imp
-from app.models import Business
+from app.models import Restaurant
 from flask import Blueprint, jsonify, request
 from app.models import db
 from flask_login import login_required, current_user
-from app.forms.new_business_form import AddBusiness
+from app.forms.new_restaurant_form import AddRestaurant
 from app.s3 import (allowed_file, get_unique_filename,
                     upload_file_to_s3, delete_object_from_bucket)
 
 
-business_routes = Blueprint('businesses', __name__)
+restaurant_routes = Blueprint('restaurants', __name__)
 
 
-@business_routes.route('/')
-def businesses():
-    businesses = Business.query.all()
-    return{'businesses': [business.to_dict() for business in businesses]}
+@restaurant_routes.route('/')
+def restaurants():
+    restaurants = Restaurant.query.all()
+    return{'restaurants': [restaurant.to_dict() for restaurant in restaurants]}
 
 
-@business_routes.route('/', methods=['POST'])
+@restaurant_routes.route('/', methods=['POST'])
 @login_required
-def add_business():
-    form = AddBusiness()
+def add_restaurant():
+    form = AddRestaurant()
 
-    business = Business(
+    restaurant = Restaurant(
         name=form.data['name'],
         description=form.data['description'],
         cuisine=form.data['cuisine'],
@@ -36,56 +36,54 @@ def add_business():
         hours=form.data['hours'],
         userId=current_user.id,
     )
-    db.session.add(business)
+    db.session.add(restaurant)
     db.session.commit()
-    # print('PLAY LIST!!!!!!!!!!!!!!!!!!', business.to_dict())
-    return business.to_dict()
+    # print('PLAY LIST!!!!!!!!!!!!!!!!!!', restaurant.to_dict())
+    return restaurant.to_dict()
 
 
-@business_routes.route('/<int:business_id>')
+@restaurant_routes.route('/<int:restaurant_id>')
 # @login_required
-def business(business_id):
+def restaurant(restaurant_id):
     # print(search_value)
-    business = Business.query.get(business_id)
+    restaurant = Restaurant.query.get(restaurant_id)
     print('---------------------------------',
-          business, '---------------------------------')
-    return business.to_dict()
+          restaurant, '---------------------------------')
+    return restaurant.to_dict()
 
 
-@business_routes.route('/<int:business_id>', methods=['PUT'])
+@restaurant_routes.route('/<int:restaurant_id>', methods=['PUT'])
 @login_required
-def update_business(business_id):
-    # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', business_id)
-    business = Business.query.get(business_id)
+def update_restaurant(restaurant_id):
+    # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', restaurant_id)
+    restaurant = Restaurant.query.get(restaurant_id)
     # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', playlist.to_dict())
-    form = AddBusiness()
+    form = AddRestaurant()
     # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', form.data)
-    business.name = form.data['name'],
-    business.description = form.data['description'],
-    business.cuisine = form.data['cuisine'],
-    business.image = form.data['image'],
-    business.address = form.data['address'],
-    business.city = form.data['city'],
-    business.state = form.data['state'],
-    business.zipCode = form.data['zipCode'],
-    business.phoneNumber = form.data['phoneNumber'],
-    business.priceRange = form.data['priceRange'],
-    business.hours = form.data['hours'],
+    restaurant.name = form.data['name'],
+    restaurant.description = form.data['description'],
+    restaurant.cuisine = form.data['cuisine'],
+    restaurant.image = form.data['image'],
+    restaurant.address = form.data['address'],
+    restaurant.city = form.data['city'],
+    restaurant.state = form.data['state'],
+    restaurant.zipCode = form.data['zipCode'],
+    restaurant.phoneNumber = form.data['phoneNumber'],
+    restaurant.priceRange = form.data['priceRange'],
+    restaurant.hours = form.data['hours'],
     db.session.commit()
-    return business.to_dict()
+    return restaurant.to_dict()
 
 
-@business_routes.route('/<int:business_id>', methods=['DELETE'])
+@restaurant_routes.route('/<int:restaurant_id>', methods=['DELETE'])
 @login_required
-def delete_business(business_id):
-    business = Business.query.get(business_id)
-    db.session.delete(business)
+def delete_restaurant(restaurant_id):
+    restaurant = Restaurant.query.get(restaurant_id)
+    db.session.delete(restaurant)
     db.session.commit()
 
 
-
-
-@business_routes.route("/image", methods=["POST"])
+@restaurant_routes.route("/image", methods=["POST"])
 @login_required
 def upload_image():
     if "image" not in request.files:
@@ -116,7 +114,7 @@ def upload_image():
     return {"image": url}
 
 
-@business_routes.route("/image", methods=["DELETE"])
+@restaurant_routes.route("/image", methods=["DELETE"])
 @login_required
 def delete_image():
     source = request.form["image"]
