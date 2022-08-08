@@ -111,10 +111,10 @@ export default function RestaurantList() {
 										<span>{restaurant.cuisine}</span> {restaurant.priceRange}{" "}
 										{restaurant.city}
 									</div>
-									<div>Hours: {restaurant.hours}</div>
+									<div className="biz-hour"><span>Hours:</span> {restaurant.hours}</div>
 									<div className="biz-message">
 										<i class="fa-regular fa-message" />
-										<div>"{getOneReview(restaurant.id)}"</div>
+										<div>"{getOneReview(restaurant.id)}" {getOneReview(restaurant.id)?.length>136 && (<span className='biz-message-more'>more</span>)}</div>
 									</div>
 								</div>
 							</NavLink>

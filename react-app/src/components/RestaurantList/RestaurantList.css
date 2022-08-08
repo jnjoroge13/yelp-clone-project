@@ -78,3 +78,17 @@ border-radius: 5px;
     font-size: 1.3rem;
     font-weight: 700;
 }
+
+.biz-message-more{
+    color: rgba(2,122,151,1);
+    font-weight: 700;
+}
+
+.biz-message-more:hover{
+    text-decoration: underline;
+}
+
+.biz-hour span {
+    color: rgb(0, 128, 85);
+    font-weight: 700;
+}
