@@ -35,7 +35,7 @@ const NavBar = () => {
 				</li>
 			</ul>}
 			{sessionUser && <div className="nav-bar-right">
-				<h3>Restaurants</h3>
+				<NavLink className='nav-bar-businesses' to='/businesses'>Restaurants</NavLink>
 				<img className="navbar-profile-pic" src={sessionUser?.profileImage} />
 			</div>}
 		</nav>

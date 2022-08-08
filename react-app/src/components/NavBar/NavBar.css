@@ -17,6 +17,20 @@
 
 .nav-bar-right{
     display: flex;
-    gap: 15px;
+    gap: 25px;
     align-items: center;
+}
+
+.nav-bar-right .nav-bar-businesses{
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-family: "Open Sans";
+    font-weight: bolder;
+    padding: 8px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.nav-bar-right .nav-bar-businesses:hover{
+    background-color: rgba(201, 200, 200, 0.228);
 }

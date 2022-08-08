@@ -5,13 +5,9 @@ import { thunkGetBusinesses } from "../../store/businesses";
 
 export default function HomePage() {
     const history = useHistory()
-    const businessListBtn = () => {
-        history.push('/businesses')
-    }
     return (
         <div className="home-page">
             <h1>Home Page</h1>
-            <button onClick={businessListBtn}>Business List</button>
         </div>
     )
 }
