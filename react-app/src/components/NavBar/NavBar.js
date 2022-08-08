@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import logo from "../assets/logo.png";
@@ -8,11 +8,27 @@ import "./NavBar.css";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
+	const [showDropdown, setShowDropdown] = useState(false);
+
+	const openDropdown = () => {
+		if(showDropdown) return
+		setShowDropdown(true);
+	};
 
 	const dispatch = useDispatch();
 	const onLogout = async (e) => {
 		await dispatch(logout());
+		setShowDropdown(!showDropdown);
 	};
+	useEffect(() => {
+		if (!showDropdown) return;
+		const closeDropdown = () => {
+			setShowDropdown(false);
+		  };
+		document.addEventListener('click', closeDropdown);
+
+		return () => document.removeEventListener("click", closeDropdown);
+	  }, [showDropdown]);
 
 	return (
 		<nav className="nav-bar-cont">
@@ -47,27 +63,27 @@ const NavBar = () => {
 						Restaurants
 					</NavLink>
 					<div className="drop-down">
-						<button className="navbar-profile-pic-btn">
-							<img
-								className="navbar-profile-pic"
-								src={sessionUser?.profileImage}
-							/>
-						</button>
-
-						<div className="drop-down-menu">
-							<div className="drop-down-divs">
-								<div className="drop-down-icons">
-									<i className="fa-regular fa-circle-user fa-xl"></i>
+						<img
+							className="navbar-profile-pic"
+							src={sessionUser?.profileImage}
+							onClick={openDropdown}
+						/>
+						{showDropdown && (
+							<div className="drop-down-menu">
+								<div className="drop-down-divs">
+									<div className="drop-down-icons">
+										<i className="fa-regular fa-circle-user fa-xl"></i>
+									</div>
+									<p>About Me</p>
 								</div>
-								<p>About Me</p>
-							</div>
-							<div className="drop-down-divs" onClick={onLogout}>
-								<div className="drop-down-icons">
-									<i className="fa fa-arrow-right-from-bracket fa-lg"></i>
+								<div className="drop-down-divs" onClick={onLogout}>
+									<div className="drop-down-icons">
+										<i className="fa fa-arrow-right-from-bracket fa-lg"></i>
+									</div>
+									<p>Logout</p>
 								</div>
-								<p>Logout</p>
 							</div>
-						</div>
+						)}
 					</div>
 				</div>
 			)}

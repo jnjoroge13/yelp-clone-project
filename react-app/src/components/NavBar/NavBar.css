@@ -53,7 +53,6 @@
     padding: 6px;
     width: 175px;
     border-color: #ebebeb;
-    opacity: 0;
 
 }
 
@@ -68,9 +67,6 @@
 	background-color: rgba(201, 200, 200, 0.228);
 }
 
-.navbar-profile-pic-btn:focus + .drop-down-menu{
-    opacity: 1;
-}
 
 .navbar-profile-pic-btn {
     border: none;
