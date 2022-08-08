@@ -25,12 +25,43 @@
 	cursor: pointer;
 	font-size: 1.1rem;
 	font-family: "Open Sans";
-	font-weight: bolder;
+	font-weight: 600;
 	padding: 8px;
 	border-radius: 5px;
 	text-decoration: none;
 }
 
 .nav-bar-right .nav-bar-restaurants:hover {
+	background-color: rgba(201, 200, 200, 0.228);
+}
+
+.drop-down{
+    position: relative;
+}
+
+.drop-down-menu{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    right: 0px;
+    border: 1px grey solid;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 18px rgb(0 0 0 / 15%);
+    padding: 6px;
+    width: 175px;
+    border-color: #ebebeb;
+
+}
+
+.drop-down-divs {
+    display: flex;
+    gap: 20px;
+    padding: 16px;
+    cursor: pointer;
+}
+
+.drop-down-divs:hover {
 	background-color: rgba(201, 200, 200, 0.228);
 }

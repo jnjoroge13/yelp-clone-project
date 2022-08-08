@@ -59,7 +59,6 @@ export default function SingleRestaurant() {
 
 	return (
 		<div>
-			<h1>b</h1>
 			<p>
 				name: {restaurant?.name} -- created by: {restaurant?.user.username}
 				<img width="100" src={restaurant?.image} />

@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "../auth/LogoutButton";
 import logo from "../assets/logo.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../store/session";
 import "./NavBar.css";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
-	console.log(sessionUser);
+	const [showDropdown, setShowDropdown] = useState(false);
+
+	const dropdown = () => {
+		setShowDropdown(!showDropdown);
+	};
+
+	const dispatch = useDispatch();
+	const onLogout = async (e) => {
+		await dispatch(logout());
+	};
+
 	return (
 		<nav className="nav-bar-cont">
 			<NavLink to="/" exact={true}>
@@ -40,7 +51,29 @@ const NavBar = () => {
 					<NavLink className="nav-bar-restaurants" to="/restaurants">
 						Restaurants
 					</NavLink>
-					<img className="navbar-profile-pic" src={sessionUser?.profileImage} />
+					<div className="drop-down">
+						<img
+							className="navbar-profile-pic"
+							src={sessionUser?.profileImage}
+							onClick={dropdown}
+						/>
+						{showDropdown && (
+							<div className="drop-down-menu">
+								<div className="drop-down-divs">
+									<div className="drop-down-icons">
+										<i class="fa-regular fa-circle-user fa-xl"></i>
+									</div>
+									<p>About Me</p>
+								</div>
+								<div className="drop-down-divs" onClick={onLogout}>
+									<div className="drop-down-icons">
+										<i class="fa fa-arrow-right-from-bracket fa-lg"></i>
+									</div>
+									<p>Logout</p>
+								</div>
+							</div>
+						)}
+					</div>
 				</div>
 			)}
 		</nav>
