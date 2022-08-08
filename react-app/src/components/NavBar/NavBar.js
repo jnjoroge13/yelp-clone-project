@@ -72,6 +72,9 @@ const NavBar = () => {
 			)}
 			{sessionUser && (
 				<div className="nav-bar-right">
+					<NavLink className="nav-bar-restaurants" to="/restaurants/new">
+						New Restaurant
+					</NavLink>
 					<NavLink className="nav-bar-restaurants" to="/restaurants">
 						Restaurants
 					</NavLink>
