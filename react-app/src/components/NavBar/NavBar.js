@@ -49,18 +49,6 @@ const NavBar = () => {
 					<NavLink className="nav-bar-restaurants" to="/restaurants">
 						Restaurants
 					</NavLink>
-					<button
-						className="nav-bar-login-btn"
-						onClick={async (e) => {
-							e.preventDefault();
-							const data = await dispatch(login('demo@aa.io', 'password'));
-							if (data) {
-								console.log(data);
-							}
-						}}
-					>
-						Demo User
-					</button>
 					<NavLink
 						className="nav-bar-login-btn"
 						to="/login"

@@ -15,7 +15,6 @@ export default function AllReviews() {
 	}, [restaurantId]);
 	const [reviewsArray, setReviewsArray] = useState("");
 	const reviewsSelector = useSelector((state) => state.reviews);
-	// console.log(Date.now().toUTCString())
 	function addHours(numOfHours, date = new Date()) {
 		date.setTime(date.getTime() + numOfHours * 60 * 60 * 1000);
 
