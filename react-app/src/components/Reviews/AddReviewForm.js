@@ -2,39 +2,37 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkAddReview } from "../../store/reviews";
 import { useHistory, useParams } from "react-router-dom";
-import { thunkGetOneBusiness } from "../../store/businesses";
+import { thunkGetOneRestaurant } from "../../store/restaurants";
 
-export default function AddReviewForm({closeAddReviewForm}) {
+export default function AddReviewForm({ closeAddReviewForm }) {
 	const dispatch = useDispatch();
-    const history = useHistory();
-    const {businessId} = useParams()
+	const history = useHistory();
+	const { restaurantId } = useParams();
 	const sessionUser = useSelector((state) => state.session.user);
 	const [rating, setRating] = useState("1");
 	const [review, setReview] = useState("");
-    const [errors, setErrors] = useState([])
-    const [showErrors,SetShowErrors] = useState(false)
+	const [errors, setErrors] = useState([]);
+	const [showErrors, SetShowErrors] = useState(false);
 
-    const onSubmit = async(e) => {
-        e.preventDefault();
-        SetShowErrors(true)
-        if (!errors.length) {
+	const onSubmit = async (e) => {
+		e.preventDefault();
+		SetShowErrors(true);
+		if (!errors.length) {
+			const newReview = {
+				rating,
+				review,
+				userId: sessionUser.id,
+				restaurantId: restaurantId,
+			};
 
-                const newReview = {
-                    rating,
-                    review,
-                    userId:sessionUser.id,
-                    businessId: businessId
-                };
+			const response = await dispatch(thunkAddReview(newReview));
 
-                const response = await dispatch(thunkAddReview(newReview));
-
-                if (response === 'Review Added') {
-                    dispatch(thunkGetOneBusiness(businessId));
-                    closeAddReviewForm()
-                }
-        }
-    };
-
+			if (response === "Review Added") {
+				dispatch(thunkGetOneRestaurant(restaurantId));
+				closeAddReviewForm();
+			}
+		}
+	};
 
 	return (
 		<div>

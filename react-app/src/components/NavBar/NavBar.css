@@ -1,36 +1,36 @@
 .navbar-profile-pic {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
 }
 
 .navbar-logo {
-    width: 100px;
+	width: 100px;
 }
 
 .nav-bar-cont {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 40px 0px 40px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 24px 40px 0px 40px;
 }
 
-.nav-bar-right{
-    display: flex;
-    gap: 25px;
-    align-items: center;
+.nav-bar-right {
+	display: flex;
+	gap: 25px;
+	align-items: center;
 }
 
-.nav-bar-right .nav-bar-businesses{
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-family: "Open Sans";
-    font-weight: bolder;
-    padding: 8px;
-    border-radius: 5px;
-    text-decoration: none;
+.nav-bar-right .nav-bar-restaurants {
+	cursor: pointer;
+	font-size: 1.1rem;
+	font-family: "Open Sans";
+	font-weight: bolder;
+	padding: 8px;
+	border-radius: 5px;
+	text-decoration: none;
 }
 
-.nav-bar-right .nav-bar-businesses:hover{
-    background-color: rgba(201, 200, 200, 0.228);
+.nav-bar-right .nav-bar-restaurants:hover {
+	background-color: rgba(201, 200, 200, 0.228);
 }

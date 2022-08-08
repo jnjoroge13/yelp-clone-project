@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkAddBusiness } from "../../store/businesses";
+import { thunkAddRestaurant } from "../../store/restaurants";
 import { useHistory } from "react-router-dom";
 
-export default function NewBusinessForm() {
+export default function NewRestaurantForm() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const sessionUser = useSelector((state) => state.session.user);
@@ -17,49 +17,48 @@ export default function NewBusinessForm() {
 	const [state, setState] = useState("");
 	const [zipCode, setZipCode] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
-	const [priceRange, setPriceRange] = useState('$');
-    const [hours, setHours] = useState("");
-    const [errors, setErrors] = useState([])
-    const [showErrors,SetShowErrors] = useState(false)
+	const [priceRange, setPriceRange] = useState("$");
+	const [hours, setHours] = useState("");
+	const [errors, setErrors] = useState([]);
+	const [showErrors, SetShowErrors] = useState(false);
 
-    const onSubmit = async(e) => {
-        e.preventDefault();
-        SetShowErrors(true)
-        if (!errors.length) {
-            const formData = new FormData();
-            formData.append('image', image)
-            setImageLoading(true)
-            const res = await fetch('/api/businesses/image', {
-                method: 'POST',
-                body: formData
-            })
-            if (res.ok) {
-                const jsonRes = await res.json();
-                setImageLoading(false);
+	const onSubmit = async (e) => {
+		e.preventDefault();
+		SetShowErrors(true);
+		if (!errors.length) {
+			const formData = new FormData();
+			formData.append("image", image);
+			setImageLoading(true);
+			const res = await fetch("/api/restaurants/image", {
+				method: "POST",
+				body: formData,
+			});
+			if (res.ok) {
+				const jsonRes = await res.json();
+				setImageLoading(false);
 
-                const business = {
-                    name,
-                    description,
-                    cuisine,
-                    address,
-                    city,
-                    state,
-                    zipCode,
-                    phoneNumber,
-                    priceRange,
-                    hours,
-                    image: jsonRes.image
-                };
+				const restaurant = {
+					name,
+					description,
+					cuisine,
+					address,
+					city,
+					state,
+					zipCode,
+					phoneNumber,
+					priceRange,
+					hours,
+					image: jsonRes.image,
+				};
 
-                const response = await dispatch(thunkAddBusiness(business));
+				const response = await dispatch(thunkAddRestaurant(restaurant));
 
-                if (response === 'Business Added') {
-                    history.push('/businesses');
-                }
-            }
-        }
-    };
-
+				if (response === "Restaurant Added") {
+					history.push("/restaurants");
+				}
+			}
+		}
+	};
 
 	return (
 		<div>
@@ -95,9 +94,13 @@ export default function NewBusinessForm() {
 				<div>
 					<label>Image:</label>
 					<input type="file" onChange={(e) => setImage(e.target.files[0])} />
-                    {image && <p >{image.name}</p>}
-                    {(imageLoading) && <p >Uploading   <img src='https://i.gifer.com/ZZ5H.gif' alt='Uploading' ></img></p>}
-
+					{image && <p>{image.name}</p>}
+					{imageLoading && (
+						<p>
+							Uploading{" "}
+							<img src="https://i.gifer.com/ZZ5H.gif" alt="Uploading"></img>
+						</p>
+					)}
 				</div>
 				<div>
 					<input

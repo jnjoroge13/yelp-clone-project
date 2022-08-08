@@ -4,45 +4,43 @@ import { thunkEditReview } from "../../store/reviews";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { thunkGetOneReview } from "../../store/reviews";
 
-export default function EditReviewForm({closeAddReviewForm}) {
+export default function EditReviewForm({ closeAddReviewForm }) {
 	const dispatch = useDispatch();
-    const history = useHistory();
-    const {reviewId} = useParams()
+	const history = useHistory();
+	const { reviewId } = useParams();
 	const sessionUser = useSelector((state) => state.session.user);
-    useEffect(() => {
-        dispatch(thunkGetOneReview(reviewId))
-    },[reviewId])
-    const currentReview = useSelector((state) => state.reviews[reviewId]);
-    // console.log(currentReview)
+	useEffect(() => {
+		dispatch(thunkGetOneReview(reviewId));
+	}, [reviewId]);
+	const currentReview = useSelector((state) => state.reviews[reviewId]);
+	// console.log(currentReview)
 	const [rating, setRating] = useState(currentReview?.rating);
 	const [review, setReview] = useState(currentReview?.review);
-    const [errors, setErrors] = useState([])
-    const [showErrors,SetShowErrors] = useState(false)
+	const [errors, setErrors] = useState([]);
+	const [showErrors, SetShowErrors] = useState(false);
 
-    useEffect(() => {
-        setReview(currentReview?.review)
-        setRating(currentReview?.rating)
-    },[currentReview])
+	useEffect(() => {
+		setReview(currentReview?.review);
+		setRating(currentReview?.rating);
+	}, [currentReview]);
 
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        SetShowErrors(true)
-        if (!errors.length) {
+	const onSubmit = async (e) => {
+		e.preventDefault();
+		SetShowErrors(true);
+		if (!errors.length) {
+			const editReview = {
+				rating,
+				review,
+				id: currentReview.id,
+			};
 
-                const editReview = {
-                    rating,
-                    review,
-                    id:currentReview.id
-                };
+			const response = await dispatch(thunkEditReview(editReview));
 
-                const response = await dispatch(thunkEditReview(editReview));
-
-                if (response === 'Review Updated') {
-                    history.push(`/businesses/${currentReview?.business.id}`)
-                }
-        }
-    };
-
+			if (response === "Review Updated") {
+				history.push(`/restaurants/${currentReview?.restaurant.id}`);
+			}
+		}
+	};
 
 	return (
 		<div>
@@ -65,7 +63,9 @@ export default function EditReviewForm({closeAddReviewForm}) {
 				</div>
 				<div>
 					<button>Submit</button>
-					<Link to={`/businesses/${currentReview?.business.id}`}>Cancel</Link>
+					<Link to={`/restaurants/${currentReview?.restaurant.id}`}>
+						Cancel
+					</Link>
 				</div>
 			</form>
 		</div>

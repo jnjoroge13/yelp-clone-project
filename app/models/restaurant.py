@@ -1,8 +1,8 @@
 from .db import db
 
 
-class Business(db.Model):
-    __tablename__ = 'businesses'
+class Restaurant(db.Model):
+    __tablename__ = 'restaurants'
 
     id = db.Column(db.Integer, primary_key=True)
     userId = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
@@ -18,10 +18,9 @@ class Business(db.Model):
     priceRange = db.Column(db.String(4), nullable=False)
     hours = db.Column(db.String(100), nullable=False)
 
-
-    user = db.relationship('User', back_populates='businesses')
+    user = db.relationship('User', back_populates='restaurants')
     reviews = db.relationship(
-        'Review', back_populates='business', cascade="all, delete-orphan")
+        'Review', back_populates='restaurant', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
