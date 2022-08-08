@@ -3,14 +3,13 @@ import { NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import whiteLogo from "../assets/logo-white.png";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../store/session";
+import { logout, login } from "../../store/session";
 import "./NavBar.css";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const location = useLocation();
-	console.log(location.pathname);
 
 	const openDropdown = () => {
 		if (showDropdown) return;
@@ -31,7 +30,7 @@ const NavBar = () => {
 
 		return () => document.removeEventListener("click", closeDropdown);
 	}, [showDropdown]);
-	if (location.pathname == "/login" || location.pathname == '/sign-up') {
+	if (location.pathname == "/login" || location.pathname == "/sign-up") {
 		return (
 			<nav className="nav-bar-cont-login-signup">
 				<NavLink to="/" exact={true}>
@@ -50,6 +49,18 @@ const NavBar = () => {
 					<NavLink className="nav-bar-restaurants" to="/restaurants">
 						Restaurants
 					</NavLink>
+					<button
+						className="nav-bar-login-btn"
+						onClick={async (e) => {
+							e.preventDefault();
+							const data = await dispatch(login('demo@aa.io', 'password'));
+							if (data) {
+								console.log(data);
+							}
+						}}
+					>
+						Demo User
+					</button>
 					<NavLink
 						className="nav-bar-login-btn"
 						to="/login"
