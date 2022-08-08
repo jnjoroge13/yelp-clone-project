@@ -1,0 +1,22 @@
+.navbar-profile-pic {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.navbar-logo {
+    width: 100px;
+}
+
+.nav-bar-cont {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px 0px 40px;
+}
+
+.nav-bar-right{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}

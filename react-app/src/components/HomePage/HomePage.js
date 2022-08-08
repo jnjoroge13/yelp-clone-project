@@ -9,7 +9,7 @@ export default function HomePage() {
         history.push('/businesses')
     }
     return (
-        <div>
+        <div className="home-page">
             <h1>Home Page</h1>
             <button onClick={businessListBtn}>Business List</button>
         </div>
