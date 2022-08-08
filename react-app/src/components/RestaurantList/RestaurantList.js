@@ -30,6 +30,26 @@ export default function RestaurantList() {
 		setRestaurantArray(Object.values(restaurantSelector));
 	}, [restaurantSelector]);
 
+	const getOneReview = (restaurantId) => {
+		const restaurantReviews = allReviews.filter(
+			(review) => review.restaurant.id == restaurantId
+		);
+		const firstReview = restaurantReviews[restaurantReviews.length-1]?.review
+
+		if (firstReview?.length > 136) {
+			return(firstReview.slice(0,136)+'...')
+		}
+		return firstReview
+		// console.log(firstReview)
+		// console.log(firstReview?.length)
+
+	}
+	const getNumberRatings = (restaurantId) => {
+		const restaurantReviews = allReviews.filter(
+			(review) => review.restaurant.id == restaurantId
+		);
+		return restaurantReviews.length
+	}
 	const getAverageRating = (restaurantId) => {
 		const restaurantReviews = allReviews.filter(
 			(review) => review.restaurant.id == restaurantId
@@ -79,11 +99,11 @@ export default function RestaurantList() {
 								<img width="200" src={restaurant.image} />
 								</div>
 							<div biz-info-cont>
-								{i++}; name: {restaurant.name} cuisine: {restaurant.cuisine}{" "}
-								description: {restaurant.description} hours: {restaurant.hours}{" "}
-								 price:{" "}
-								{restaurant.priceRange} id:{restaurant.id} averageRating:
-								{getAverageRating(restaurant.id)} <img width='108' height='20' src={getRatingImg(restaurant.id)} />
+								<h3>{i++}. {restaurant.name}</h3>
+								<div><img width='108' height='20' src={getRatingImg(restaurant.id)} />{getNumberRatings(restaurant.id)}</div>
+								<div><span>{restaurant.cuisine}</span> {restaurant.priceRange} {restaurant.city}</div>
+								<div>Hours: {restaurant.hours}</div>
+								<div><i class="fa-regular fa-message"/>"{getOneReview(restaurant.id)}"</div>
 							</div>
 						</NavLink>
 					</div>
