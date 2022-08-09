@@ -19,7 +19,6 @@ const LoginForm = () => {
 	};
 	const clearErrors = () => {
 		setErrors([])
-		console.log(errors)
 	}
 	const updateEmail = (e) => {
 		setEmail(e.target.value);
@@ -35,12 +34,11 @@ const LoginForm = () => {
 
 	return (
 		<div className="login-signup-cont">
-			{errors.length && (
-				<div className="login-errors">
+			{errors.length>0 && <div className="login-errors">
 					<>The email address or password you entered is incorrect.</>
 					<i class="fa-solid fa-xmark fa-xl" onClick={clearErrors}></i>
 				</div>
-			)}
+			}
 			<form className="login-signup-form-cont" onSubmit={onLogin}>
 				<div className="login-signup-header">
 					<h3>Log in to BKS</h3>
