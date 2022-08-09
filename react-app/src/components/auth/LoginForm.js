@@ -10,7 +10,6 @@ const LoginForm = () => {
 	const [password, setPassword] = useState("");
 	const user = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
-
 	const onLogin = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(login(email, password));
@@ -18,7 +17,10 @@ const LoginForm = () => {
 			setErrors(data);
 		}
 	};
-
+	const clearErrors = () => {
+		setErrors([])
+		console.log(errors)
+	}
 	const updateEmail = (e) => {
 		setEmail(e.target.value);
 	};
@@ -33,6 +35,12 @@ const LoginForm = () => {
 
 	return (
 		<div className="login-signup-cont">
+			{errors.length && (
+				<div className="login-errors">
+					<>The email address or password you entered is incorrect.</>
+					<i class="fa-solid fa-xmark fa-xl" onClick={clearErrors}></i>
+				</div>
+			)}
 			<form className="login-signup-form-cont" onSubmit={onLogin}>
 				<div className="login-signup-header">
 					<h3>Log in to BKS</h3>
@@ -40,15 +48,16 @@ const LoginForm = () => {
 						New to BKS? <Link to="/sign-up">Sign up</Link>
 					</p>
 				</div>
-				<div>
+				{/* <div>
 					{errors.map((error, ind) => (
 						<div key={ind}>{error}</div>
 					))}
-				</div>
+				</div> */}
 				<div className="form-email">
 					<input
 						name="email"
 						type="text"
+						required={true}
 						placeholder="Email"
 						value={email}
 						onChange={updateEmail}
@@ -59,6 +68,7 @@ const LoginForm = () => {
 						name="password"
 						type="password"
 						placeholder="Password"
+						required={true}
 						value={password}
 						onChange={updatePassword}
 					/>
