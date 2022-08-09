@@ -62,7 +62,7 @@ export default function RestaurantList() {
 	};
 	const getRatingImg = (restaurantId) => {
 		const rating = getAverageRating(restaurantId);
-		if (rating == 0) {
+		if (!rating) {
 			return zeroStars;
 		} else if (rating > 0 && rating <= 1) {
 			return oneStars;
@@ -115,7 +115,8 @@ export default function RestaurantList() {
 									<div className="biz-hour"><span>Hours:</span> {restaurant.hours}</div>
 									<div className="biz-message">
 										<i class="fa-regular fa-message" />
-										<div>"{getOneReview(restaurant.id)}" {getOneReview(restaurant.id)?.length>136 && (<span className='biz-message-more'>more</span>)}</div>
+										{getOneReview(restaurant.id) && <div>"{getOneReview(restaurant.id)}" {getOneReview(restaurant.id)?.length>136 && (<span className='biz-message-more'>more</span>)}</div>}
+										{!getOneReview(restaurant.id) && <div>No Reviews</div>}
 									</div>
 								</div>
 							</NavLink>
