@@ -5,8 +5,19 @@
     justify-content: center;
     gap: 30px;
     padding-top: 150px;
+    position: relative;
 }
-
+.login-errors{
+    position: absolute;
+    top:25px;
+    background: #fcd6d3;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+}
 .login-signup-form-cont {
     width: 300px;
     padding: 0px 48px;

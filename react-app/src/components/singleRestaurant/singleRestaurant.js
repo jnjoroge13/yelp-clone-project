@@ -17,12 +17,12 @@ export default function SingleRestaurant() {
 	const restaurant = useSelector((state) => state.restaurants[restaurantId]);
 	const [editRestaurant, setEditRestaurant] = useState(false);
 	const [addReview, setAddReview] = useState(false);
-	const [loaded,setLoaded] = useState(false)
+	const [loaded, setLoaded] = useState(false);
 	useEffect(() => {
 		dispatch(thunkGetReviews(restaurantId))
 			.then(() => dispatch(thunkGetOneRestaurant(restaurantId)))
-			.then(()=>setLoaded(true))
-	}, [restaurantId,dispatch])
+			.then(() => setLoaded(true));
+	}, [restaurantId, dispatch]);
 
 	const openEditForm = () => {
 		setEditRestaurant(true);
@@ -39,39 +39,43 @@ export default function SingleRestaurant() {
 	const onDelete = async (e) => {
 		e.preventDefault();
 
-		const formData = new FormData();
-		formData.append("image", restaurant.image);
+		// const formData = new FormData();
+		// formData.append("image", restaurant.image);
 
-		const awsRes = await fetch("/api/restaurants/image", {
-			method: "DELETE",
-			headers: {
-				Content_Type: "application/json",
-			},
-			body: formData,
-		});
-		if (awsRes.ok) {
-			const res = await dispatch(thunkDeleteRestaurant(restaurantId));
+		// const awsRes = await fetch("/api/restaurants/image", {
+		// 	method: "DELETE",
+		// 	headers: {
+		// 		Content_Type: "application/json",
+		// 	},
+		// 	body: formData,
+		// });
+		// if (awsRes.ok) {
+		const res = await dispatch(thunkDeleteRestaurant(restaurantId));
 
-			if (res === "Restaurant Deleted") {
-				history.push("/restaurants");
-			}
+		if (res === "Restaurant Deleted") {
+			history.push("/restaurants");
 		}
+		// }
 	};
 
 	return (
-		loaded && <div>
-			<p>
-				name: {restaurant?.name} -- created by: {restaurant?.user.username}
-				<img width="100" src={restaurant?.image} />
-			</p>
-			<button onClick={openEditForm}>Edit</button>
-			<button onClick={onDelete}>Delete</button>
-			{editRestaurant && <EditRestaurantForm closeEditForm={closeEditForm} />}
+		loaded && (
 			<div>
-				<button onClick={openAddReviewForm}>Add Review</button>
-				{addReview && <AddReviewForm closeAddReviewForm={closeAddReviewForm} />}
-				<AllReviews />
+				<p>
+					name: {restaurant?.name} -- created by: {restaurant?.user.username}
+					<img width="100" src={restaurant?.image} />
+				</p>
+				<button onClick={openEditForm}>Edit</button>
+				<button onClick={onDelete}>Delete</button>
+				{editRestaurant && <EditRestaurantForm closeEditForm={closeEditForm} />}
+				<div>
+					<button onClick={openAddReviewForm}>Add Review</button>
+					{addReview && (
+						<AddReviewForm closeAddReviewForm={closeAddReviewForm} />
+					)}
+					<AllReviews />
+				</div>
 			</div>
-		</div>
+		)
 	);
 }

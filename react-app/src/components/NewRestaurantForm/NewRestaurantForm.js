@@ -26,39 +26,40 @@ export default function NewRestaurantForm() {
 		e.preventDefault();
 		SetShowErrors(true);
 		if (!errors.length) {
-			const formData = new FormData();
-			formData.append("image", image);
-			setImageLoading(true);
-			const res = await fetch("/api/restaurants/image", {
-				method: "POST",
-				body: formData,
-			});
-			if (res.ok) {
-				const jsonRes = await res.json();
-				setImageLoading(false);
+			// const formData = new FormData();
+			// formData.append("image", image);
+			// setImageLoading(true);
+			// const res = await fetch("/api/restaurants/image", {
+			// 	method: "POST",
+			// 	body: formData,
+			// });
+			// if (res.ok) {
+			// 	const jsonRes = await res.json();
+			// 	setImageLoading(false);
 
-				const restaurant = {
-					name,
-					description,
-					cuisine,
-					address,
-					city,
-					state,
-					zipCode,
-					phoneNumber,
-					priceRange,
-					hours,
-					image: jsonRes.image,
-				};
+			const restaurant = {
+				name,
+				description,
+				cuisine,
+				address,
+				city,
+				state,
+				zipCode,
+				phoneNumber,
+				priceRange,
+				hours,
+				// image: jsonRes.image,
+				image,
+			};
 
-				const response = await dispatch(thunkAddRestaurant(restaurant));
+			const response = await dispatch(thunkAddRestaurant(restaurant));
 
-				if (response === "Restaurant Added") {
-					history.push("/restaurants");
-				}
+			if (response === "Restaurant Added") {
+				history.push("/restaurants");
 			}
 		}
 	};
+	// };
 
 	return (
 		<div>
@@ -91,16 +92,29 @@ export default function NewRestaurantForm() {
 						<option>Other</option>
 					</select>
 				</div>
+				{/* <div> */}
+					{/* <label>Image:</label> */}
+					{/* <input
+						type="file"
+						id="files"
+						class="hidden"
+						onChange={(e) => setImage(e.target.files[0])}
+					/> */}
+					{/* <label for="files">Select file</label> */}
+					{/* {image && <p>{image.name}</p>} */}
+					{/* {imageLoading && ( */}
+						{/* <p> */}
+							{/* Uploading{" "} */}
+							{/* <img src="https://i.gifer.com/ZZ5H.gif" alt="Uploading"></img> */}
+						{/* </p> */}
+					{/* )} */}
+				{/* </div> */}
 				<div>
-					<label>Image:</label>
-					<input type="file" onChange={(e) => setImage(e.target.files[0])} />
-					{image && <p>{image.name}</p>}
-					{imageLoading && (
-						<p>
-							Uploading{" "}
-							<img src="https://i.gifer.com/ZZ5H.gif" alt="Uploading"></img>
-						</p>
-					)}
+					<input
+						placeholder="Image Url"
+						value={image}
+						onChange={(e) => setImage(e.target.value)}
+					/>
 				</div>
 				<div>
 					<input
