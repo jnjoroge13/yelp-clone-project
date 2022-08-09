@@ -1,9 +1,16 @@
+const GET_ALL_REVIEWS = "reviews/GET_ALL_REVIEWS";
 const GET_REVIEWS = "reviews/GET_REVIEWS";
 const GET_ONE_REVIEW = "reviews/GET_ONE_REVIEW";
 const ADD_REVIEW = "reviews/ADD_REVIEW";
 const EDIT_REVIEW = "reviews/EDIT_REVIEW";
 const DELETE_REVIEW = "reviews/DELETE_REVIEW";
 
+const actionGetAllReviews = (reviews) => {
+	return {
+		type: GET_ALL_REVIEWS,
+		reviews,
+	};
+};
 const actionGetReviews = (reviews) => {
 	return {
 		type: GET_REVIEWS,
@@ -36,6 +43,13 @@ const actionDeleteReview = (reviewId) => {
 		type: DELETE_REVIEW,
 		reviewId,
 	};
+};
+
+export const thunkGetAllReviews = () => async (dispatch) => {
+	const res = await fetch(`/api/reviews/`);
+	const resData = await res.json();
+	dispatch(actionGetAllReviews(resData.reviews));
+	return res;
 };
 
 export const thunkGetReviews = (restaurantId) => async (dispatch) => {
@@ -88,6 +102,12 @@ export const thunkDeleteReview = (reviewId) => async (dispatch) => {
 const reviewReducer = (state = {}, action) => {
 	const newState = { ...state };
 	switch (action.type) {
+		case GET_ALL_REVIEWS:
+			action.reviews.forEach((review) => {
+				newState[review.id] = review;
+			});
+			return newState;
+
 		case GET_REVIEWS:
 			const getReviewsState = {};
 			action.reviews.forEach((review) => {

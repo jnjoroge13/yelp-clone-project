@@ -3,14 +3,13 @@ import { NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import whiteLogo from "../assets/logo-white.png";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../store/session";
+import { logout, login } from "../../store/session";
 import "./NavBar.css";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const location = useLocation();
-	console.log(location.pathname);
 
 	const openDropdown = () => {
 		if (showDropdown) return;
@@ -31,7 +30,7 @@ const NavBar = () => {
 
 		return () => document.removeEventListener("click", closeDropdown);
 	}, [showDropdown]);
-	if (location.pathname == "/login" || location.pathname == '/sign-up') {
+	if (location.pathname == "/login" || location.pathname == "/sign-up") {
 		return (
 			<nav className="nav-bar-cont-login-signup">
 				<NavLink to="/" exact={true}>
@@ -73,6 +72,9 @@ const NavBar = () => {
 			)}
 			{sessionUser && (
 				<div className="nav-bar-right">
+					<NavLink className="nav-bar-restaurants" to="/restaurants/new">
+						New Restaurant
+					</NavLink>
 					<NavLink className="nav-bar-restaurants" to="/restaurants">
 						Restaurants
 					</NavLink>

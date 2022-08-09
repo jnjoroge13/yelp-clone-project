@@ -49,7 +49,6 @@ export default function SingleRestaurant() {
 			},
 			body: formData,
 		});
-		console.log(awsRes);
 		if (awsRes.ok) {
 			const res = await dispatch(thunkDeleteRestaurant(restaurantId));
 

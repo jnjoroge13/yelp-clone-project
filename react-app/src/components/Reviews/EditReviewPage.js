@@ -13,7 +13,6 @@ export default function EditReviewForm({ closeAddReviewForm }) {
 		dispatch(thunkGetOneReview(reviewId));
 	}, [reviewId]);
 	const currentReview = useSelector((state) => state.reviews[reviewId]);
-	// console.log(currentReview)
 	const [rating, setRating] = useState(currentReview?.rating);
 	const [review, setReview] = useState(currentReview?.review);
 	const [errors, setErrors] = useState([]);

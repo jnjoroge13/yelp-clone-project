@@ -35,8 +35,10 @@ const LoginForm = () => {
 		<div className="login-signup-cont">
 			<form className="login-signup-form-cont" onSubmit={onLogin}>
 				<div className="login-signup-header">
-          <h3>Log in to BKS</h3>
-          <p>New to BKS? <Link to='/sign-up'>Sign up</Link></p>
+					<h3>Log in to BKS</h3>
+					<p>
+						New to BKS? <Link to="/sign-up">Sign up</Link>
+					</p>
 				</div>
 				<div>
 					{errors.map((error, ind) => (
@@ -63,9 +65,22 @@ const LoginForm = () => {
 				</div>
 				<div className="form-submit">
 					<button type="submit">Log In</button>
-        </div>
-        <div className="login-signup-footer">
-          <p>New to BKS? <Link to='/sign-up'>Sign up</Link></p>
+				</div>
+				<div className="form-demo-user">
+					<button
+						onClick={async (e) => {
+							e.preventDefault();
+							const data = await dispatch(login("demo@aa.io", "password"));
+						}}
+						type="submit"
+					>
+						Demo User
+					</button>
+				</div>
+				<div className="login-signup-footer">
+					<p>
+						New to BKS? <Link to="/sign-up">Sign up</Link>
+					</p>
 				</div>
 			</form>
 			<div className="login-signup-image-cont">

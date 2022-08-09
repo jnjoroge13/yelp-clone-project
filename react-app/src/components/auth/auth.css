@@ -97,3 +97,12 @@
 .signup-text{
     font-size: 0.9rem;
 }
+input:focus {
+    outline: none !important;
+    border:1px solid #0073bb;
+    box-shadow: 0 0 2px #0073bb;
+  }
+
+.form-demo-user {
+    margin-top: 5px;
+}
