@@ -99,16 +99,17 @@ export default function RestaurantList() {
 									<h3>
 										{i++}. <span>{restaurant.name}</span>
 									</h3>
-									<div>
+									<div className="biz-rating-cont">
 										<img
+											className="biz-star-rating"
 											width="108"
 											height="20"
 											src={getRatingImg(restaurant.id)}
 										/>
 										{getNumberRatings(restaurant.id)}
 									</div>
-									<div>
-										<span>{restaurant.cuisine}</span> {restaurant.priceRange}{" "}
+									<div className="biz-cuisine">
+										<span className="biz-cuisine-tag">{restaurant.cuisine}</span> {restaurant.priceRange}<span className="interpunct">{" · "}</span>
 										{restaurant.city}
 									</div>
 									<div className="biz-hour"><span>Hours:</span> {restaurant.hours}</div>
