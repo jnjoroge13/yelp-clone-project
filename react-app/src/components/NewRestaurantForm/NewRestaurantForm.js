@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import usePlacesAutocomplete, {
 	getGeocode,
 	getLatLng,
+	getDetails,
+	getZipCode
 } from "use-places-autocomplete";
 import {
 	Combobox,
@@ -27,6 +29,7 @@ export default function NewRestaurantForm() {
 	const [selectedAddress, setSelectedAddress] = useState("");
 	const [lat, setLat] = useState("");
 	const [lng, setLng] = useState("");
+	const [zipCode, setZipCode] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [priceRange, setPriceRange] = useState("$");
 	const [hours, setHours] = useState("");
@@ -75,6 +78,7 @@ export default function NewRestaurantForm() {
 				description,
 				cuisine,
 				address: selectedAddress,
+				zipCode,
 				phoneNumber,
 				priceRange,
 				hours,
@@ -130,9 +134,10 @@ export default function NewRestaurantForm() {
 						try {
 							const results = await getGeocode({ address });
 							const { lat, lng } = await getLatLng(results[0]);
+							const mapsZipCode = await getZipCode(results[0])
 							setLat(lat);
 							setLng(lng);
-							// console.log(lat, lng);
+							setZipCode(mapsZipCode)
 						} catch {
 							console.log("error");
 						}

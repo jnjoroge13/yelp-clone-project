@@ -110,7 +110,7 @@ export default function RestaurantList() {
 									</div>
 									<div className="biz-cuisine">
 										<span className="biz-cuisine-tag">{restaurant.cuisine}</span> {restaurant.priceRange}<span className="interpunct">{" · "}</span>
-										{restaurant.city}
+										{restaurant.zipCode}
 									</div>
 									<div className="biz-hour"><span>Hours:</span> {restaurant.hours}</div>
 									<div className="biz-message">
