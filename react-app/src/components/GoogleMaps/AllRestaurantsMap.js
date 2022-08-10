@@ -5,6 +5,7 @@ import {
 	// Marker,
 	// InfoWindow,
 } from "@react-google-maps/api";
+import { useSelector } from "react-redux";
 
 
 const libraries = ["places"];
@@ -24,8 +25,10 @@ const options = {
     zoomControl: true
 }
 export default function AllRestaurantsMap() {
+	const key = useSelector((state) => state.maps.key);
+	// console.log(key)
 	const { isLoaded, loadError } = useLoadScript({
-		googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+		googleMapsApiKey: key,
 		libraries,
 	});
 
