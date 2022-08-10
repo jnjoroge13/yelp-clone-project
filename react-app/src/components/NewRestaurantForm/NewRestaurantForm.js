@@ -21,11 +21,31 @@ export default function NewRestaurantForm() {
 	const [hours, setHours] = useState("");
 	const [errors, setErrors] = useState([]);
 	const [showErrors, SetShowErrors] = useState(false);
+	const [imageError,setImageError]= useState(false)
 
+	function checkImage(url) {
+		const image = new Image();
+		image.src = url;
+		setTimeout(() => {
+			// console.log(image.width)
+
+			if (image.width > 0) {
+				setImageError(false);
+				console.log('good image')
+			}else {
+				setImageError(true);
+				console.log('bad image')
+			}
+		}, 1000);
+    }
+	useEffect(() => {
+
+		checkImage(image)
+	},[image])
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		SetShowErrors(true);
-		if (!errors.length) {
+		if (imageError) {
 			// const formData = new FormData();
 			// formData.append("image", image);
 			// setImageLoading(true);
@@ -115,6 +135,7 @@ export default function NewRestaurantForm() {
 						value={image}
 						onChange={(e) => setImage(e.target.value)}
 					/>
+					{imageError && <p>Invalid Image Url</p>}
 				</div>
 				<div>
 					<input
