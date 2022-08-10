@@ -12,7 +12,6 @@ import {
 	ComboboxPopover,
 	ComboboxList,
 	ComboboxOption,
-	ComboboxOptionText,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
@@ -26,9 +25,8 @@ export default function NewRestaurantForm() {
 	const [image, setImage] = useState("");
 	const [imageLoading, setImageLoading] = useState(false);
 	const [selectedAddress, setSelectedAddress] = useState("");
-	// const [city, setCity] = useState("");
-	// const [state, setState] = useState("");
-	// const [zipCode, setZipCode] = useState("");
+	const [lat, setLat] = useState("");
+	const [lng, setLng] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [priceRange, setPriceRange] = useState("$");
 	const [hours, setHours] = useState("");
@@ -46,7 +44,7 @@ export default function NewRestaurantForm() {
 	} = usePlacesAutocomplete({
 		requestOptions: {
 			location: { lat: () => 34.052234, lng: () => -118.243685 },
-			radius: 400000,
+			radius: 200000,
 		},
 	});
 
@@ -54,8 +52,6 @@ export default function NewRestaurantForm() {
 		const image = new Image();
 		image.src = url;
 		setTimeout(() => {
-			// console.log(image.width)
-
 			if (image.width > 0) {
 				setImageError(false);
 				console.log("good image");
@@ -74,29 +70,14 @@ export default function NewRestaurantForm() {
 		e.preventDefault();
 		SetShowErrors(true);
 		if (!imageError && !errors.length) {
-			// const formData = new FormData();
-			// formData.append("image", image);
-			// setImageLoading(true);
-			// const res = await fetch("/api/restaurants/image", {
-			// method: "POST",
-			// body: formData,
-			// });
-			// if (res.ok) {
-			// const jsonRes = await res.json();
-			// setImageLoading(false);
-
 			const restaurant = {
 				name,
 				description,
 				cuisine,
 				address: selectedAddress,
-				// city,
-				// state,
-				// zipCode,
 				phoneNumber,
 				priceRange,
 				hours,
-				// image: jsonRes.image,
 				image,
 			};
 
@@ -142,14 +123,16 @@ export default function NewRestaurantForm() {
 				</div>
 				<Combobox
 					onSelect={async (address) => {
-						console.log(address);
+						// console.log(address);
 						setValue(address, false);
-						setSelectedAddress(address)
+						setSelectedAddress(address);
 						clearSuggestions();
 						try {
 							const results = await getGeocode({ address });
 							const { lat, lng } = await getLatLng(results[0]);
-							console.log(lat, lng);
+							setLat(lat);
+							setLng(lng);
+							// console.log(lat, lng);
 						} catch {
 							console.log("error");
 						}
@@ -171,23 +154,6 @@ export default function NewRestaurantForm() {
 						</ComboboxList>
 					</ComboboxPopover>
 				</Combobox>
-				{/* <div> */}
-				{/* <label>Image:</label> */}
-				{/* <input */}
-				{/* // type="file" */}
-				{/* // id="files" */}
-				{/* // className="hidden" */}
-				{/* // onChange={(e) => setImage(e.target.files[0])} */}
-				{/* // /> */}
-				{/* <label for="files">Select file</label> */}
-				{/* {image && <p>{image.name}</p>} */}
-				{/* {imageLoading && ( */}
-				{/* // <p> */}
-				{/* Uploading{" "} */}
-				{/* <img src="https://i.gifer.com/ZZ5H.gif" alt="Uploading"></img> */}
-				{/* </p> */}
-				{/* // )} */}
-				{/* </div> */}
 				<div>
 					<input
 						placeholder="Image Url"
@@ -196,34 +162,6 @@ export default function NewRestaurantForm() {
 					/>
 					{imageError && <p>Invalid Image Url</p>}
 				</div>
-				{/* <div>
-					<input
-						placeholder="address"
-						value={address}
-						onChange={(e) => setAddress(e.target.value)}
-					/>
-				</div>
-				<div>
-					<input
-						placeholder="city"
-						value={city}
-						onChange={(e) => setCity(e.target.value)}
-					/>
-				</div>
-				<div>
-					<input
-						placeholder="state"
-						value={state}
-						onChange={(e) => setState(e.target.value)}
-					/>
-				</div>
-				<div>
-					<input
-						placeholder="zipcode"
-						value={zipCode}
-						onChange={(e) => setZipCode(e.target.value)}
-					/>
-				</div> */}
 				<div>
 					<input
 						placeholder="phone number"
@@ -255,4 +193,101 @@ export default function NewRestaurantForm() {
 			</form>
 		</div>
 	);
+}
+
+//AWS Image Upload
+{
+	/* <div> */
+}
+{
+	/* <label>Image:</label> */
+}
+{
+	/* <input */
+}
+{
+	/* // type="file" */
+}
+{
+	/* // id="files" */
+}
+{
+	/* // className="hidden" */
+}
+{
+	/* // onChange={(e) => setImage(e.target.files[0])} */
+}
+{
+	/* // /> */
+}
+{
+	/* <label for="files">Select file</label> */
+}
+{
+	/* {image && <p>{image.name}</p>} */
+}
+{
+	/* {imageLoading && ( */
+}
+{
+	/* // <p> */
+}
+{
+	/* Uploading{" "} */
+}
+{
+	/* <img src="https://i.gifer.com/ZZ5H.gif" alt="Uploading"></img> */
+}
+{
+	/* </p> */
+}
+{
+	/* // )} */
+}
+{
+	/* </div> */
+}
+
+//AWS Image Upload onSubmit
+// const formData = new FormData();
+// formData.append("image", image);
+// setImageLoading(true);
+// const res = await fetch("/api/restaurants/image", {
+// method: "POST",
+// body: formData,
+// });
+// if (res.ok) {
+// const jsonRes = await res.json();
+// setImageLoading(false);
+
+//Plain Address inputs
+{
+	/* <div>
+	<input
+		placeholder="address"
+		value={address}
+		onChange={(e) => setAddress(e.target.value)}
+	/>
+</div>
+<div>
+	<input
+		placeholder="city"
+		value={city}
+		onChange={(e) => setCity(e.target.value)}
+	/>
+</div>
+<div>
+	<input
+		placeholder="state"
+		value={state}
+		onChange={(e) => setState(e.target.value)}
+	/>
+</div>
+<div>
+	<input
+		placeholder="zipcode"
+		value={zipCode}
+		onChange={(e) => setZipCode(e.target.value)}
+	/>
+</div> */
 }
