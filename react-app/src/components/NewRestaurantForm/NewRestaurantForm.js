@@ -25,7 +25,7 @@ export default function NewRestaurantForm() {
 	const [cuisine, setCuisine] = useState("Chinese");
 	const [image, setImage] = useState("");
 	const [imageLoading, setImageLoading] = useState(false);
-	const [address, setAddress] = useState("");
+	const [selectedAddress, setSelectedAddress] = useState("");
 	// const [city, setCity] = useState("");
 	// const [state, setState] = useState("");
 	// const [zipCode, setZipCode] = useState("");
@@ -89,7 +89,7 @@ export default function NewRestaurantForm() {
 				name,
 				description,
 				cuisine,
-				address,
+				address: selectedAddress,
 				// city,
 				// state,
 				// zipCode,
@@ -144,6 +144,7 @@ export default function NewRestaurantForm() {
 					onSelect={async (address) => {
 						console.log(address);
 						setValue(address, false);
+						setSelectedAddress(address)
 						clearSuggestions();
 						try {
 							const results = await getGeocode({ address });
@@ -159,6 +160,7 @@ export default function NewRestaurantForm() {
 						onChange={(e) => setValue(e.target.value)}
 						disabled={!ready}
 						placeholder="Address"
+						required={true}
 					/>
 					<ComboboxPopover>
 						<ComboboxList>
