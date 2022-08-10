@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	GoogleMap,
 	Marker,
@@ -6,7 +6,8 @@ import {
 	// InfoWindow,
 } from "@react-google-maps/api";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { thunkGetKey } from "../../store/maps";
 
 
 const libraries = ["places"];
@@ -24,13 +25,20 @@ const options = {
 }
 export default function SingleRestaurantMap() {
 	const { restaurantId } = useParams();
+	const dispatch = useDispatch()
 	const restaurant = useSelector((state) => state.restaurants[restaurantId]);
+	const key = useSelector((state) => state.maps.key);
 	const marker = {
 		lat: Number(restaurant?.lat),
 		lng: Number(restaurant?.lng),
 	}
+
+	useEffect(() => {
+		dispatch(thunkGetKey())
+	},[restaurant,dispatch])
+
 	const { isLoaded, loadError } = useLoadScript({
-		googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+		googleMapsApiKey: key,
 		libraries,
 	});
 	const center = {

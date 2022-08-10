@@ -13,11 +13,19 @@ import SingleRestaurant from "./components/singleRestaurant/singleRestaurant";
 import EditReviewForm from "./components/Reviews/EditReviewPage";
 import User from "./components/User";
 import { authenticate } from "./store/session";
+import { thunkGetAllReviews } from "./store/reviews";
+import { thunkGetKey } from "./store/maps";
+import { thunkGetRestaurants } from "./store/restaurants";
 
 function App() {
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
 
+	useEffect(() => {
+		dispatch(thunkGetAllReviews())
+		dispatch(thunkGetKey())
+		dispatch(thunkGetRestaurants())
+	})
 	useEffect(() => {
 		(async () => {
 			await dispatch(authenticate());
