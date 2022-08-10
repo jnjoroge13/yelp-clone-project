@@ -118,6 +118,8 @@ export default function NewRestaurantForm() {
 						<option>Korean</option>
 						<option>Italian</option>
 						<option>Brunch</option>
+						<option>Bakery</option>
+						<option>Cafe</option>
 						<option>American</option>
 						<option>Seafood</option>
 						<option>Mexican</option>
