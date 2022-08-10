@@ -50,7 +50,7 @@ export default function AllReviews() {
 			<h3>Reviews:</h3>
 			{reviewsArray &&
 				reviewsArray.map((review) => (
-					<div>
+					<div key={review.id}>
 						<p>
 							id: {review.id} ; userId: {review.userId} ; rating:{" "}
 							{review.rating} ; review: {review.review} ; created:{" "}

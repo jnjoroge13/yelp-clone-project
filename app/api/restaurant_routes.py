@@ -1,6 +1,7 @@
-import imp
+# import imp
+import os
 from app.models import Restaurant
-from flask import Blueprint, jsonify, request
+from flask import Blueprint
 from app.models import db
 from flask_login import login_required, current_user
 from app.forms.new_restaurant_form import AddRestaurant
@@ -82,44 +83,47 @@ def delete_restaurant(restaurant_id):
     db.session.delete(restaurant)
     db.session.commit()
 
+@restaurant_routes.route('/googlemapapi', methods=['GET'])
+def get_google_map_api():
+    # print('------------',os.environ.get('GOOGLE_MAPS_API_KEY'))
+    return {'googleMapsAPIKey': os.environ.get('GOOGLE_MAPS_API_KEY')}
+# @restaurant_routes.route("/image", methods=["POST"])
+# @login_required
+# def upload_image():
+#     if "image" not in request.files:
+#         print('----------error #1-----------')
+#         return {"errors": "image required"}, 400
 
-@restaurant_routes.route("/image", methods=["POST"])
-@login_required
-def upload_image():
-    if "image" not in request.files:
-        print('----------error #1-----------')
-        return {"errors": "image required"}, 400
+#     print('line50', request.files)
 
-    print('line50', request.files)
+#     image = request.files["image"]
+#     print('--------image--------', image)
 
-    image = request.files["image"]
-    print('--------image--------', image)
+#     if not allowed_file(image.filename):
+#         print('----------error #2-----------')
+#         return {"errors": "file type not permitted"}, 400
 
-    if not allowed_file(image.filename):
-        print('----------error #2-----------')
-        return {"errors": "file type not permitted"}, 400
+#     image.filename = get_unique_filename(image.filename)
 
-    image.filename = get_unique_filename(image.filename)
+#     upload = upload_file_to_s3(image)
+#     print('----------error #3-----------', upload, '--------')
+#     if "url" not in upload:
+#         print('----------error #4-----------', upload, '--------')
+#         return upload, 400
 
-    upload = upload_file_to_s3(image)
-    print('----------error #3-----------', upload, '--------')
-    if "url" not in upload:
-        print('----------error #4-----------', upload, '--------')
-        return upload, 400
+#     print('-------upload-Working-------', upload, '-----------------')
 
-    print('-------upload-Working-------', upload, '-----------------')
+#     url = upload["url"]
 
-    url = upload["url"]
-
-    return {"image": url}
+#     return {"image": url}
 
 
-@restaurant_routes.route("/image", methods=["DELETE"])
-@login_required
-def delete_image():
-    source = request.form["image"]
-    splitsource = source.split('/')
-    # print('------splitsource-------', splitsource[3])
-    response = delete_object_from_bucket(splitsource[3])
-    # print('------response-------', response)
-    return response
+# @restaurant_routes.route("/image", methods=["DELETE"])
+# @login_required
+# def delete_image():
+#     source = request.form["image"]
+#     splitsource = source.split('/')
+#     # print('------splitsource-------', splitsource[3])
+#     response = delete_object_from_bucket(splitsource[3])
+#     # print('------response-------', response)
+#     return response
