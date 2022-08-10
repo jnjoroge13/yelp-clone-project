@@ -90,7 +90,7 @@ export default function RestaurantList() {
 			<div className="biz-list-cont">
 				{restaurantArray &&
 					restaurantArray.map((restaurant) => (
-						<div className="biz-list-single-cont">
+						<div key={restaurant.id} className="biz-list-single-cont">
 							<NavLink className="biz-list-single" to={`/restaurants/${restaurant.id}`}>
 								<div className="biz-image">
 									<img src={restaurant.image} />
@@ -114,7 +114,7 @@ export default function RestaurantList() {
 									</div>
 									<div className="biz-hour"><span>Hours:</span> {restaurant.hours}</div>
 									<div className="biz-message">
-										<i class="fa-regular fa-message" />
+										<i className="fa-regular fa-message" />
 										{getOneReview(restaurant.id) && <div>"{getOneReview(restaurant.id)}" {getOneReview(restaurant.id)?.length>136 && (<span className='biz-message-more'>more</span>)}</div>}
 										{!getOneReview(restaurant.id) && <div>No Reviews</div>}
 									</div>

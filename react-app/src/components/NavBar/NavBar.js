@@ -3,7 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import whiteLogo from "../assets/logo-white.png";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, login } from "../../store/session";
+import { logout} from "../../store/session";
 import "./NavBar.css";
 
 const NavBar = () => {

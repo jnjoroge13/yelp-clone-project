@@ -6,12 +6,12 @@ import { thunkGetOneRestaurant } from "../../store/restaurants";
 
 export default function EditRestaurantForm({ closeEditForm }) {
 	const dispatch = useDispatch();
-	const history = useHistory();
-	const sessionUser = useSelector((state) => state.session.user);
+	// const history = useHistory();
+	// const sessionUser = useSelector((state) => state.session.user);
 	const { restaurantId } = useParams();
 	useEffect(() => {
 		dispatch(thunkGetOneRestaurant(restaurantId));
-	}, [restaurantId]);
+	}, [restaurantId, dispatch]);
 	const restaurant = useSelector((state) => state.restaurants[restaurantId]);
 	const [name, setName] = useState(restaurant?.name);
 	const [description, setDescription] = useState(restaurant?.description);

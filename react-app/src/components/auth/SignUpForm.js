@@ -115,7 +115,7 @@ const SignUpForm = () => {
 							</div>
 						))}
 					</div>
-					<i class="fa-solid fa-xmark fa-xl" onClick={clearErrors}></i>
+					<i className="fa-solid fa-xmark fa-xl" onClick={clearErrors}></i>
 				</div>
 			)}
 			<form className="login-signup-form-cont" onSubmit={onSignUp}>
