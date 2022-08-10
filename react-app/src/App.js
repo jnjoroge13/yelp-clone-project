@@ -11,6 +11,7 @@ import UsersList from "./components/UsersList";
 import HomePage from "./components/HomePage/HomePage";
 import SingleRestaurant from "./components/singleRestaurant/singleRestaurant";
 import EditReviewForm from "./components/Reviews/EditReviewPage";
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 
