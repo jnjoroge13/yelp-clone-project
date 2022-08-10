@@ -13,6 +13,7 @@ import oneandOneHalfStars from "../assets/1.5-stars.png";
 import twoandOneHalfStars from "../assets/2.5-stars.png";
 import threeandOneHalfStars from "../assets/3.5-stars.png";
 import fourandOneHalfStars from "../assets/4.5-stars.png";
+import AllRestaurantsMap from "../GoogleMaps/AllRestaurantsMap";
 import './RestaurantList.css'
 
 export default function RestaurantList() {
@@ -123,6 +124,7 @@ export default function RestaurantList() {
 						</div>
 					))}
 			</div>
+			<AllRestaurantsMap/>
 		</div>
 	);
 }
