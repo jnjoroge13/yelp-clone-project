@@ -9,8 +9,8 @@ ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif"}
 
 s3 = boto3.client(
     "s3",
-    aws_access_key_id=os.environ.get("S3_ACCESS_KEY_ID"),
     aws_secret_access_key=os.environ.get("S3_SECRET_ACCESS_KEY"),
+    aws_access_key_id=os.environ.get("S3_ACCESS_KEY_ID"),
     region_name=os.environ.get("S3_AWS_REGION")
 )
 

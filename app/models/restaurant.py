@@ -12,9 +12,9 @@ class Restaurant(db.Model):
     cuisine = db.Column(db.String(50), nullable=False)
     address = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(100), nullable=False)
-    state = db.Column(db.String(50), nullable=False)
+    state = db.Column(db.String(2), nullable=False)
     zipCode = db.Column(db.String(10), nullable=False)
-    phoneNumber = db.Column(db.Integer, nullable=False)
+    phoneNumber = db.Column(db.String(15), nullable=False)
     priceRange = db.Column(db.String(4), nullable=False)
     hours = db.Column(db.String(100), nullable=False)
 

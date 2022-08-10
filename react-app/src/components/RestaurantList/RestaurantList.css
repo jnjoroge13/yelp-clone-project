@@ -40,8 +40,8 @@
 }
 .biz-image {
 	width: 20%;
-	min-width: 220px;
-	max-width: 225px;
+	min-width: 225px;
+	max-width: 235px;
 	border-radius: 5px;
 }
 .biz-image img {
@@ -49,9 +49,8 @@
 height: 200px; */
 	aspect-ratio: 1 / 1;
 	width: 100%;
-	max-width: 225px;
 	border-radius: 5px;
-    object-fit:scale-down;
+    object-fit:cover;
 
 }
 

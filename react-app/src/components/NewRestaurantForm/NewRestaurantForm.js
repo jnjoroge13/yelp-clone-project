@@ -30,12 +30,12 @@ export default function NewRestaurantForm() {
 			// formData.append("image", image);
 			// setImageLoading(true);
 			// const res = await fetch("/api/restaurants/image", {
-			// 	method: "POST",
-			// 	body: formData,
+				// method: "POST",
+				// body: formData,
 			// });
 			// if (res.ok) {
-			// 	const jsonRes = await res.json();
-			// 	setImageLoading(false);
+				// const jsonRes = await res.json();
+				// setImageLoading(false);
 
 			const restaurant = {
 				name,
@@ -94,20 +94,20 @@ export default function NewRestaurantForm() {
 				</div>
 				{/* <div> */}
 					{/* <label>Image:</label> */}
-					{/* <input
-						type="file"
-						id="files"
-						class="hidden"
-						onChange={(e) => setImage(e.target.files[0])}
-					/> */}
+					{/* <input */}
+						{/* // type="file" */}
+						{/* // id="files" */}
+						{/* // class="hidden" */}
+						{/* // onChange={(e) => setImage(e.target.files[0])} */}
+					{/* // /> */}
 					{/* <label for="files">Select file</label> */}
 					{/* {image && <p>{image.name}</p>} */}
 					{/* {imageLoading && ( */}
-						{/* <p> */}
+						{/* // <p> */}
 							{/* Uploading{" "} */}
 							{/* <img src="https://i.gifer.com/ZZ5H.gif" alt="Uploading"></img> */}
 						{/* </p> */}
-					{/* )} */}
+					{/* // )} */}
 				{/* </div> */}
 				<div>
 					<input

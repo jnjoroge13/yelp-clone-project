@@ -104,7 +104,7 @@ def upload_image():
     upload = upload_file_to_s3(image)
     print('----------error #3-----------', upload, '--------')
     if "url" not in upload:
-        print('----------error #3-----------', upload, '--------')
+        print('----------error #4-----------', upload, '--------')
         return upload, 400
 
     print('-------upload-Working-------', upload, '-----------------')
