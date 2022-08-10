@@ -9,6 +9,8 @@ import EditRestaurantForm from "../EditRestaurantForm/EditRestaurantForm";
 import AddReviewForm from "../Reviews/AddReviewForm";
 import { thunkGetReviews } from "../../store/reviews";
 import AllReviews from "../Reviews/AllReviews";
+import SingleRestaurantMap from "../GoogleMaps/SingleRestaurantMap";
+
 
 export default function SingleRestaurant() {
 	const dispatch = useDispatch();
@@ -74,6 +76,9 @@ export default function SingleRestaurant() {
 						<AddReviewForm closeAddReviewForm={closeAddReviewForm} />
 					)}
 					<AllReviews />
+				</div>
+				<div>
+					<SingleRestaurantMap/>
 				</div>
 			</div>
 		)

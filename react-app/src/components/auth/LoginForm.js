@@ -36,7 +36,7 @@ const LoginForm = () => {
 		<div className="login-signup-cont">
 			{errors.length>0 && <div className="login-errors">
 					<>The email address or password you entered is incorrect.</>
-					<i class="fa-solid fa-xmark fa-xl" onClick={clearErrors}></i>
+					<i className="fa-solid fa-xmark fa-xl" onClick={clearErrors}></i>
 				</div>
 			}
 			<form className="login-signup-form-cont" onSubmit={onLogin}>
