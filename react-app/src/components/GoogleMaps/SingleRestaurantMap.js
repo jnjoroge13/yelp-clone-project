@@ -5,6 +5,8 @@ import {
 	// Marker,
 	// InfoWindow,
 } from "@react-google-maps/api";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 const libraries = ["places"];
@@ -14,21 +16,23 @@ const mapContainerStyle = {
     height: "400px",
 };
 
-const center = {
-    lat: 34.052234,
-    lng: -118.243685,
-};
+
 
 const options = {
     disableDefaultUI: true,
     zoomControl: true
 }
 export default function SingleRestaurantMap() {
+	const { restaurantId } = useParams();
+	const restaurant = useSelector((state) => state.restaurants[restaurantId]);
 	const { isLoaded, loadError } = useLoadScript({
 		googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
 		libraries,
 	});
-
+	const center = {
+		lat: Number(restaurant?.lat),
+		lng: Number(restaurant?.lng),
+	};
 	if (loadError) return "Error loading maps";
 	if (!isLoaded) return "Loading Map...";
 	return (
