@@ -36,16 +36,17 @@ export default function NewRestaurantForm() {
 				setImageError(true);
 				console.log('bad image')
 			}
-		}, 1000);
+		}, 100);
     }
 	useEffect(() => {
-
-		checkImage(image)
+		if (image) {
+			checkImage(image)
+		}
 	},[image])
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		SetShowErrors(true);
-		if (imageError) {
+		if (!imageError && !errors.length) {
 			// const formData = new FormData();
 			// formData.append("image", image);
 			// setImageLoading(true);
