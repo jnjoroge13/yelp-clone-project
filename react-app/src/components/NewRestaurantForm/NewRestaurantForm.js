@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkAddRestaurant } from "../../store/restaurants";
+import { thunkGetOneRestaurant } from "../../store/restaurants";
+
 import { useHistory } from "react-router-dom";
 import {
 	GoogleMap,
@@ -326,7 +328,6 @@ export default function NewRestaurantForm() {
 		</div>
 	);
 }
-
 //AWS Image Upload
 {
 	/* <div> */

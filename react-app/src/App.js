@@ -6,6 +6,7 @@ import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar/NavBar";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
 import NewRestaurantForm from "./components/NewRestaurantForm/NewRestaurantForm";
+import { EditRestaurantForm } from "./components/EditRestaurantForm/EditRestaurantForm";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import HomePage from "./components/HomePage/HomePage";
@@ -51,6 +52,9 @@ function App() {
 				</ProtectedRoute>
 				<Route path="/restaurants/:restaurantId" exact={true}>
 					<SingleRestaurant />
+				</Route>
+				<Route path="/restaurants/edit/:restaurantId" exact={true}>
+					<EditRestaurantForm />
 				</Route>
 				<ProtectedRoute path="/reviews/:reviewId" exact={true}>
 					<EditReviewForm />
