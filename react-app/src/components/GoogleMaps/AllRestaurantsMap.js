@@ -10,8 +10,8 @@ import { useSelector } from "react-redux";
 const libraries = ["places"];
 
 const mapContainerStyle = {
-	width: "25vw",
-	height: "25vw",
+	height: "100%",
+	width: "100%"
 };
 
 const center = {
@@ -43,7 +43,7 @@ export default function AllRestaurantsMap() {
 	// if (loadError) return "Error loading maps";
 	// if (!isLoaded) return "Loading Map...";
 	return (
-		<div>
+		<div className="all-biz-map-cont">
 			<GoogleMap
 				mapContainerStyle={mapContainerStyle}
 				zoom={14}

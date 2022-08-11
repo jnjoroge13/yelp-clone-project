@@ -13,6 +13,7 @@ import HomePage from "./components/HomePage/HomePage";
 import SingleRestaurant from "./components/singleRestaurant/singleRestaurant";
 import EditReviewForm from "./components/Reviews/EditReviewPage";
 import User from "./components/User";
+import Footer from "./components/Footer/Footer";
 import { authenticate } from "./store/session";
 import { thunkGetAllReviews } from "./store/reviews";
 import { thunkGetKey } from "./store/maps";
@@ -72,6 +73,7 @@ function App() {
 					<HomePage />
 				</Route>
 			</Switch>
+			<Footer/>
 		</BrowserRouter>
 	);
 }
