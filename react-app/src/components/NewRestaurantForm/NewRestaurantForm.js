@@ -136,13 +136,13 @@ export default function NewRestaurantForm() {
 	const clearErrors = () => {
 		setFirstSubmit(false);
 	};
-	const { isLoaded, loadError } = useLoadScript({
-		googleMapsApiKey: key,
-		libraries,
-	});
+	// const { isLoaded, loadError } = useLoadScript({
+	// 	googleMapsApiKey: key,
+	// 	libraries,
+	// });
 
-	if (loadError) return "Error loading maps";
-	if (!isLoaded) return "Loading Map...";
+	// if (loadError) return "Error loading maps";
+	// if (!isLoaded) return "Loading Map...";
 	return (
 		<div>
 			{errors.length > 0 && firstSubmit && (

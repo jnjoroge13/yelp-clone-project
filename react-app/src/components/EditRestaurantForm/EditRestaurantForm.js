@@ -33,14 +33,15 @@ export function EditRestaurantForm() {
 		thunkGetOneRestaurant(restaurantId)
 	},[dispatch])
 	const currentResaurant = useSelector((state) => state.restaurants[restaurantId]);
-	console.log(currentResaurant)
+	// console.log(currentResaurant)
 	const key = useSelector((state) => state.maps.key);
 	const sessionUser = useSelector((state) => state.session.user);
 	const [name, setName] = useState(currentResaurant?.name);
 	const [description, setDescription] = useState(currentResaurant?.description);
 	const [cuisine, setCuisine] = useState(currentResaurant?.cuisine);
 	const [image, setImage] = useState(currentResaurant?.image);
-	const [selectedAddress, setSelectedAddress] = useState(currentResaurant?.address);
+	const [address, setAddress] = useState(currentResaurant?.address);
+	const [selectedAddress, setSelectedAddress] = useState(true);
 	const [lat, setLat] = useState(currentResaurant?.lat);
 	const [lng, setLng] = useState(currentResaurant?.lng);
 	const [zipCode, setZipCode] = useState(currentResaurant?.zipCode);
@@ -62,7 +63,6 @@ export function EditRestaurantForm() {
 		setDescription(currentResaurant?.description);
 		setCuisine(currentResaurant?.cuisine);
 		setImage(currentResaurant?.image);
-		setSelectedAddress(currentResaurant?.address);
 		setLat(currentResaurant?.lat);
 		setLng(currentResaurant?.lng);
 		setZipCode(currentResaurant?.zipCode);
@@ -97,7 +97,7 @@ export function EditRestaurantForm() {
 
 		// if (name.length > 50) errors.push("Name must be under 355 character");
 		// if (description.length > 355) errors.push('Description must be under 355 character')
-		// if (!selectedAddress.length) errors.push('Must select an address from the dropdown options')
+		// if (!selectedAddress) errors.push('Must select an address from the dropdown options')
 		// if (!validateImageExt(image)) errors.push('Image must be a png, jpg, or jpeg')
 		// if(imageError) errors.push('Image Url is corrupted')
 		// if (!validatePhoneNumber(phoneNumber)) errors.push('Phone number not valid')
@@ -154,13 +154,13 @@ export function EditRestaurantForm() {
 	const clearErrors = () => {
 		setFirstSubmit(false);
 	};
-	const { isLoaded, loadError } = useLoadScript({
-		googleMapsApiKey: key,
-		libraries,
-	});
+	// const { isLoaded, loadError } = useLoadScript({
+	// 	googleMapsApiKey: key,
+	// 	libraries,
+	// });
 
-	if (loadError) return "Error loading maps";
-	if (!isLoaded) return "Loading Map...";
+	// if (loadError) return "Error loading maps";
+	// if (!isLoaded) return "Loading Map...";
 	return (
 		<div>
 			{errors.length > 0 && firstSubmit && (
@@ -212,7 +212,8 @@ export function EditRestaurantForm() {
 					onSelect={async (address) => {
 						// console.log(address);
 						setValue(address, false);
-						setSelectedAddress(address);
+						setSelectedAddress(true);
+						setAddress(address);
 						clearSuggestions();
 						try {
 							const results = await getGeocode({ address });
@@ -228,7 +229,10 @@ export function EditRestaurantForm() {
 				>
 					<ComboboxInput
 						value={value.length?value:currentResaurant?.address}
-						onChange={(e) => setValue(e.target.value)}
+						onChange={(e) => {
+							setSelectedAddress(false)
+							setValue(e.target.value)
+						}}
 						disabled={!ready}
 						placeholder="Address"
 						required={true}

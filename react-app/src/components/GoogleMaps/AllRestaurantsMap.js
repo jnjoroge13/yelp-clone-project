@@ -27,13 +27,13 @@ const options = {
 export default function AllRestaurantsMap() {
 	const key = useSelector((state) => state.maps.key);
 	// console.log(key)
-	const { isLoaded, loadError } = useLoadScript({
-		googleMapsApiKey: key,
-		libraries,
-	});
+	// const { isLoaded, loadError } = useLoadScript({
+	// 	googleMapsApiKey: key,
+	// 	libraries,
+	// });
 
-	if (loadError) return "Error loading maps";
-	if (!isLoaded) return "Loading Map...";
+	// if (loadError) return "Error loading maps";
+	// if (!isLoaded) return "Loading Map...";
 	return (
 		<div>
 			<GoogleMap
