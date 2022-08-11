@@ -1,10 +1,10 @@
 .login-signup-cont {
     display: flex;
     width: 100%;
-	height: calc(100vh - 251px);
+	height: calc(100vh - 301px);
     justify-content: center;
     gap: 30px;
-    padding-top: 100px;
+    padding-top: 150px;
     position: relative;
     overflow: hidden;
     overflow-y: scroll;

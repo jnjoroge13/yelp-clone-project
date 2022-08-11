@@ -20,6 +20,9 @@
 .form-cuisine-price{
     width: 100%;
     margin-bottom: 10px;
+    border-radius: 5px;
+    height: 35px;
+    border: 1.6px solid rgb(201, 200, 200);
 }
 
 .form-hours{
