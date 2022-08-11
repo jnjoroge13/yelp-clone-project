@@ -47,7 +47,7 @@ const NavBar = () => {
 				<img className="navbar-logo" src={logo} />
 			</NavLink>
 			<div className="search-bar-cont">
-			<form className="search-bar" >
+			{/* <form className="search-bar" >
 				<input
 					type="text"
 					id="search"
@@ -58,7 +58,7 @@ const NavBar = () => {
 					<div className="search-bar-icon">
 						<i className=" search-icon fa fa-search fa-xl"></i>
 						</div>
-			</form>
+			</form> */}
 			</div>
 			{!sessionUser && (
 				<div className="nav-bar-right">
