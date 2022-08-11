@@ -17,6 +17,7 @@ const NavBar = () => {
 	};
 
 	const dispatch = useDispatch();
+	const [search,setSearch]=useState('')
 	const onLogout = async (e) => {
 		await dispatch(logout());
 		setShowDropdown(!showDropdown);
@@ -45,6 +46,20 @@ const NavBar = () => {
 			<NavLink to="/" exact={true}>
 				<img className="navbar-logo" src={logo} />
 			</NavLink>
+			<div className="search-bar-cont">
+			<form className="search-bar" >
+				<input
+					type="text"
+					id="search"
+					name="search"
+					placeholder="Search by Cuisine or Restaurant Name"
+					onChange={(e) => setSearch(e.target.value)}
+					/>
+					<div className="search-bar-icon">
+						<i className=" search-icon fa fa-search fa-xl"></i>
+						</div>
+			</form>
+			</div>
 			{!sessionUser && (
 				<div className="nav-bar-right">
 					<NavLink className="nav-bar-restaurants" to="/restaurants">
@@ -71,6 +86,7 @@ const NavBar = () => {
 					</NavLink> */}
 				</div>
 			)}
+
 			{sessionUser && (
 				<div className="nav-bar-right">
 					<NavLink className="nav-bar-restaurants" to="/restaurants/new">
