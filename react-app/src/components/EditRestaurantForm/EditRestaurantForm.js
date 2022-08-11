@@ -57,7 +57,7 @@ export function EditRestaurantForm() {
 	const [imageError, setImageError] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const [firstSubmit, setFirstSubmit] = useState(false);
-
+	console.log(zipCode)
 	useEffect(() => {
 		setName(currentResaurant?.name);
 		setDescription(currentResaurant?.description);
@@ -93,7 +93,7 @@ export function EditRestaurantForm() {
 		return re.test(img);
 	};
 	useEffect(() => {
-		const errors = [];
+		// const errors = [];
 
 		// if (name.length > 50) errors.push("Name must be under 355 character");
 		// if (description.length > 355) errors.push('Description must be under 355 character')
@@ -133,7 +133,7 @@ export function EditRestaurantForm() {
 				name,
 				description,
 				cuisine,
-				address: selectedAddress,
+				address,
 				zipCode,
 				lat,
 				lng,
@@ -141,11 +141,12 @@ export function EditRestaurantForm() {
 				priceRange,
 				hours,
 				image,
+				id:restaurantId
 			};
 
-			const response = await dispatch(thunkAddRestaurant(restaurant));
+			const response = await dispatch(thunkEditRestaurant(restaurant));
 
-			if (response === "Restaurant Added") {
+			if (response === "Restaurant Updated") {
 				history.push("/restaurants");
 			}
 		}
@@ -219,6 +220,7 @@ export function EditRestaurantForm() {
 							const results = await getGeocode({ address });
 							const { lat, lng } = await getLatLng(results[0]);
 							const mapsZipCode = await getZipCode(results[0]);
+							console.log(mapsZipCode)
 							setLat(lat);
 							setLng(lng);
 							setZipCode(mapsZipCode);
