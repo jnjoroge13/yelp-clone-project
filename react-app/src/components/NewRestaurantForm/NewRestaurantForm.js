@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkAddRestaurant } from "../../store/restaurants";
 import { thunkGetOneRestaurant } from "../../store/restaurants";
-
+import signinImage from "../assets/yelp-signin-image.png";
+import "./NewRestaurantForm.css";
 import { useHistory } from "react-router-dom";
 import {
 	GoogleMap,
 	useLoadScript,
-	useJsApiLoader
+	useJsApiLoader,
 } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
 	getGeocode,
@@ -71,20 +72,37 @@ export default function NewRestaurantForm() {
 	};
 
 	const validateImageExt = (img) => {
-		let re = /(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i;
+		let re =
+			/(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i;
 		return re.test(img);
 	};
 	useEffect(() => {
 		const errors = [];
 
 		if (name.length > 50) errors.push("Name must be under 355 character");
-		if (description.length > 355) errors.push('Description must be under 355 character')
-		if (!selectedAddress.length) errors.push('Must select an address from the dropdown options')
-		if (!validateImageExt(image)) errors.push('Image must be a png, jpg, or jpeg')
-		if(imageError) errors.push('Image Url is corrupted')
-		if (!validatePhoneNumber(phoneNumber)) errors.push('Phone number not valid')
+		if (description.length > 355)
+			errors.push("Description must be under 355 character");
+		if (!selectedAddress.length)
+			errors.push("Must select an address from the dropdown options");
+		if (!validateImageExt(image))
+			errors.push("Image must be a png, jpg, or jpeg");
+		if (imageError) errors.push("Image Url is corrupted");
+		if (!validatePhoneNumber(phoneNumber))
+			errors.push("Phone number not valid");
 		setErrors(errors);
-	}, [name, description, cuisine, selectedAddress,zipCode,lat,lng,phoneNumber,priceRange,image]);
+	}, [
+		name,
+		description,
+		cuisine,
+		selectedAddress,
+		zipCode,
+		lat,
+		lng,
+		phoneNumber,
+		priceRange,
+		image,
+		imageError,
+	]);
 
 	function checkImage(url) {
 		const image = new Image();
@@ -144,7 +162,7 @@ export default function NewRestaurantForm() {
 	// if (loadError) return "Error loading maps";
 	// if (!isLoaded) return "Loading Map...";
 	return (
-		<div>
+		<div className="login-signup-cont">
 			{errors.length > 0 && firstSubmit && (
 				<div className="login-errors">
 					<div>
@@ -157,10 +175,14 @@ export default function NewRestaurantForm() {
 					<i className="fa-solid fa-xmark fa-xl" onClick={clearErrors}></i>
 				</div>
 			)}
-			<form onSubmit={onSubmit}>
-				<div>
+			<form className="login-signup-form-cont" onSubmit={onSubmit}>
+				<div className="login-signup-header">
+					<h3>Create New Business</h3>
+					<p className="signup-text">Connect with your local community</p>
+				</div>
+				<div className="form-email">
 					<input
-						placeholder="name"
+						placeholder="Name"
 						value={name}
 						required={true}
 						onChange={(e) => setName(e.target.value)}
@@ -168,14 +190,19 @@ export default function NewRestaurantForm() {
 				</div>
 				<div>
 					<textarea
+						className="form-description"
 						required={true}
-						placeholder="description"
+						placeholder="Description"
 						value={description}
 						onChange={(e) => setDescription(e.target.value)}
 					/>
 				</div>
 				<div>
-					<select value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
+					<select
+						className="form-cuisine-price"
+						value={cuisine}
+						onChange={(e) => setCuisine(e.target.value)}
+					>
 						<option>Chinese</option>
 						<option>Burgers</option>
 						<option>Korean</option>
@@ -191,6 +218,7 @@ export default function NewRestaurantForm() {
 					</select>
 				</div>
 				<Combobox
+					className="form-email"
 					onSelect={async (address) => {
 						// console.log(address);
 						setValue(address, false);
@@ -224,7 +252,7 @@ export default function NewRestaurantForm() {
 						</ComboboxList>
 					</ComboboxPopover>
 				</Combobox>
-				<div>
+				<div className="form-email">
 					<input
 						placeholder="Image Url"
 						value={image}
@@ -233,7 +261,7 @@ export default function NewRestaurantForm() {
 					/>
 					{imageError && <p>Invalid Image Url</p>}
 				</div>
-				<div>
+				<div className="form-email">
 					<input
 						placeholder="Phone Number"
 						value={phoneNumber}
@@ -243,6 +271,7 @@ export default function NewRestaurantForm() {
 				</div>
 				<div>
 					<select
+						className="form-cuisine-price"
 						value={priceRange}
 						onChange={(e) => setPriceRange(e.target.value)}
 					>
@@ -252,78 +281,89 @@ export default function NewRestaurantForm() {
 						<option>$$$$</option>
 					</select>
 				</div>
-				<div>
-					<label>Open:</label>
-					<select
-						value={openHour}
-						onChange={(e) => setOpenHour(e.target.value)}
-					>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-						<option>7</option>
-						<option>8</option>
-						<option>9</option>
-						<option>10</option>
-						<option>11</option>
-						<option>12</option>
-					</select>
-					<select
-						value={openMinutes}
-						onChange={(e) => setOpenMinutes(e.target.value)}
-					>
-						<option>00</option>
-						<option>30</option>
-					</select>
-					<select
-						value={openAmPm}
-						onChange={(e) => setOpenAmPm(e.target.value)}
-					>
-						<option>AM</option>
-						<option>PM</option>
-					</select>
+				<div className="form-hours">
+					<div>
+						<label>Open:</label>
+					</div>
+					<div>
+						<select
+							value={openHour}
+							onChange={(e) => setOpenHour(e.target.value)}
+						>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+						</select>
+						<select
+							value={openMinutes}
+							onChange={(e) => setOpenMinutes(e.target.value)}
+						>
+							<option>00</option>
+							<option>30</option>
+						</select>
+						<select
+							value={openAmPm}
+							onChange={(e) => setOpenAmPm(e.target.value)}
+						>
+							<option>AM</option>
+							<option>PM</option>
+						</select>
+					</div>
 				</div>
-				<div>
-					<label>Close:</label>
-					<select
-						value={closeHour}
-						onChange={(e) => setCloseHour(e.target.value)}
-					>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-						<option>7</option>
-						<option>8</option>
-						<option>9</option>
-						<option>10</option>
-						<option>11</option>
-						<option>12</option>
-					</select>
-					<select
-						value={closeMinutes}
-						onChange={(e) => setCloseMinutes(e.target.value)}
-					>
-						<option>00</option>
-						<option>30</option>
-					</select>
-					<select
-						value={closeAmPm}
-						onChange={(e) => setCloseAmPm(e.target.value)}
-					>
-						<option>AM</option>
-						<option>PM</option>
-					</select>
+				<div className="form-hours">
+					<div>
+						<label>Close:</label>
+					</div>
+					<div>
+						<select
+							value={closeHour}
+							onChange={(e) => setCloseHour(e.target.value)}
+						>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+						</select>
+						<select
+							value={closeMinutes}
+							onChange={(e) => setCloseMinutes(e.target.value)}
+						>
+							<option>00</option>
+							<option>30</option>
+						</select>
+						<select
+							value={closeAmPm}
+							onChange={(e) => setCloseAmPm(e.target.value)}
+						>
+							<option>AM</option>
+							<option>PM</option>
+						</select>
+					</div>
 				</div>
 				<div>
 					<button>Submit</button>
 				</div>
 			</form>
+			<div className="login-signup-image-cont">
+				<img src={signinImage} />
+			</div>
 		</div>
 	);
 }

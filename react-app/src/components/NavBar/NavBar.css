@@ -62,6 +62,7 @@
     padding: 6px;
     width: 175px;
     border-color: #ebebeb;
+    z-index: 10;
 
 }
 
