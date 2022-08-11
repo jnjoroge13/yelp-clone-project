@@ -161,6 +161,7 @@ export default function NewRestaurantForm() {
 
 	// if (loadError) return "Error loading maps";
 	// if (!isLoaded) return "Loading Map...";
+
 	return (
 		<div className="login-signup-cont">
 			{errors.length > 0 && firstSubmit && (
