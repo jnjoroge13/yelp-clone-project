@@ -17,7 +17,6 @@ export default function SingleRestaurant() {
 	const history = useHistory();
 	const { restaurantId } = useParams();
 	const restaurant = useSelector((state) => state.restaurants[restaurantId]);
-	const [editRestaurant, setEditRestaurant] = useState(false);
 	const [addReview, setAddReview] = useState(false);
 	const [loaded, setLoaded] = useState(false);
 	useEffect(() => {
@@ -26,12 +25,6 @@ export default function SingleRestaurant() {
 			.then(() => setLoaded(true));
 	}, [restaurantId, dispatch]);
 
-	const openEditForm = () => {
-		setEditRestaurant(true);
-	};
-	const closeEditForm = () => {
-		setEditRestaurant(false);
-	};
 	const openAddReviewForm = () => {
 		setAddReview(true);
 	};
@@ -67,9 +60,8 @@ export default function SingleRestaurant() {
 					name: {restaurant?.name} -- created by: {restaurant?.user.username}
 					<img width="100" src={restaurant?.image} />
 				</p>
-				<button onClick={openEditForm}>Edit</button>
+				<button onClick={()=>history.push(`/restaurants/edit/${restaurantId}`)}>Edit</button>
 				<button onClick={onDelete}>Delete</button>
-				{editRestaurant && <EditRestaurantForm closeEditForm={closeEditForm} />}
 				<div>
 					<button onClick={openAddReviewForm}>Add Review</button>
 					{addReview && (

@@ -1,0 +1,31 @@
+.Footer-cont{
+    /* height:45px; */
+    /* border: 1px blue solid; */
+    position: absolute;
+    bottom: 0;
+    right:0;
+    left: 0;
+    padding: 12px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7;
+        border-color: #ebebeb;
+}
+
+.about-div{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.about-linkedin:hover,
+.about-github:hover {
+    color: rgba(224,7,7,1);
+}
+
+.about-name{
+
+    font-size: 1.1rem;
+    font-weight: 600;
+}

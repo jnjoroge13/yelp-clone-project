@@ -6,12 +6,14 @@ import SignUpForm from "./components/auth/SignUpForm";
 import NavBar from "./components/NavBar/NavBar";
 import RestaurantList from "./components/RestaurantList/RestaurantList";
 import NewRestaurantForm from "./components/NewRestaurantForm/NewRestaurantForm";
+import { EditRestaurantForm } from "./components/EditRestaurantForm/EditRestaurantForm";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import HomePage from "./components/HomePage/HomePage";
 import SingleRestaurant from "./components/singleRestaurant/singleRestaurant";
 import EditReviewForm from "./components/Reviews/EditReviewPage";
 import User from "./components/User";
+import Footer from "./components/Footer/Footer";
 import { authenticate } from "./store/session";
 import { thunkGetAllReviews } from "./store/reviews";
 import { thunkGetKey } from "./store/maps";
@@ -52,6 +54,9 @@ function App() {
 				<Route path="/restaurants/:restaurantId" exact={true}>
 					<SingleRestaurant />
 				</Route>
+				<Route path="/restaurants/edit/:restaurantId" exact={true}>
+					<EditRestaurantForm />
+				</Route>
 				<ProtectedRoute path="/reviews/:reviewId" exact={true}>
 					<EditReviewForm />
 				</ProtectedRoute>
@@ -68,6 +73,7 @@ function App() {
 					<HomePage />
 				</Route>
 			</Switch>
+			<Footer/>
 		</BrowserRouter>
 	);
 }

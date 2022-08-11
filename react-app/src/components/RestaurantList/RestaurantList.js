@@ -124,7 +124,7 @@ export default function RestaurantList() {
 						</div>
 					))}
 			</div>
-			<AllRestaurantsMap/>
+			<AllRestaurantsMap restaurantArray={restaurantArray} />
 		</div>
 	);
 }

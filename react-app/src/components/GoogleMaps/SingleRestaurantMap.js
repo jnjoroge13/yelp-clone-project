@@ -37,16 +37,16 @@ export default function SingleRestaurantMap() {
 		dispatch(thunkGetKey())
 	},[restaurant,dispatch])
 
-	const { isLoaded, loadError } = useLoadScript({
-		googleMapsApiKey: key,
-		libraries,
-	});
+	// const { isLoaded, loadError } = useLoadScript({
+	// 	googleMapsApiKey: key,
+	// 	libraries,
+	// });
 	const center = {
 		lat: Number(restaurant?.lat),
 		lng: Number(restaurant?.lng),
 	};
-	if (loadError) return "Error loading maps";
-	if (!isLoaded) return "Loading Map...";
+	// if (loadError) return "Error loading maps";
+	// if (!isLoaded) return "Loading Map...";
 	return (
 		<div>
 			<GoogleMap

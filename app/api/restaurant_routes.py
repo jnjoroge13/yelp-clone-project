@@ -29,8 +29,8 @@ def add_restaurant():
         cuisine=form.data['cuisine'],
         image=form.data['image'],
         address=form.data['address'],
-        city=form.data['city'],
-        state=form.data['state'],
+        lat=form.data['lat'],
+        lng=form.data['lng'],
         zipCode=form.data['zipCode'],
         phoneNumber=form.data['phoneNumber'],
         priceRange=form.data['priceRange'],
@@ -60,18 +60,17 @@ def update_restaurant(restaurant_id):
     restaurant = Restaurant.query.get(restaurant_id)
     # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', playlist.to_dict())
     form = AddRestaurant()
-    # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', form.data)
-    restaurant.name = form.data['name'],
-    restaurant.description = form.data['description'],
-    restaurant.cuisine = form.data['cuisine'],
-    restaurant.image = form.data['image'],
-    restaurant.address = form.data['address'],
-    restaurant.city = form.data['city'],
-    restaurant.state = form.data['state'],
-    restaurant.zipCode = form.data['zipCode'],
-    restaurant.phoneNumber = form.data['phoneNumber'],
-    restaurant.priceRange = form.data['priceRange'],
-    restaurant.hours = form.data['hours'],
+    restaurant.name=form.data['name'],
+    restaurant.description=form.data['description'],
+    restaurant.cuisine=form.data['cuisine'],
+    restaurant.image=form.data['image'],
+    restaurant.address=form.data['address'],
+    restaurant.lat=form.data['lat'],
+    restaurant.lng=form.data['lng'],
+    restaurant.zipCode=form.data['zipCode'],
+    restaurant.phoneNumber=form.data['phoneNumber'],
+    restaurant.priceRange=form.data['priceRange'],
+    restaurant.hours=form.data['hours'],
     db.session.commit()
     return restaurant.to_dict()
 

@@ -46,28 +46,28 @@ const SignUpForm = () => {
 		setErrors(errors);
 	}, [username, email, password, repeatPassword]);
 
-	const checkErrors = () => {
-		const errors = [];
-		// if (!username) errors.push('A username is required.');
-		// if (!email) errors.push('An email is required.');
-		if (!validateEmail(email)) errors.push("Must be a valid email address.");
-		if (!usernameNoSpaces(username))
-			errors.push("Username cannot have spaces.");
-		// if (!password) errors.push('A password is required.');
-		if (password.length < 6)
-			errors.push("Password length must be at least 6 characters.");
-		// if (!repeatPassword) errors.push('Please repeat the password.');
-		if (password !== repeatPassword)
-			errors.push("Password and repeated password must match.");
-		if (username.length > 25)
-			errors.push("Username must be 25 characters or less.");
-		if (email.length > 255)
-			errors.push("Email length must be 255 characters or less.");
-		if (password.length > 255)
-			errors.push("Password length must be 255 characters or less.");
-		console.log(errors);
-		setErrors(errors);
-	};
+	// const checkErrors = () => {
+	// 	const errors = [];
+	// 	// if (!username) errors.push('A username is required.');
+	// 	// if (!email) errors.push('An email is required.');
+	// 	if (!validateEmail(email)) errors.push("Must be a valid email address.");
+	// 	if (!usernameNoSpaces(username))
+	// 		errors.push("Username cannot have spaces.");
+	// 	// if (!password) errors.push('A password is required.');
+	// 	if (password.length < 6)
+	// 		errors.push("Password length must be at least 6 characters.");
+	// 	// if (!repeatPassword) errors.push('Please repeat the password.');
+	// 	if (password !== repeatPassword)
+	// 		errors.push("Password and repeated password must match.");
+	// 	if (username.length > 25)
+	// 		errors.push("Username must be 25 characters or less.");
+	// 	if (email.length > 255)
+	// 		errors.push("Email length must be 255 characters or less.");
+	// 	if (password.length > 255)
+	// 		errors.push("Password length must be 255 characters or less.");
+	// 	console.log(errors);
+	// 	setErrors(errors);
+	// };
 	const onSignUp = async (e) => {
 		e.preventDefault();
 		setFirstSubmit(true);
