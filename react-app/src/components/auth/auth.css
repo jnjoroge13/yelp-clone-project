@@ -1,7 +1,8 @@
 .login-signup-cont {
     display: flex;
     width: 100%;
-	height: calc(100vh - 301px);
+	/* height: calc(100vh - 301px); */
+    flex-grow: 1;
     justify-content: center;
     gap: 30px;
     padding-top: 150px;

@@ -10,6 +10,7 @@ import AddReviewForm from "../Reviews/AddReviewForm";
 import { thunkGetReviews } from "../../store/reviews";
 import AllReviews from "../Reviews/AllReviews";
 import SingleRestaurantMap from "../GoogleMaps/SingleRestaurantMap";
+import './singleBiz.css'
 
 
 export default function SingleRestaurant() {
@@ -57,7 +58,7 @@ export default function SingleRestaurant() {
 
 	return (
 		loaded && (
-			<div>
+			<div className="single-biz-cont">
 				<p>
 					name: {restaurant?.name} -- created by: {restaurant?.user.username}
 					<img width="100" src={restaurant?.image} />

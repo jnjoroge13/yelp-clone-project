@@ -76,12 +76,17 @@ export default function NewRestaurantForm() {
 			/(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i;
 		return re.test(img);
 	};
+	function onlySpaces(str) {
+		return /^\s*$/.test(str);
+	}
 	useEffect(() => {
 		const errors = [];
-
+		if (onlySpaces(name)) errors.push("Restaurant must have a name");
 		if (name.length > 50) errors.push("Name must be under 355 character");
 		if (description.length > 355)
 			errors.push("Description must be under 355 character");
+		if (onlySpaces(description))
+			errors.push("Restaurant must have a description");
 		if (!selectedAddress.length)
 			errors.push("Must select an address from the dropdown options");
 		if (!validateImageExt(image))
