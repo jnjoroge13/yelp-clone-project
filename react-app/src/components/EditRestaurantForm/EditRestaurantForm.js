@@ -243,7 +243,8 @@ export function EditRestaurantForm() {
 
 						onChange={(e) => {
 							setSelectedAddress(false)
-							setValue(e.target.value)
+							if(!e.target.value.length) setValue(' ')
+							if(e.target.value.length) setValue(e.target.value)
 						}}
 						disabled={!ready}
 						placeholder="Address"
