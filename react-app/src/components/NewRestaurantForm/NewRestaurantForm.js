@@ -34,7 +34,6 @@ export default function NewRestaurantForm() {
 	const [description, setDescription] = useState("");
 	const [cuisine, setCuisine] = useState("Chinese");
 	const [image, setImage] = useState("");
-	const [imageLoading, setImageLoading] = useState(false);
 	const [selectedAddress, setSelectedAddress] = useState("");
 	const [lat, setLat] = useState("");
 	const [lng, setLng] = useState("");

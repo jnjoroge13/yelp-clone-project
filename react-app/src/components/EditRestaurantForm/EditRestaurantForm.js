@@ -30,21 +30,22 @@ export function EditRestaurantForm() {
 	const history = useHistory();
 	const { restaurantId } = useParams();
 	useEffect(() => {
-		dispatch(thunkGetOneRestaurant(restaurantId));
-	}, [restaurantId, dispatch]);
+		thunkGetOneRestaurant(restaurantId)
+	},[dispatch])
+	const currentResaurant = useSelector((state) => state.restaurants[restaurantId]);
+	console.log(currentResaurant)
 	const key = useSelector((state) => state.maps.key);
 	const sessionUser = useSelector((state) => state.session.user);
-	const [name, setName] = useState("");
-	const [description, setDescription] = useState("");
-	const [cuisine, setCuisine] = useState("Chinese");
-	const [image, setImage] = useState("");
-	const [imageLoading, setImageLoading] = useState(false);
-	const [selectedAddress, setSelectedAddress] = useState("");
-	const [lat, setLat] = useState("");
-	const [lng, setLng] = useState("");
-	const [zipCode, setZipCode] = useState("");
-	const [phoneNumber, setPhoneNumber] = useState("");
-	const [priceRange, setPriceRange] = useState("$");
+	const [name, setName] = useState(currentResaurant?.name);
+	const [description, setDescription] = useState(currentResaurant?.description);
+	const [cuisine, setCuisine] = useState(currentResaurant?.cuisine);
+	const [image, setImage] = useState(currentResaurant?.image);
+	const [selectedAddress, setSelectedAddress] = useState(currentResaurant?.address);
+	const [lat, setLat] = useState(currentResaurant?.lat);
+	const [lng, setLng] = useState(currentResaurant?.lng);
+	const [zipCode, setZipCode] = useState(currentResaurant?.zipCode);
+	const [phoneNumber, setPhoneNumber] = useState(currentResaurant?.phoneNumber);
+	const [priceRange, setPriceRange] = useState(currentResaurant?.priceRange);
 	const [openHour, setOpenHour] = useState("10");
 	const [closeHour, setCloseHour] = useState("9");
 	const [openMinutes, setOpenMinutes] = useState("00");
@@ -56,10 +57,22 @@ export function EditRestaurantForm() {
 	const [errors, setErrors] = useState([]);
 	const [firstSubmit, setFirstSubmit] = useState(false);
 
+	useEffect(() => {
+		setName(currentResaurant?.name);
+		setDescription(currentResaurant?.description);
+		setCuisine(currentResaurant?.cuisine);
+		setImage(currentResaurant?.image);
+		setSelectedAddress(currentResaurant?.address);
+		setLat(currentResaurant?.lat);
+		setLng(currentResaurant?.lng);
+		setZipCode(currentResaurant?.zipCode);
+		setPhoneNumber(currentResaurant?.phoneNumber);
+		setPriceRange(currentResaurant?.priceRange);
+	}, [currentResaurant]);
 	//Google Places Address
 	const {
 		ready,
-		value,
+		value=currentResaurant?.name,
 		suggestions: { status, data },
 		setValue,
 		clearSuggestions,
@@ -82,13 +95,13 @@ export function EditRestaurantForm() {
 	useEffect(() => {
 		const errors = [];
 
-		if (name.length > 50) errors.push("Name must be under 355 character");
-		if (description.length > 355) errors.push('Description must be under 355 character')
-		if (!selectedAddress.length) errors.push('Must select an address from the dropdown options')
-		if (!validateImageExt(image)) errors.push('Image must be a png, jpg, or jpeg')
-		if(imageError) errors.push('Image Url is corrupted')
-		if (!validatePhoneNumber(phoneNumber)) errors.push('Phone number not valid')
-		setErrors(errors);
+		// if (name.length > 50) errors.push("Name must be under 355 character");
+		// if (description.length > 355) errors.push('Description must be under 355 character')
+		// if (!selectedAddress.length) errors.push('Must select an address from the dropdown options')
+		// if (!validateImageExt(image)) errors.push('Image must be a png, jpg, or jpeg')
+		// if(imageError) errors.push('Image Url is corrupted')
+		// if (!validatePhoneNumber(phoneNumber)) errors.push('Phone number not valid')
+		// setErrors(errors);
 	}, [name, description, cuisine, selectedAddress,zipCode,lat,lng,phoneNumber,priceRange,image]);
 
 	function checkImage(url) {
@@ -214,7 +227,7 @@ export function EditRestaurantForm() {
 					}}
 				>
 					<ComboboxInput
-						value={value}
+						value={value.length?value:currentResaurant?.address}
 						onChange={(e) => setValue(e.target.value)}
 						disabled={!ready}
 						placeholder="Address"
