@@ -38,6 +38,7 @@ export function EditRestaurantForm() {
 	// console.log(currentResaurant)
 	const key = useSelector((state) => state.maps.key);
 	const sessionUser = useSelector((state) => state.session.user);
+	const isOwner = sessionUser?.id == currentResaurant?.user.id
 	const [name, setName] = useState(currentResaurant?.name);
 	const [description, setDescription] = useState(currentResaurant?.description);
 	const [cuisine, setCuisine] = useState(currentResaurant?.cuisine);
@@ -95,16 +96,16 @@ export function EditRestaurantForm() {
 		return re.test(img);
 	};
 	useEffect(() => {
-		// const errors = [];
+		const errors = [];
 
-		// if (name.length > 50) errors.push("Name must be under 355 character");
-		// if (description.length > 355) errors.push('Description must be under 355 character')
-		// if (!selectedAddress) errors.push('Must select an address from the dropdown options')
-		// if (!validateImageExt(image)) errors.push('Image must be a png, jpg, or jpeg')
-		// if(imageError) errors.push('Image Url is corrupted')
-		// if (!validatePhoneNumber(phoneNumber)) errors.push('Phone number not valid')
-		// setErrors(errors);
-	}, [name, description, cuisine, selectedAddress,zipCode,lat,lng,phoneNumber,priceRange,image]);
+		if (name?.length > 50) errors.push("Name must be under 355 character");
+		if (description?.length > 355) errors.push('Description must be under 355 character')
+		if (!selectedAddress) errors.push('Must select an address from the dropdown options')
+		if (!validateImageExt(image)) errors.push('Image must be a png, jpg, or jpeg')
+		if(imageError) errors.push('Image Url is corrupted')
+		if (!validatePhoneNumber(phoneNumber)) errors.push('Phone number not valid')
+		setErrors(errors);
+	}, [name, description, cuisine, selectedAddress,zipCode,lat,lng,phoneNumber,priceRange,image,imageError]);
 
 	function checkImage(url) {
 		const image = new Image();
@@ -149,7 +150,7 @@ export function EditRestaurantForm() {
 			const response = await dispatch(thunkEditRestaurant(restaurant));
 
 			if (response === "Restaurant Updated") {
-				history.push("/restaurants");
+				history.push(`/restaurants/${restaurantId}`);
 			}
 		}
 	};
@@ -157,13 +158,9 @@ export function EditRestaurantForm() {
 	const clearErrors = () => {
 		setFirstSubmit(false);
 	};
-	// const { isLoaded, loadError } = useLoadScript({
-	// 	googleMapsApiKey: key,
-	// 	libraries,
-	// });
-
-	// if (loadError) return "Error loading maps";
-	// if (!isLoaded) return "Loading Map...";
+	if (!isOwner) {
+		return(<h1>NOT AUTHORIZED</h1>)
+	}
 	return (
 		<div className="login-signup-cont">
 			{errors.length > 0 && firstSubmit && (
@@ -238,7 +235,8 @@ export function EditRestaurantForm() {
 					}}
 				>
 					<ComboboxInput
-						value={value.length?value:currentResaurant?.address}
+						value={value.length ? value : currentResaurant?.address}
+
 						onChange={(e) => {
 							setSelectedAddress(false)
 							setValue(e.target.value)

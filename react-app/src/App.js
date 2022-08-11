@@ -54,9 +54,9 @@ function App() {
 				<Route path="/restaurants/:restaurantId" exact={true}>
 					<SingleRestaurant />
 				</Route>
-				<Route path="/restaurants/edit/:restaurantId" exact={true}>
+				<ProtectedRoute path="/restaurants/edit/:restaurantId" exact={true}>
 					<EditRestaurantForm />
-				</Route>
+				</ProtectedRoute>
 				<ProtectedRoute path="/reviews/:reviewId" exact={true}>
 					<EditReviewForm />
 				</ProtectedRoute>

@@ -8,6 +8,7 @@ import './Reviews.css'
 export default function AllReviews() {
 	// const history = useHistory();
 	const dispatch = useDispatch();
+	const sessionUser = useSelector((state) => state.session.user);
 	const { restaurantId } = useParams()
 	useEffect(() => {
 		dispatch(thunkGetReviews(restaurantId));
@@ -52,15 +53,15 @@ export default function AllReviews() {
 				reviewsArray.map((review) => (
 					<div key={review.id}>
 						<p>
-							id: {review.id} ; userId: {review.userId} ; rating:{" "}
+							id: {review.id} ; userId: {review.user.id} ; rating:{" "}
 							{review.rating} ; review: {review.review} ; created:{" "}
 							{convertDate(review.createdAt)}
 						</p>
-                        <Link to={`/reviews/${review.id}`}>Edit</Link>
-                        <button onClick={async(e) => {
+                        {(review.user.id==sessionUser?.id) && <Link to={`/reviews/${review.id}`}>Edit</Link>}
+                        {(review.user.id==sessionUser?.id) && <button onClick={async(e) => {
                             e.preventDefault();
                             await dispatch(thunkDeleteReview(review.id));
-                        }}>Delete</button>
+                        }}>Delete</button>}
 					</div>
 				))}
 		</div>
