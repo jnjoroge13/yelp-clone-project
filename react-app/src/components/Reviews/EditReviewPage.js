@@ -13,6 +13,7 @@ export default function EditReviewForm({ closeAddReviewForm }) {
 		dispatch(thunkGetOneReview(reviewId));
 	}, [reviewId]);
 	const currentReview = useSelector((state) => state.reviews[reviewId]);
+	const isOwner = currentReview?.user.id == sessionUser?.id
 	const [rating, setRating] = useState(currentReview?.rating);
 	const [review, setReview] = useState(currentReview?.review);
 	const [errors, setErrors] = useState([]);
@@ -40,7 +41,9 @@ export default function EditReviewForm({ closeAddReviewForm }) {
 			}
 		}
 	};
-
+	if (!isOwner) {
+		return(<h1>NOT AUTHORIZED</h1>)
+	}
 	return (
 		<div>
 			<form onSubmit={onSubmit}>
