@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import whiteLogo from "../assets/logo-white.png";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,7 +10,7 @@ const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const location = useLocation();
-
+	const history = useHistory()
 	const openDropdown = () => {
 		if (showDropdown) return;
 		setShowDropdown(true);
@@ -20,6 +20,7 @@ const NavBar = () => {
 	const onLogout = async (e) => {
 		await dispatch(logout());
 		setShowDropdown(!showDropdown);
+		history.push('/')
 	};
 	useEffect(() => {
 		if (!showDropdown) return;

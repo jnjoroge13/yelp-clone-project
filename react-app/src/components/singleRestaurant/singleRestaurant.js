@@ -15,8 +15,10 @@ import SingleRestaurantMap from "../GoogleMaps/SingleRestaurantMap";
 export default function SingleRestaurant() {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const sessionUser = useSelector((state) => state.session.user);
 	const { restaurantId } = useParams();
 	const restaurant = useSelector((state) => state.restaurants[restaurantId]);
+	const isOwner = sessionUser?.id == restaurant?.user.id
 	const [addReview, setAddReview] = useState(false);
 	const [loaded, setLoaded] = useState(false);
 	useEffect(() => {
@@ -60,10 +62,10 @@ export default function SingleRestaurant() {
 					name: {restaurant?.name} -- created by: {restaurant?.user.username}
 					<img width="100" src={restaurant?.image} />
 				</p>
-				<button onClick={()=>history.push(`/restaurants/edit/${restaurantId}`)}>Edit</button>
-				<button onClick={onDelete}>Delete</button>
+				{isOwner && <button onClick={()=>history.push(`/restaurants/edit/${restaurantId}`)}>Edit</button>}
+				{isOwner && <button onClick={onDelete}>Delete</button>}
 				<div>
-					<button onClick={openAddReviewForm}>Add Review</button>
+					{sessionUser && <button onClick={openAddReviewForm}>Add Review</button>}
 					{addReview && (
 						<AddReviewForm closeAddReviewForm={closeAddReviewForm} />
 					)}
