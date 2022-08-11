@@ -4,6 +4,7 @@ import { thunkAddRestaurant } from "../../store/restaurants";
 import { thunkGetOneRestaurant } from "../../store/restaurants";
 import { thunkEditRestaurant } from "../../store/restaurants";
 import { useHistory, useParams } from "react-router-dom";
+import signinImage from "../assets/yelp-signin-image.png";
 import {
 	GoogleMap,
 	useLoadScript,
@@ -22,6 +23,7 @@ import {
 	ComboboxOption,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import "../NewRestaurantForm/NewRestaurantForm.css";
 
 const libraries = ["places"];
 
@@ -163,7 +165,7 @@ export function EditRestaurantForm() {
 	// if (loadError) return "Error loading maps";
 	// if (!isLoaded) return "Loading Map...";
 	return (
-		<div>
+		<div className="login-signup-cont">
 			{errors.length > 0 && firstSubmit && (
 				<div className="login-errors">
 					<div>
@@ -176,8 +178,12 @@ export function EditRestaurantForm() {
 					<i className="fa-solid fa-xmark fa-xl" onClick={clearErrors}></i>
 				</div>
 			)}
-			<form onSubmit={onSubmit}>
-				<div>
+			<form className="login-signup-form-cont" onSubmit={onSubmit}>
+			<div className="login-signup-header">
+					<h3>Edit Business</h3>
+					<p className="signup-text">Connect with your local community</p>
+				</div>
+				<div className="form-email">
 					<input
 						placeholder="name"
 						value={name}
@@ -187,6 +193,7 @@ export function EditRestaurantForm() {
 				</div>
 				<div>
 					<textarea
+						className="form-description"
 						required={true}
 						placeholder="description"
 						value={description}
@@ -194,7 +201,7 @@ export function EditRestaurantForm() {
 					/>
 				</div>
 				<div>
-					<select value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
+					<select className="form-cuisine-price" value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
 						<option>Chinese</option>
 						<option>Burgers</option>
 						<option>Korean</option>
@@ -210,6 +217,7 @@ export function EditRestaurantForm() {
 					</select>
 				</div>
 				<Combobox
+					className="form-email"
 					onSelect={async (address) => {
 						// console.log(address);
 						setValue(address, false);
@@ -248,7 +256,7 @@ export function EditRestaurantForm() {
 						</ComboboxList>
 					</ComboboxPopover>
 				</Combobox>
-				<div>
+				<div className="form-email">
 					<input
 						placeholder="Image Url"
 						value={image}
@@ -257,7 +265,7 @@ export function EditRestaurantForm() {
 					/>
 					{imageError && <p>Invalid Image Url</p>}
 				</div>
-				<div>
+				<div className="form-email">
 					<input
 						placeholder="Phone Number"
 						value={phoneNumber}
@@ -267,6 +275,7 @@ export function EditRestaurantForm() {
 				</div>
 				<div>
 					<select
+						className="form-cuisine-price"
 						value={priceRange}
 						onChange={(e) => setPriceRange(e.target.value)}
 					>
@@ -276,7 +285,7 @@ export function EditRestaurantForm() {
 						<option>$$$$</option>
 					</select>
 				</div>
-				<div>
+				<div className="form-hours">
 					<label>Open:</label>
 					<select
 						value={openHour}
@@ -310,7 +319,7 @@ export function EditRestaurantForm() {
 						<option>PM</option>
 					</select>
 				</div>
-				<div>
+				<div className="form-hours">
 					<label>Close:</label>
 					<select
 						value={closeHour}
@@ -348,6 +357,9 @@ export function EditRestaurantForm() {
 					<button>Submit</button>
 				</div>
 			</form>
+			<div className="login-signup-image-cont">
+				<img src={signinImage} />
+			</div>
 		</div>
 	);
 }
