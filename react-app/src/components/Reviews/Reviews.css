@@ -1,0 +1,50 @@
+.all-reviews-cont{
+    width: 100%;
+    /* background-color: azure; */
+}
+
+.each-review-cont{
+    display: flex;
+    flex-direction: column;
+}
+
+.each-review-top{
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.each-review-top img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.each-review-top-username{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: black;
+}
+
+
+.each-review-btn button,
+.each-review-btn a{
+    background-color: rgba(224, 7, 7, 0.9);
+    padding-bottom: 2px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 1px;
+    margin-right: 8px;
+	border-radius: 5px;
+	font-weight: 600;
+	color: white;
+	transition: all 0.8s;
+	cursor: pointer;
+    text-decoration: none;
+    border: none;
+}
+.each-review-btn button:hover,
+.each-review-btn a:hover{
+    background-color: white;
+    color: rgba(224, 7, 7, 0.9);
+}

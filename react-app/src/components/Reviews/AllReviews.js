@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { thunkDeleteReview } from "../../store/reviews";
 import { thunkGetReviews } from "../../store/reviews";
-import './Reviews.css'
+import "./Reviews.css";
 
 export default function AllReviews() {
 	// const history = useHistory();
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
-	const { restaurantId } = useParams()
+	const { restaurantId } = useParams();
 	useEffect(() => {
 		dispatch(thunkGetReviews(restaurantId));
 	}, [restaurantId]);
@@ -47,23 +47,41 @@ export default function AllReviews() {
 	// };
 
 	return (
-        <div>
-			<h3>Reviews:</h3>
-			{reviewsArray &&
-				reviewsArray.map((review) => (
-					<div key={review.id}>
-						<p>
-							id: {review.id} ; userId: {review.user.id} ; rating:{" "}
-							{review.rating} ; review: {review.review} ; created:{" "}
-							{convertDate(review.createdAt)}
-						</p>
-                        {(review.user.id==sessionUser?.id) && <Link to={`/reviews/${review.id}`}>Edit</Link>}
-                        {(review.user.id==sessionUser?.id) && <button onClick={async(e) => {
-                            e.preventDefault();
-                            await dispatch(thunkDeleteReview(review.id));
-                        }}>Delete</button>}
-					</div>
-				))}
+		<div className="all-reviews-cont">
+			<div className="all-reviews-header">Reviews:</div>
+			<div className="all-reviews-list-cont">
+				{reviewsArray &&
+					reviewsArray.map((review) => (
+						<div key={review.id} className="each-review-cont">
+							<div className="each-review-top">
+								<div>
+									<img src={review.user.profileImage} />
+								</div>
+								<div className="each-review-top-username">{review.user.username}</div>
+							</div>
+							<p>
+								id: {review.id} ; userId: {review.user.id} ; rating:{" "}
+								{review.rating} ; review: {review.review} ; created:{" "}
+								{convertDate(review.createdAt)}
+							</p>
+							<div  className="each-review-btn">
+								{review.user.id == sessionUser?.id && (
+									<Link to={`/reviews/${review.id}`}>Edit</Link>
+								)}
+								{review.user.id == sessionUser?.id && (
+									<button
+										onClick={async (e) => {
+											e.preventDefault();
+											await dispatch(thunkDeleteReview(review.id));
+										}}
+									>
+										Delete
+									</button>
+								)}
+							</div>
+						</div>
+					))}
+			</div>
 		</div>
 	);
 }
