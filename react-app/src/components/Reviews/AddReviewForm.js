@@ -24,12 +24,11 @@ export default function AddReviewForm({ closeAddReviewForm }) {
 
 	useEffect(() => {
 		const errors = [];
-		if (onlySpaces(review))
-			errors.push("Restaurant must have a description");
+		if (onlySpaces(review)) errors.push("Restaurant must have a description");
+		if (review.length > 201) errors.push("Review must be under 200 characters");
+
 		setErrors(errors);
-	}, [
-		rating,review
-	]);
+	}, [rating, review]);
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		SetShowErrors(true);
@@ -66,13 +65,13 @@ export default function AddReviewForm({ closeAddReviewForm }) {
 				</div>
 			)}
 			<form className="add-review-form" onSubmit={onSubmit}>
-				<div  className="add-review-rating">
+				<div className="add-review-rating">
 					<select value={rating} onChange={(e) => setRating(e.target.value)}>
-						<option value={'1'}>1 ⭐</option>
-						<option value={'2'}>2 ⭐</option>
-						<option value={'3'}>3 ⭐</option>
-						<option value={'4'}>4 ⭐</option>
-						<option value={'5'}>5 ⭐</option>
+						<option value={"1"}>1 ⭐</option>
+						<option value={"2"}>2 ⭐</option>
+						<option value={"3"}>3 ⭐</option>
+						<option value={"4"}>4 ⭐</option>
+						<option value={"5"}>5 ⭐</option>
 					</select>
 				</div>
 				<div className="add-review-textarea">
