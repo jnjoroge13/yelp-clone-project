@@ -32,7 +32,7 @@ export default function AllReviews() {
 	}
 	const convertDate = (createdAt) => {
 		const d = new Date(createdAt);
-		const addtime = addHours(4, d);
+		const addtime = addHours(0, d);
 		const now = Date.now();
 
 		const hourDiff = Math.floor((now - addtime) / 1000 / 60 / 60);
