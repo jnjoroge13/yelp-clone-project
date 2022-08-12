@@ -46,7 +46,7 @@ const NavBar = () => {
 			<NavLink to="/" exact={true}>
 				<img className="navbar-logo" src={logo} />
 			</NavLink>
-			<div className="search-bar-cont">
+			{/* <div className="search-bar-cont">
 			<form className="search-bar" >
 				<input
 					type="text"
@@ -59,7 +59,7 @@ const NavBar = () => {
 						<i className=" search-icon fa fa-search fa-xl"></i>
 						</div>
 			</form>
-			</div>
+			</div> */}
 			{!sessionUser && (
 				<div className="nav-bar-right">
 					<NavLink className="nav-bar-restaurants" to="/restaurants">
