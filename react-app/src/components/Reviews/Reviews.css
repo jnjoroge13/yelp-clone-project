@@ -1,0 +1,111 @@
+.all-reviews-cont {
+	width: 100%;
+	/* background-color: azure; */
+	max-height: 600px;
+	overflow: hidden;
+	overflow-y: scroll;
+	padding-bottom: 30px;
+    margin-top: 24px;
+}
+.all-reviews-list-cont{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.each-review-cont {
+	display: flex;
+	flex-direction: column;
+    gap: 15px;
+    border: 1.4px solid #ebebeb;
+    padding: 24px;
+    box-shadow: 0 0 5px #0000001a;
+    border-radius: 5px;
+}
+
+.each-review-top {
+	display: flex;
+	align-items: flex-start;
+	gap: 15px;
+}
+
+.each-review-top img {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+
+.each-review-top-username {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: black;
+}
+
+.each-review-btn button,
+.each-review-btn a {
+	background-color: rgba(224, 7, 7, 1);
+	padding-bottom: 2px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 1px;
+	margin-right: 8px;
+	border-radius: 5px;
+	font-weight: 600;
+	color: white;
+	transition: all 0.8s;
+	cursor: pointer;
+	text-decoration: none;
+	border: none;
+}
+.each-review-btn button:hover,
+.each-review-btn a:hover {
+	background-color: white;
+	color: rgba(224, 7, 7, 1);
+}
+
+.each-review-rating {
+	display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.add-review-form-cont{
+	width: 100%;
+	margin-top: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.add-review-form{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	justify-content: center;
+	/* border: 2px solid pink; */
+	align-items: center;
+}
+.add-review-textarea{
+	width: 80%;
+}
+.add-review-textarea textarea{
+	width: 100%;
+	height: 100px;
+	padding: 16px;
+}
+
+.add-review-textarea textarea:focus{
+	outline: none !important;
+	border:1px solid #0073bb;
+	box-shadow: 0 0 2px #0073bb;
+}
+
+.add-review-errors{
+    background: #fcd6d3;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+	margin-bottom: 10px;
+	width: 50%;
+}
