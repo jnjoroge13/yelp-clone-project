@@ -39,6 +39,7 @@ export default function EditReviewForm({ closeAddReviewForm }) {
 	useEffect(() => {
 		const errors = [];
 		if (onlySpaces(review)) errors.push("Restaurant must have a description");
+		if (review.length > 201) errors.push("Review must be under 200 characters");
 		setErrors(errors);
 	}, [rating, review]);
 
