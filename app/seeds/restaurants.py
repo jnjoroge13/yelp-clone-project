@@ -21,7 +21,7 @@ def seed_restaurants():
         hours='6:30 AM - 8:00 PM')
 
     perch = Restaurant(
-        userId=1,
+        userId=2,
         name="Perch",
         image='https://s3-media0.fl.yelpcdn.com/bphoto/pmgh2uQYfwBlwqGu_1y8oA/o.jpg',
         description="Perch is an elevated resting place, a whimsical French-inspired rooftop bistro with unobstructed views of the Downtown Los Angeles skyline and mountains in the distance, two outdoor fireplaces and various fire pits. ",
@@ -35,7 +35,7 @@ def seed_restaurants():
         hours='4:00 PM - 1:00 AM')
 
     rays = Restaurant(
-        userId=1,
+        userId=3,
         name="Howlin' Ray's",
         image='https://s3-media0.fl.yelpcdn.com/bphoto/MJUkD3lWR3-2hO7fZsg_0g/o.jpg',
         description="Nashville Hot Chicken.",
@@ -49,7 +49,7 @@ def seed_restaurants():
         hours='10:00 AM - 7:00 PM')
 
     bestia = Restaurant(
-        userId=1,
+        userId=4,
         name="Bestia",
         image='https://s3-media0.fl.yelpcdn.com/bphoto/G_AziiJiP5-KxsMelOtk5A/o.jpg',
         description="Italian fine dining.",
@@ -63,7 +63,7 @@ def seed_restaurants():
         hours='5:00 PM - 11:00 PM')
 
     granville = Restaurant(
-        userId=1,
+        userId=5,
         name="GRANVILLE",
         image='https://s3-media0.fl.yelpcdn.com/bphoto/znY6Wq1711cPvOtfKxWZZg/o.jpg',
         description="LA's Favorite Neighborhood Spot Since 2006. Come As You Are!",
@@ -77,7 +77,7 @@ def seed_restaurants():
         hours='11:30 AM - 9:00 PM')
 
     haneuem = Restaurant(
-        userId=2,
+        userId=6,
         name="HanEuem",
         image='https://s3-media0.fl.yelpcdn.com/bphoto/pYgM0JZicgZJcXK-xw11sQ/o.jpg',
         description="Truly Authentic Korean cuisine by Chef Kang. Variety of fascinating and tasteful dishes will amaze you.",
@@ -91,7 +91,7 @@ def seed_restaurants():
         hours='5:00 PM - 10:00 PM')
 
     providence = Restaurant(
-        userId=2,
+        userId=7,
         name="Providence",
         image='https://s3-media0.fl.yelpcdn.com/bphoto/TOVt8ih7yD6-V8SN1bwUAQ/o.jpg',
         description="Fine Dining",
@@ -105,7 +105,7 @@ def seed_restaurants():
         hours='6:00 PM - 9:00 PM')
 
     eggslut = Restaurant(
-        userId=2,
+        userId=8,
         name="Eggslut",
         image='https://s3-media0.fl.yelpcdn.com/bphoto/MgkGV_YW91JoE5iQBxF7sQ/o.jpg',
         description="Eggslut is a chef driven, gourmet food concept founded in 2011, by chef Alvin Cailan. It began as a food truck that roamed the streets of Los Angeles, eventually turning into a food stall in the historic Grand Central Market in Downtown L.A. which opened in November 2013.",
@@ -119,7 +119,7 @@ def seed_restaurants():
         hours='8:00 AM - 2:00 PM')
 
     bjc = Restaurant(
-        userId=2,
+        userId=9,
         name="Blu Jam Café",
         image='https://s3-media0.fl.yelpcdn.com/bphoto/W3j6aLTVb_nH8k6nN8qPTg/o.jpg',
         description="The name Blu Jam was taken from the location's original history, where it was used as an underground blues and jazz club where patrons would enter through it's secret entrance to listen to musicians jam. ",
@@ -133,7 +133,7 @@ def seed_restaurants():
         hours='9:00 AM - 2:00 PM')
 
     leo = Restaurant(
-        userId=2,
+        userId=10,
         name="Leo's Tacos Truck",
         image='https://s3-media0.fl.yelpcdn.com/bphoto/bth2LMdF7OABNU6Uv2M__w/o.jpg',
         description="Truly Authentic Mexican cuisine by Chef Kang. Variety of fascinating and tasteful dishes will amaze you.",

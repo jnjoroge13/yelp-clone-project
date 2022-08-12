@@ -174,7 +174,7 @@ export default function SingleRestaurant() {
 					</div>
 					<div className="single-biz-bottom-right-cont">
 						<div className="single-biz-bottom-right-div">
-							{sessionUser && (
+							{(sessionUser && !isOwner) && (
 								<button className="add-review-btn" onClick={openAddReviewForm}>
 									<i className="fa-regular fa-star fa-lg"></i> Write a review
 								</button>
