@@ -1,129 +1,92 @@
-# Flask React Project
-
-This is the starter for the Flask React project..
-
-## Getting started
-1. Clone this repository (only this branch)
-
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
-
-2. Install dependencies
-
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
-
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
-
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
-
-   ```bash
-   pipenv shell
-   ```
-
-   ```bash
-   flask db upgrade
-   ```
-
-   ```bash
-   flask seed all
-   ```
-
-   ```bash
-   flask run
-   ```
-
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
-***
+# EarFruit
 
 
-*IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on alpine-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
+## Index
+[Feature List Documentation](https://github.com/mipresley23/EarFruitGroupProjectRepo/wiki/MVP-Feature-List)
 
-### Dev Containers (OPTIONAL for M1 Users)
-The following instructions detail an *optional* development setup for M1 Mac users having issues with the `psycopg` package.
+[Database Schema](https://github.com/mipresley23/EarFruitGroupProjectRepo/wiki/DB_Schema)
 
-1. Make sure you have the [Microsoft Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed.
-2. Make sure you have [Docker](https://www.docker.com/products/docker-desktop/) installed on your computer.
-3. Clone the repository (only this branch)
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
-4. Open the repo in VS Code.
-5. Click "Open in Container" when VS Code prompts to open container in the bottom right hand corner.
-6. **Be Patient!** The initial install will take a LONG time, it's building a container that has postgres preconfigured and even installing all your project dependencies. (For both flask and react!)
+[Frontend Routes Documentation](https://github.com/mipresley23/EarFruitGroupProjectRepo/wiki/Frontend-Routes)
 
-   **Note:** This will take much less time on future starts because everything will be cached.
+[API Routes Documentation](https://github.com/mipresley23/EarFruitGroupProjectRepo/wiki/API-Routes)
 
-7. Once everything is up, be sure to make a `.env` file based on `.env.example` in both the root directory and the *react-app* directory before running your app. You do not need a `DATABASE_URL` in the `.env` file if you are using this Docker setup for development - the URL is already set in the image (see `.devcontainer/Dockerfile` for the URL).
+[Redux Store Tree Document](https://github.com/mipresley23/EarFruitGroupProjectRepo/wiki/State-Shape)
 
-8. Get into your pipenv, migrate your database, seed your database, and run your flask app
+[User Stories](https://github.com/mipresley23/EarFruitGroupProjectRepo/wiki/User-Stories)
 
-   ```bash
-   pipenv shell
-   ```
+## Live site hosted by Heroku
 
-   ```bash
-   flask db upgrade
-   ```
+[EarFruit](https://earfruit.herokuapp.com/)
 
-   ```bash
-   flask seed all
-   ```
+## Link to project Repo
 
-   ```bash
-   flask run
-   ```
+[EarFruit Repo](https://github.com/mipresley23/EarFruitGroupProjectRepo)
 
-9. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+## Technologies Used
 
-<br>
+> [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg" height=50px width=50px/>](https://reactjs.org/)   [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg" height=50px width=50px />](https://redux.js.org/)   [
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original-wordmark.svg" height=50px width=50px />](https://flask.palletsprojects.com/en/2.1.x/)   [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlalchemy/sqlalchemy-original-wordmark.svg" height=50px width=50px />](https://docs.sqlalchemy.org/en/14/)   [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original-wordmark.svg" height=50px width=50px />](https://docs.python.org/3/)   [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" height=50px width=50px />](https://developer.mozilla.org/en-US/docs/Web/JavaScript)   [Alembic](https://alembic.sqlalchemy.org/en/latest/)   [WTForms](https://wtforms.readthedocs.io/en/3.0.x/)
 
-## Deploy to Heroku
-This repo comes configured with Github Actions. When you push to your main branch, Github will automatically pull your code, package and push it to Heroku, and then release the new image and run db migrations.
 
-1. Write your Dockerfile. In order for the Github action to work effectively, it must have a configured Dockerfile. Follow the comments found in this [Dockerfile](./Dockerfile) to write your own!
+## Description
+EarFruit is a Spotify clone, where users are allowed to browse songs by song title or have them grouped by artist or album title. Users who are signed up and logged in may add songs. They also may edit information about or delete songs that they've uploaded. Any users may listen to a song or any previously created playlist of songs, but users who are signed in may create their own playlists. The signed in user may also edit their own playlists. Signed in users may also include a picture upon signup that becomes their profile picture. Each user's profile includes information about the user, any playlists that user has created, as well as any songs that user has uploaded. 
 
-2. Create a new project on Heroku.
+## Getting Started
+> * Begin by cloning this [repo.](https://github.com/mipresley23/EarFruitGroupProjectRepo)
+> * Travel to the project root directory and install dependencies by running the following commands.
+> > * pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
+> * Create a .env file based on the example with your environment information
+> * Create your database with a user and password and ensure they match your .env file
+> * Enter your pipenv shell then create, migrate, and seed your database by running the following commands:
+> > * pipenv shell
+> > * flask db migrate
+> > * flask db upgrade
+> > * flask seed all
+> Next you may launch your backend server by running the command
+> > * flask run
+> * Next cd into the react-app directory and run the following commands to launch the front end server:
+> > * npm install
+> > * npm start
 
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres".
+## Wireframe guides
 
-4. Configure production environment variables. In your Heroku app settings -> config variables you should have two environment variables set:
+### Splash Page
+![image](https://user-images.githubusercontent.com/59783664/180310857-d91b8645-c7ed-4dff-9887-dd26cc2117fd.png)
 
-   |    Key          |    Value    |
-   | -------------   | ----------- |
-   | `DATABASE_URL`  | Autogenerated when adding postgres to Heroku app |
-   | `SECRET_KEY`    | Random string full of entropy |
+### Search/Browse Page
+![image](https://user-images.githubusercontent.com/59783664/180311035-670c723f-c5ed-4d85-8737-f3a8b1f99894.png)
 
-5. Generate a Heroku OAuth token for your Github Action. To do so, log in to Heroku via your command line with `heroku login`. Once you are logged in, run `heroku authorizations:create`. Copy the GUID value for the Token key.
+### Playlist/Song/Profile Pages
+![image](https://user-images.githubusercontent.com/59783664/182166874-49fce589-f12d-41eb-bac3-f6ea078c7b8c.png)
 
-6. In your Github Actions Secrets you should have two environment variables set. You can set these variables via your Github repository settings -> secrets -> actions. Click "New respository secret" to create
-each of the following variables:
+### Signup Page
+![Screen Shot 2022-07-21 at 4 05 33 PM](https://user-images.githubusercontent.com/93172512/180329561-cf9e320a-75d9-4ae5-9c70-96807139641b.png)
 
-   |    Key            |    Value    |
-   | -------------     | ----------- |
-   | `HEROKU_API_KEY`  | Heroku Oauth Token (from step 6)|
-   | `HEROKU_APP_NAME` | Heroku app name    |
+### Sign in 
+<img width="608" alt="Screen Shot 2022-07-31 at 5 00 50 PM" src="https://user-images.githubusercontent.com/93172512/182050907-48042e15-8c27-4d7a-a08f-69cc52a94a03.png">
 
-7. Push to your `main` branch! This will trigger the Github Action to build your Docker image and deploy your application to the Heroku container registry. Please note that the Github Action will automatically upgrade your production database with `flask db upgrade`. However, it will *not* automatically seed your database. You must manually seed your production database if/when you so choose (see step 8).
+## Features
+### Signup
+![image](https://user-images.githubusercontent.com/59783664/182046326-f6c99a35-4a43-4fdf-a6eb-9b755c58e03c.png)
 
-8. *Attention!* Please run this command *only if you wish to seed your production database*: `heroku run -a bestkeptsecret flask seed all`
+### Splash/Root Page showing Demo User
+![image](https://user-images.githubusercontent.com/59783664/182046430-b0d20a47-9092-42dc-a3c2-7351b02877cc.png)
 
-## Helpful commands
-|    Command            |    Purpose    |
-| -------------         | ------------- |
-| `pipenv shell`        | Open your terminal in the virtual environment and be able to run flask commands without a prefix |
-| `pipenv run`          | Run a command from the context of the virtual environment without actually entering into it. You can use this as a prefix for flask commands  |
-| `flask db upgrade`    | Check in with the database and run any needed migrations  |
-| `flask db downgrade`  | Check in with the database and revert any needed migrations  |
-| `flask seed all`      | Just a helpful syntax to run queries against the db to seed data. See the **app/seeds** folder for reference and more details |
-| `heroku login -i`      | Authenticate your heroku-cli using the command line. Drop the -i to authenticate via the browser |
-| `heroku authorizations:create` | Once authenticated, use this to generate an Oauth token |
-| `heroku run -a <app name>` | Run a command from within the deployed container on Heroku |
+### Profile Page
+![image](https://user-images.githubusercontent.com/59783664/182046464-1622eb66-ad3c-44fa-82d0-72b808fcc069.png)
+
+### Add Song Form in front of All Songs Page
+![image](https://user-images.githubusercontent.com/59783664/182046524-4a7cab0b-6cb7-4755-95cb-fd980f4a00b9.png)
+
+### Create/Edit Playlist
+![image](https://user-images.githubusercontent.com/59783664/182046587-ea37b36d-7006-4a35-8787-75222ec3c116.png)
+
+### Music Player playing song
+![image](https://user-images.githubusercontent.com/59783664/182046613-489ddbc7-6977-422d-a0bf-0633344d1086.png)
+
+
+## Contributors
+### [Jesse Njoroge](https://github.com/jnjoroge13)
+### [Michael Presley](https://github.com/mipresley23)
+### [Anthony Taylor](https://github.com/antt3)
+### [Krishna Mulloth](https://github.com/kmulloth)
