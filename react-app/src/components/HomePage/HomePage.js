@@ -9,7 +9,7 @@ export default function HomePage() {
 	return (
 		<div className="home-page">
 			<div className="home-page-image">{/* <img src={homePageImage}/> */}</div>
-			{/* <div className="home-page-categories">
+			<div className="home-page-categories">
 				<div className="categories-div"><p>🥡</p> Chinese </div>
 				<div className="categories-div"><p>🥘</p> Korean </div>
 				<div className="categories-div"><p>🍝</p> Italian </div>
@@ -18,7 +18,7 @@ export default function HomePage() {
 				<div className="categories-div"><p>🦞</p> Seafood </div>
 				<div className="categories-div"><p>🌮</p> Mexican </div>
 				<div className="categories-div"><p>🍳</p> Brunch </div>
-			</div> */}
+			</div>
 		</div>
 	);
 }

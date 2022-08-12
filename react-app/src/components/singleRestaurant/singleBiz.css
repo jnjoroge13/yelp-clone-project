@@ -1,3 +1,72 @@
-.single-biz-cont{
-    flex-grow: 1;
+.single-biz-cont {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	overflow-y: scroll;
+	height: 100%;
+	padding: 0px 40px;
+}
+
+.single-biz-top-cont {
+	width: 100%;
+	height: 400px;
+	/* background-image: url('https://s3-media0.fl.yelpcdn.com/bphoto/B3H9dsOSLLb6_yzbvheMew/o.jpg'); */
+}
+
+.single-biz-bottom-cont {
+	padding-top: 32px;
+	flex-grow: 1;
+	/* background-color: rgba(0, 255, 255, 0.218); */
+	display: flex;
+}
+
+.single-biz-bottom-left-cont {
+	width: 50%;
+	/* background-color: beige; */
+}
+.single-biz-bottom-left-cont h1 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	padding-bottom: 24px;
+}
+.single-biz-bottom-right-cont {
+	width: 50%;
+	border-right: 1px solid black;
+}
+.single-biz-bottom-left {
+	display: flex;
+}
+.single-biz-left-location {
+	display: flex;
+	flex-direction: column;
+	/* background-color: beige; */
+	width: 400px;
+	overflow: hidden;
+}
+
+.single-biz-left-hours-div {
+	display: flex;
+	justify-content: space-between;
+	gap: 30px;
+}
+.single-biz-left-hours-div div {
+	color: rgba(45, 46, 47, 1);
+	font-weight: 600;
+	font-size: 1.3rem;
+}
+
+.single-biz-left-hours {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 16px;
+	align-items: center;
+    margin-right: 50px;
+	border-right: rgba(110, 112, 114, 1) 1px solid;
+}
+
+.single-biz-left-address {
+	font-size: 1.3rem;
+	overflow-wrap: break-word;
 }

@@ -10,8 +10,7 @@ import AddReviewForm from "../Reviews/AddReviewForm";
 import { thunkGetReviews } from "../../store/reviews";
 import AllReviews from "../Reviews/AllReviews";
 import SingleRestaurantMap from "../GoogleMaps/SingleRestaurantMap";
-import './singleBiz.css'
-
+import "./singleBiz.css";
 
 export default function SingleRestaurant() {
 	const dispatch = useDispatch();
@@ -19,7 +18,7 @@ export default function SingleRestaurant() {
 	const sessionUser = useSelector((state) => state.session.user);
 	const { restaurantId } = useParams();
 	const restaurant = useSelector((state) => state.restaurants[restaurantId]);
-	const isOwner = sessionUser?.id == restaurant?.user.id
+	const isOwner = sessionUser?.id == restaurant?.user.id;
 	const [addReview, setAddReview] = useState(false);
 	const [loaded, setLoaded] = useState(false);
 	useEffect(() => {
@@ -27,7 +26,12 @@ export default function SingleRestaurant() {
 			.then(() => dispatch(thunkGetOneRestaurant(restaurantId)))
 			.then(() => setLoaded(true));
 	}, [restaurantId, dispatch]);
-
+	console.log(restaurant);
+	const style = {
+		backgroundImage: `url(${restaurant?.image})`,
+		backgroundPosition: "center",
+		backgroundSize: "scale-down",
+	};
 	const openAddReviewForm = () => {
 		setAddReview(true);
 	};
@@ -55,26 +59,79 @@ export default function SingleRestaurant() {
 		}
 		// }
 	};
-
 	return (
 		loaded && (
 			<div className="single-biz-cont">
-				<p>
+				<div className="single-biz-top-cont" style={style}></div>
+				<div className="single-biz-bottom-cont">
+					<div className="single-biz-bottom-left-cont">
+						<h1>Location & Hours</h1>
+						<div className="single-biz-bottom-left">
+							<div className="single-biz-left-location">
+								<SingleRestaurantMap />
+								<div className="single-biz-left-address">{restaurant?.address}</div>
+							</div>
+							<div className="single-biz-left-hours">
+								<div className="single-biz-left-hours-div">
+									<div>Mon</div> <div>{restaurant?.hours}</div>
+								</div>
+								<div className="single-biz-left-hours-div">
+									<div>Tue</div> <div>{restaurant?.hours}</div>
+								</div>
+								<div className="single-biz-left-hours-div">
+									<div>Wed</div> <div>{restaurant?.hours}</div>
+								</div>
+								<div className="single-biz-left-hours-div">
+									<div>Thu</div> <div>{restaurant?.hours}</div>
+								</div>
+								<div className="single-biz-left-hours-div">
+									<div>Fri</div> <div>{restaurant?.hours}</div>
+								</div>
+								<div className="single-biz-left-hours-div">
+									<div>Sat</div> <div>{restaurant?.hours}</div>
+								</div>
+								<div className="single-biz-left-hours-div">
+									<div>Sun</div> <div>{restaurant?.hours}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div className="single-biz-bottom-right-cont">
+						<div>
+							{sessionUser && (
+								<button onClick={openAddReviewForm}>Add Review</button>
+							)}
+							{addReview && (
+								<AddReviewForm closeAddReviewForm={closeAddReviewForm} />
+							)}
+							<AllReviews />
+						</div>
+					</div>
+				</div>
+				{/* <p>
 					name: {restaurant?.name} -- created by: {restaurant?.user.username}
 					<img width="100" src={restaurant?.image} />
 				</p>
-				{isOwner && <button onClick={()=>history.push(`/restaurants/edit/${restaurantId}`)}>Edit</button>}
+				{isOwner && (
+					<button
+						onClick={() => history.push(`/restaurants/edit/${restaurantId}`)}
+					>
+						Edit
+					</button>
+				)}
 				{isOwner && <button onClick={onDelete}>Delete</button>}
 				<div>
-					{sessionUser && <button onClick={openAddReviewForm}>Add Review</button>}
+					{sessionUser && (
+						<button onClick={openAddReviewForm}>Add Review</button>
+					)}
 					{addReview && (
 						<AddReviewForm closeAddReviewForm={closeAddReviewForm} />
 					)}
 					<AllReviews />
 				</div>
 				<div>
-					<SingleRestaurantMap/>
-				</div>
+					<SingleRestaurantMap />
+				</div> */}
 			</div>
 		)
 	);
