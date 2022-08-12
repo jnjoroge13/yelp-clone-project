@@ -5,6 +5,7 @@
 	overflow: hidden;
 	overflow-y: scroll;
 	height: 100%;
+    margin-bottom: 20px;
 	/* padding: 0px 40px; */
 }
 
@@ -106,6 +107,7 @@
 }
 .add-review-btn i {
 	color: white;
+
 }
 
 .single-biz-top-cont {

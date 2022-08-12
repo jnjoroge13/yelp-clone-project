@@ -5,7 +5,7 @@
 	overflow: hidden;
 	overflow-y: scroll;
 	padding-bottom: 30px;
-
+    margin-top: 24px;
 }
 .all-reviews-list-cont{
     display: flex;
@@ -66,4 +66,46 @@
 	display: flex;
     gap: 10px;
     align-items: center;
+}
+.add-review-form-cont{
+	width: 100%;
+	margin-top: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.add-review-form{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	justify-content: center;
+	/* border: 2px solid pink; */
+	align-items: center;
+}
+.add-review-textarea{
+	width: 80%;
+}
+.add-review-textarea textarea{
+	width: 100%;
+	height: 100px;
+	padding: 16px;
+}
+
+.add-review-textarea textarea:focus{
+	outline: none !important;
+	border:1px solid #0073bb;
+	box-shadow: 0 0 2px #0073bb;
+}
+
+.add-review-errors{
+    background: #fcd6d3;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+	margin-bottom: 10px;
+	width: 50%;
 }

@@ -93,11 +93,9 @@ export default function AllReviews() {
 							src={getRatingImg(review.rating)}
 						/>  {convertDate(review.createdAt)}
 							</div>
-							<p>
-								id: {review.id} ; userId: {review.user.id} ; rating:{" "}
-								{review.rating} ; review: {review.review} ; created:{" "}
-								{convertDate(review.createdAt)}
-							</p>
+							<div>
+								{review.review}
+							</div>
 							<div  className="each-review-btn">
 								{review.user.id == sessionUser?.id && (
 									<Link to={`/reviews/${review.id}`}>Edit</Link>
