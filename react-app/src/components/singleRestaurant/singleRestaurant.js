@@ -69,7 +69,9 @@ export default function SingleRestaurant() {
 						<div className="single-biz-bottom-left">
 							<div className="single-biz-left-location">
 								<SingleRestaurantMap />
-								<div className="single-biz-left-address">{restaurant?.address}</div>
+								<div className="single-biz-left-address">
+									{restaurant?.address}
+								</div>
 							</div>
 							<div className="single-biz-left-hours">
 								<div className="single-biz-left-hours-div">
@@ -97,9 +99,11 @@ export default function SingleRestaurant() {
 						</div>
 					</div>
 					<div className="single-biz-bottom-right-cont">
-						<div>
+						<div className="single-biz-bottom-right-div">
 							{sessionUser && (
-								<button onClick={openAddReviewForm}>Add Review</button>
+								<button className="add-review-btn" onClick={openAddReviewForm}>
+									<i class="fa-regular fa-star fa-lg"></i> Write a review
+								</button>
 							)}
 							{addReview && (
 								<AddReviewForm closeAddReviewForm={closeAddReviewForm} />

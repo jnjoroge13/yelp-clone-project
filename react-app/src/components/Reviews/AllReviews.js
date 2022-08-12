@@ -30,10 +30,10 @@ export default function AllReviews() {
 			return Math.floor((now - addtime) / 1000 / 60) + " mins ago";
 		}
 		if (hourDiff < 24) {
-			return Math.floor((now - addtime) / 1000 / 60 / 60) + " hr ago";
+			return Math.floor((now - addtime) / 1000 / 60 / 60) + " hrs ago";
 		}
 		if (hourDiff >= 24) {
-			return Math.floor((now - addtime) / 1000 / 60 / 60 / 24) + " day ago";
+			return Math.floor((now - addtime) / 1000 / 60 / 60 / 24) + " days ago";
 		}
 	};
 	useEffect(() => {

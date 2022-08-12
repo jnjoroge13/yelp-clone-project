@@ -5,20 +5,24 @@
 	overflow: hidden;
 	overflow-y: scroll;
 	height: 100%;
-	padding: 0px 40px;
+	/* padding: 0px 40px; */
 }
 
 .single-biz-top-cont {
+    flex-grow: 1;
 	width: 100%;
 	height: 400px;
+    min-height: 400px;
 	/* background-image: url('https://s3-media0.fl.yelpcdn.com/bphoto/B3H9dsOSLLb6_yzbvheMew/o.jpg'); */
 }
 
 .single-biz-bottom-cont {
+    padding: 0px 40px;
 	padding-top: 32px;
 	flex-grow: 1;
 	/* background-color: rgba(0, 255, 255, 0.218); */
 	display: flex;
+
 }
 
 .single-biz-bottom-left-cont {
@@ -30,10 +34,7 @@
 	font-weight: 700;
 	padding-bottom: 24px;
 }
-.single-biz-bottom-right-cont {
-	width: 50%;
-	border-right: 1px solid black;
-}
+
 .single-biz-bottom-left {
 	display: flex;
 }
@@ -62,11 +63,45 @@
 	flex-direction: column;
 	gap: 16px;
 	align-items: center;
-    margin-right: 50px;
+    min-width: 360px;
+    /* margin-right: 50px; */
 	border-right: rgba(110, 112, 114, 1) 1px solid;
 }
 
 .single-biz-left-address {
 	font-size: 1.3rem;
 	overflow-wrap: break-word;
+}
+
+.single-biz-bottom-right-cont {
+	width: 50%;
+    padding-left: 32px;
+
+}
+
+.single-biz-bottom-right-div{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: beige;
+}
+.add-review-btn {
+    border:none;
+    padding: 24px 24px;
+    background-color: rgba(224,7,7,1);
+    display:flex;
+    height: 40px;
+    width: auto;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    cursor: pointer;
+}
+.add-review-btn i{
+    color: white;
 }
