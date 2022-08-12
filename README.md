@@ -33,7 +33,7 @@ BestKeptSecret is a Yelp clone, where users are allowed add and review restaraun
 ## Features
 
 ### Splash Page!
-<img width="3000" alt="Screen Shot 2022-08-12 at 11 35 43 AM" src="https://user-images.githubusercontent.com/93172512/184422856-676aa8c1-3d34-4166-b2d9-4e532ab6fb9e.png">
+<img width="1000" alt="Screen Shot 2022-08-12 at 11 35 43 AM" src="https://user-images.githubusercontent.com/93172512/184422856-676aa8c1-3d34-4166-b2d9-4e532ab6fb9e.png">
 
 ### Signup Page
 <img width="1000" alt="Screen Shot 2022-08-12 at 11 36 13 AM" src="https://user-images.githubusercontent.com/93172512/184422687-8d294af6-11bc-4138-ab66-791e2470861c.png">
