@@ -86,7 +86,7 @@
 }
 .add-review-btn {
 	border: none;
-	padding: 24px 24px;
+	padding: 24px 12px;
 	background-color: rgba(224, 7, 7, 1);
 	display: flex;
 	height: 40px;
@@ -97,8 +97,12 @@
 	font-weight: 700;
 	justify-content: center;
 	align-items: center;
+    transition: all 0.5s;
 	gap: 10px;
 	cursor: pointer;
+}
+.add-review-btn:hover{
+    background-color: rgb(244,13,21)
 }
 .add-review-btn i {
 	color: white;

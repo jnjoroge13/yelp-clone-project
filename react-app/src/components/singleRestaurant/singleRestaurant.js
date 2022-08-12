@@ -39,7 +39,7 @@ export default function SingleRestaurant() {
 	}, [restaurantId, dispatch]);
 	console.log(restaurant);
 	const style = {
-		backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0,0),rgba(0, 0, 0,0),65%, rgba(0, 0, 0,0.9)), url(${restaurant?.image})`,
+		backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0,0),rgba(0, 0, 0,0),57%, rgba(0, 0, 0,0.9)), url(${restaurant?.image})`,
 		backgroundPosition: "center",
 		backgroundSize: "scale-down",
 	};
@@ -132,6 +132,9 @@ export default function SingleRestaurant() {
 					</div>
 					<div className="single-biz-top-hours">
 						<span>Open </span>{restaurant?.hours}
+					</div>
+					<div className="single-biz-top-hours">
+						{restaurant?.phoneNumber}
 					</div>
 				</div>
 				<div className="single-biz-bottom-cont">
