@@ -2,7 +2,7 @@
 
 ## Live site hosted by Heroku
 
-[EarFruit](https://bestkeptsecret.herokuapp.com/)
+[BestKeptSecret](https://bestkeptsecret.herokuapp.com/)
 
 ## Technologies Used
 
