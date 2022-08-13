@@ -91,7 +91,8 @@ export default function AllReviews() {
 							<img
 							className="biz-star-rating"
 							src={getRatingImg(review.rating)}
-						/>  {convertDate(review.createdAt)}
+								/>
+								{/* {convertDate(review.createdAt)} */}
 							</div>
 							<div>
 								{review.review}
