@@ -5,6 +5,11 @@
 	flex-direction: column;
 }
 
+.home-page-decription{
+	font-weight: 700;
+	font-size: 2rem;
+	color:rgb(65, 65, 66,0.85);
+}
 .home-page-image {
 	height: 70vh;
 	flex-grow: 1;

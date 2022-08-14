@@ -3,25 +3,25 @@ import { NavLink, useHistory, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import whiteLogo from "../assets/logo-white.png";
 import { useSelector, useDispatch } from "react-redux";
-import { logout} from "../../store/session";
+import { logout } from "../../store/session";
 import "./NavBar.css";
 
 const NavBar = () => {
 	const sessionUser = useSelector((state) => state.session.user);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const location = useLocation();
-	const history = useHistory()
+	const history = useHistory();
 	const openDropdown = () => {
 		if (showDropdown) return;
 		setShowDropdown(true);
 	};
 
 	const dispatch = useDispatch();
-	const [search,setSearch]=useState('')
+	const [search, setSearch] = useState("");
 	const onLogout = async (e) => {
 		await dispatch(logout());
 		setShowDropdown(!showDropdown);
-		history.push('/')
+		history.push("/");
 	};
 	useEffect(() => {
 		if (!showDropdown) return;
@@ -60,6 +60,10 @@ const NavBar = () => {
 						</div>
 			</form>
 			</div> */}
+			{location.pathname == "/" && <div className="home-page-decription">
+				Explore and Review Restaurants in your community!
+			</div>}
+
 			{!sessionUser && (
 				<div className="nav-bar-right">
 					<NavLink className="nav-bar-restaurants" to="/restaurants">
