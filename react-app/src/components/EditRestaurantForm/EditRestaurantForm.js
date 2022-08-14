@@ -101,7 +101,7 @@ export function EditRestaurantForm() {
 	useEffect(() => {
 		const errors = [];
 		if (onlySpaces(name)) errors.push("Restaurant must have a name");
-		if (name?.length > 50) errors.push("Name must be under 355 character");
+		if (name?.length > 50) errors.push("Name must be 50 characters or less");
 		if (onlySpaces(description)) errors.push("Restaurant must have a description");
 		if (description?.length > 355) errors.push('Description must be under 355 character')
 		if (!selectedAddress) errors.push('Must select an address from the dropdown options')
