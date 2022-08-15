@@ -37,6 +37,7 @@
 
 .single-biz-bottom-left {
 	display: flex;
+	margin-bottom: 20px;
 }
 .single-biz-left-location {
 	display: flex;
@@ -182,4 +183,11 @@
     font-weight: 600;
 	color: rgba(4,197,133,1);
     font-size: 1.2rem;
+}
+
+.biz-description-div{
+	width: 80%;
+	font-size: 1.2rem;
+	border-top: rgba(110, 112, 114, 1) 1px solid;
+	padding-top: 16px;
 }
