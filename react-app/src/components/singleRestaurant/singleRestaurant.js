@@ -119,23 +119,22 @@ export default function SingleRestaurant() {
 							{" "}
 							· {restaurant?.priceRange} · {restaurant?.cuisine}
 						</>
-						{isOwner && <button
-							onClick={() => history.push(`/restaurants/edit/${restaurantId}`)}
-						>
-							Edit
-						</button>}
-						{isOwner && <button
-							onClick={onDelete}
-						>
-							Delete
-						</button>}
+						{isOwner && (
+							<button
+								onClick={() =>
+									history.push(`/restaurants/edit/${restaurantId}`)
+								}
+							>
+								Edit
+							</button>
+						)}
+						{isOwner && <button onClick={onDelete}>Delete</button>}
 					</div>
 					<div className="single-biz-top-hours">
-						<span>Open </span>{restaurant?.hours}
+						<span>Open </span>
+						{restaurant?.hours}
 					</div>
-					<div className="single-biz-top-hours">
-						{restaurant?.phoneNumber}
-					</div>
+					<div className="single-biz-top-hours">{restaurant?.phoneNumber}</div>
 				</div>
 				<div className="single-biz-bottom-cont">
 					<div className="single-biz-bottom-left-cont">
@@ -171,10 +170,14 @@ export default function SingleRestaurant() {
 								</div>
 							</div>
 						</div>
+						<div className="biz-description-div">
+							<h1>About the Restaurant</h1>
+							{restaurant?.description}
+						</div>
 					</div>
 					<div className="single-biz-bottom-right-cont">
 						<div className="single-biz-bottom-right-div">
-							{(sessionUser && !isOwner) && (
+							{sessionUser && !isOwner && (
 								<button className="add-review-btn" onClick={openAddReviewForm}>
 									<i className="fa-regular fa-star fa-lg"></i> Write a review
 								</button>
