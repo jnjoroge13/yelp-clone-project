@@ -149,3 +149,12 @@
 .search-icon{
     color:white;
 }
+
+
+
+/* Mobile */
+@media (max-width: 420px){
+	.search-bar-cont{
+		display: none;
+	}
+}

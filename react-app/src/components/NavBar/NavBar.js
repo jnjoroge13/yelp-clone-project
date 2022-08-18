@@ -46,23 +46,20 @@ const NavBar = () => {
 			<NavLink to="/" exact={true}>
 				<img className="navbar-logo" src={logo} />
 			</NavLink>
-			{/* <div className="search-bar-cont">
-			<form className="search-bar" >
-				<input
-					type="text"
-					id="search"
-					name="search"
-					placeholder="Search by Cuisine or Restaurant Name"
-					onChange={(e) => setSearch(e.target.value)}
+			<div className="search-bar-cont">
+				<form className="search-bar">
+					<input
+						type="text"
+						id="search"
+						name="search"
+						placeholder="Search by Cuisine or Restaurant Name"
+						onChange={(e) => setSearch(e.target.value)}
 					/>
 					<div className="search-bar-icon">
 						<i className=" search-icon fa fa-search fa-xl"></i>
-						</div>
-			</form>
-			</div> */}
-			{location.pathname == "/" && <div className="home-page-decription">
-				Explore and Review Restaurants in your community!
-			</div>}
+					</div>
+				</form>
+			</div>
 
 			{!sessionUser && (
 				<div className="nav-bar-right">
