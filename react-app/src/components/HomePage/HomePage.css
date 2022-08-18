@@ -57,3 +57,11 @@
 	box-shadow: 0 0 10px 0 #00000026;
 
 }
+
+
+@media (max-width: 420px){
+	.home-page{
+		padding-top: 100px;
+		/* height: 1200px; */
+	}
+}

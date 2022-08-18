@@ -159,9 +159,12 @@
 	.nav-bar-cont{
 		padding: 0px 5px;
 		height: 100px;
+		width: 100%;
 		justify-content: space-around;
 		background-color: rgba(224, 7, 7, 1);
 		flex-direction: column;
+		border: none;
+		position: fixed;
 	}
 	.nav-bar-right{
 		display: none;

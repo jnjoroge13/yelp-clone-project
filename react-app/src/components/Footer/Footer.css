@@ -29,3 +29,29 @@
     font-size: 1.1rem;
     font-weight: 600;
 }
+.about-div-mobile{
+    display: none;
+}
+
+@media (max-width: 420px){
+    .Footer-cont{
+        position: absolute;
+        bottom: 0;
+        height: 44px;
+        padding: 0;
+    }
+    .about-name{
+
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .about-div{
+        display: none;
+    }
+
+    .about-div-mobile{
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+}
