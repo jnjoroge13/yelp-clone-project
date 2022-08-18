@@ -18,3 +18,9 @@
 .hidden{
     display: none;
 }
+@media (max-width: 420px){
+	#root{
+        height: 100%;
+        width: 100vw;
+    }
+}

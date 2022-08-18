@@ -43,8 +43,11 @@ const NavBar = () => {
 	}
 	return (
 		<nav className="nav-bar-cont">
-			<NavLink to="/" exact={true}>
+			<NavLink className='logo-cont' to="/" exact={true}>
 				<img className="navbar-logo" src={logo} />
+			</NavLink>
+			<NavLink className='logo-cont-mobile' to="/" exact={true}>
+				<img className="navbar-logo" src={whiteLogo} />
 			</NavLink>
 			<div className="search-bar-cont">
 				<form className="search-bar">
