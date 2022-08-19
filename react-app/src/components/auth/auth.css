@@ -126,4 +126,7 @@ input:focus {
     .login-signup-image-cont{
         display: none;
     }
+    .login-signup-cont{
+        padding-top: 100px;
+    }
 }
