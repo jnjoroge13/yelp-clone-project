@@ -184,6 +184,7 @@ const NavBar = () => {
 					</NavLink>
 				</div>
 			)}
+
 			{/* Mobile Logged in User Dropdown */}
 			{sessionUser && showMobileDropdown && (
 				<div className="mobile-menu-dropdown-cont">
@@ -201,18 +202,16 @@ const NavBar = () => {
 						<i class="fa-solid fa-plus"></i>
 						New Restaurant
 					</NavLink>
-					{/* <div className="drop-down-divs mobile-menu-divs">
-						<div className="drop-down-icons">
-							<i className="fa-regular fa-circle-user fa-xl"></i>
-						</div>
-						<p>About Me</p>
-					</div> */}
-					<div className="mobile-menu-divs" onClick={onLogout}>
-							<i className="fa fa-arrow-right-from-bracket fa-lg"></i>
+					<div
+						className="mobile-dropdown-restaurants mobile-menu-divs"
+						onClick={onLogout}
+					>
+						<i className="fa fa-arrow-right-from-bracket fa-lg"></i>
 						Logout
 					</div>
 				</div>
 			)}
+			
 			{/* Logged out User Nav Right */}
 			{!sessionUser && (
 				<div className="nav-bar-right">
