@@ -115,48 +115,49 @@
 .search-bar-cont {
 	box-sizing: border-box;
 	/* border: 1px solid black; */
-    width: 40%;
-    height: 45px;
+	width: 40%;
+	height: 45px;
 }
-.search-bar{
-    width: 100%;
-    display: flex;
-
+.search-bar {
+	width: 100%;
+	display: flex;
 }
 .search-bar input {
-    /* width: 100%; */
-    border: none;
-    flex-grow: 1;
-    padding-left: 15px;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-    border-color: #ebebeb;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
+	/* width: 100%; */
+	border: none;
+	flex-grow: 1;
+	padding-left: 15px;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	border-color: #ebebeb;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-left: 1px solid;
 }
-.search-bar-icon{
-    width: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 45px;
-    background-color: rgba(224, 7, 7, 1);
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
-.search-icon{
-    color:white;
-}
-.logo-cont-mobile{
-	display:none;
+.search-bar-icon {
+	width: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 45px;
+	background-color: rgba(224, 7, 7, 1);
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
+.search-icon {
+	color: white;
+}
+.logo-cont-mobile {
+	display: none;
+}
+.mobile-menu-cont {
+	display: none;
+}
 
 /* Mobile */
-@media (max-width: 420px){
-	.nav-bar-cont{
+@media (max-width: 420px) {
+	.nav-bar-cont {
 		padding: 0px 5px;
 		height: 100px;
 		width: 100%;
@@ -166,30 +167,59 @@
 		border: none;
 		position: fixed;
 	}
-	.nav-bar-right{
+	.nav-bar-right {
 		display: none;
 	}
-	.navbar-logo{
+	.navbar-logo {
 		width: 60px;
 	}
-	.logo-cont{
+	.logo-cont {
 		display: none;
 	}
-	.logo-cont-mobile{
+	.logo-cont-mobile {
 		display: block;
 	}
-	.search-bar-cont{
+	.search-bar-cont {
 		width: 90%;
 		padding: 0px;
 		margin: 0px;
 	}
-	.search-bar-icon{
+	.search-bar-icon {
 		display: none;
 	}
-	.search-bar input{
-		border: 1px solid;
+	.search-bar input {
+		border: none;
 		border-radius: 5px;
 		height: 30px;
 		font-size: 0.8rem;
+	}
+	.mobile-menu-cont {
+		display: block;
+		position: absolute;
+		top: 5px;
+		right: 22px;
+		border-radius: 50%;
+		background-color: rgb(243, 6, 6);
+		padding: 9px;
+	}
+
+	.mobile-menu-cont .fa-bars {
+		color: white;
+	}
+	.mobile-menu-dropdown-cont {
+		position: absolute;
+		top: 100px;
+		right: 0px;
+		width: 100%;
+		background-color: #ebebeb;
+		/* height: 500px; */
+	}
+	.mobile-dropdown-restaurants{
+		font-size: 1.1rem;
+		font-family: "Open Sans";
+		font-weight: 600;
+		padding: 8px;
+		border-radius: 5px;
+		text-decoration: none;
 	}
 }
