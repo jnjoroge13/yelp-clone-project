@@ -33,7 +33,7 @@
     display: none;
 }
 
-@media (max-width: 420px){
+@media (max-width: 850px){
     .Footer-cont{
         position: absolute;
         bottom: 0;

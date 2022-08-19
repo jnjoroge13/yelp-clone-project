@@ -56,6 +56,41 @@ const NavBar = () => {
 				<NavLink to="/" exact={true}>
 					<img className="navbar-logo" src={whiteLogo} />
 				</NavLink>
+				<div className="mobile-menu-cont">
+					<i
+						className="fa-solid fa-bars fa-xl"
+						onClick={openMobileDropdown}
+					></i>
+				</div>
+				{showMobileDropdown && (
+					<div className="mobile-menu-dropdown-cont">
+						<NavLink
+							className="mobile-nav-bar-signup-btn mobile-menu-divs"
+							to="/sign-up"
+							exact={true}
+							activeClassName="active"
+						>
+							<i className="fa-brands fa-yelp"></i>
+							Sign Up
+						</NavLink>
+						<NavLink
+							className="mobile-nav-bar-login-btn mobile-menu-divs"
+							to="/login"
+							exact={true}
+							activeClassName="active"
+						>
+							<i className="fa-solid fa-user"></i>
+							Log In
+						</NavLink>
+						<NavLink
+							className="mobile-dropdown-restaurants mobile-menu-divs"
+							to="/restaurants"
+						>
+							<i className="fa-solid fa-utensils"></i>
+							Restaurants
+						</NavLink>
+					</div>
+				)}
 			</nav>
 		);
 	}
@@ -72,6 +107,9 @@ const NavBar = () => {
 			</NavLink>
 			<div className="search-bar-cont">
 				<form className="search-bar">
+					<div className="mobile-search-bar-icon">
+						<i className=" mobile-search-icon fa fa-search fa-sm"></i>
+					</div>
 					<input
 						type="text"
 						id="search"
