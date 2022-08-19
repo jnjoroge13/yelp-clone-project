@@ -120,3 +120,13 @@ input:focus {
 .form-demo-user {
     margin-top: 5px;
 }
+
+/* Mobile CSS */
+@media (max-width: 850px){
+    .login-signup-image-cont{
+        display: none;
+    }
+    .login-signup-cont{
+        padding-top: 100px;
+    }
+}

@@ -18,6 +18,22 @@ export default function Footer() {
 					<i className="about-linkedin fa-brands fa-linkedin fa-2x"></i>
 				</a>
 			</div>
+			<div className="about-div-mobile">
+				<p className="about-name">Jesse Njoroge</p>
+				<a
+					href="https://github.com/jnjoroge13"
+					target="_blank"
+					className="about-github"
+				>
+					<i className="about-github fa-brands fa-github fa-xl"></i>
+				</a>
+				<a
+					href="https://www.linkedin.com/in/jesse-njoroge/"
+					target="_blank"
+				>
+					<i className="about-linkedin fa-brands fa-linkedin fa-xl"></i>
+				</a>
+			</div>
 		</div>
 	);
 }

@@ -1,6 +1,5 @@
 .form-description{
     width: 100%;
-
     border-radius: 5px;
     border: 1.6px solid rgb(201, 200, 200);
     color: black;
@@ -34,4 +33,19 @@
 
 .form-hours select{
     margin-right: 5px;
+}
+
+
+@media (max-width: 850px){
+    .new-biz-form-cont{
+        overflow-y: scroll;
+        z-index: 0;
+        padding-bottom: 64px;
+        padding-top: 120px;
+    }
+    .form-description{
+        height: 50px;
+        font-size: 0.8rem;
+
+    }
 }

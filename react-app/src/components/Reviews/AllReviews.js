@@ -92,9 +92,9 @@ export default function AllReviews() {
 							className="biz-star-rating"
 							src={getRatingImg(review.rating)}
 								/>
-								{/* {convertDate(review.createdAt)} */}
+								{convertDate(review.createdAt)}
 							</div>
-							<div>
+							<div className="biz-review">
 								{review.review}
 							</div>
 							<div  className="each-review-btn">
