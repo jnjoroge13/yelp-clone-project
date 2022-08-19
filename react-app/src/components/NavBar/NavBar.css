@@ -202,7 +202,6 @@
 		background-color: rgb(243, 6, 6);
 		padding: 9px;
 	}
-
 	.mobile-menu-cont .fa-bars {
 		color: white;
 	}
@@ -212,14 +211,26 @@
 		right: 0px;
 		width: 100%;
 		background-color: #ebebeb;
-		/* height: 500px; */
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
 	}
-	.mobile-dropdown-restaurants{
-		font-size: 1.1rem;
-		font-family: "Open Sans";
-		font-weight: 600;
-		padding: 8px;
-		border-radius: 5px;
+	.mobile-nav-bar-signup-btn {
 		text-decoration: none;
+	}
+	.mobile-menu-divs {
+		border-bottom: rgba(110, 112, 114, 1) 1px solid;
+		text-decoration: none;
+		font-size: 1rem;
+		margin-left: 10px;
+		margin-right: 30px;
+		padding: 15px;
+	}
+	.mobile-menu-divs i {
+		margin-right: 20px;
+	}
+	.mobile-nav-bar-signup-btn,
+	.mobile-nav-bar-signup-btn i{
+		color: rgba(224, 7, 7, 1);
 	}
 }

@@ -87,13 +87,37 @@ const NavBar = () => {
 
 			{/* Mobile Dropdown */}
 			<div className="mobile-menu-cont">
-				<i class="fa-solid fa-bars fa-xl" onClick={openMobileDropdown}></i>
+				<i className="fa-solid fa-bars fa-xl" onClick={openMobileDropdown}></i>
 			</div>
-			{showMobileDropdown && (<div className="mobile-menu-dropdown-cont">
-				<NavLink className="mobile-dropdown-restaurants" to="/restaurants">
-					Restaurants
-				</NavLink>
-			</div>)}
+			{showMobileDropdown && (
+				<div className="mobile-menu-dropdown-cont">
+					<NavLink
+						className="mobile-nav-bar-signup-btn mobile-menu-divs"
+						to="/sign-up"
+						exact={true}
+						activeClassName="active"
+					>
+						<i className="fa-brands fa-yelp"></i>
+						Sign Up
+					</NavLink>
+					<NavLink
+						className="mobile-nav-bar-login-btn mobile-menu-divs"
+						to="/login"
+						exact={true}
+						activeClassName="active"
+					>
+						<i className="fa-solid fa-user"></i>
+						Log In
+					</NavLink>
+					<NavLink
+						className="mobile-dropdown-restaurants mobile-menu-divs"
+						to="/restaurants"
+					>
+						<i className="fa-solid fa-utensils"></i>
+						Restaurants
+					</NavLink>
+				</div>
+			)}
 
 			{/* Logged out User Nav Right */}
 			{!sessionUser && (
