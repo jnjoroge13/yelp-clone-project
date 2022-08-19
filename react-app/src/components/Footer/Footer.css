@@ -39,6 +39,7 @@
         bottom: 0;
         height: 44px;
         padding: 0;
+        z-index: 5;
     }
     .about-name{
 

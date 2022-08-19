@@ -62,7 +62,7 @@ const NavBar = () => {
 						onClick={openMobileDropdown}
 					></i>
 				</div>
-				{showMobileDropdown && (
+				{!sessionUser && showMobileDropdown && (
 					<div className="mobile-menu-dropdown-cont">
 						<NavLink
 							className="mobile-nav-bar-signup-btn mobile-menu-divs"
@@ -79,9 +79,35 @@ const NavBar = () => {
 							exact={true}
 							activeClassName="active"
 						>
-							<i className="fa-solid fa-user"></i>
+							<i className="fa-regular fa-circle-user"></i>
 							Log In
 						</NavLink>
+						<NavLink
+							className="mobile-dropdown-restaurants mobile-menu-divs"
+							to="/restaurants"
+						>
+							<i className="fa-solid fa-utensils"></i>
+							Restaurants
+						</NavLink>
+					</div>
+				)}
+				{sessionUser && showMobileDropdown && (
+					<div className="mobile-menu-dropdown-cont">
+						<NavLink className="nav-bar-restaurants" to="/restaurants/new">
+							New Restaurant
+						</NavLink>
+						<div className="drop-down-divs">
+							<div className="drop-down-icons">
+								<i className="fa-regular fa-circle-user fa-xl"></i>
+							</div>
+							<p>About Me</p>
+						</div>
+						<div className="drop-down-divs" onClick={onLogout}>
+							<div className="drop-down-icons">
+								<i className="fa fa-arrow-right-from-bracket fa-lg"></i>
+							</div>
+							<p>Logout</p>
+						</div>
 						<NavLink
 							className="mobile-dropdown-restaurants mobile-menu-divs"
 							to="/restaurants"
@@ -127,7 +153,9 @@ const NavBar = () => {
 			<div className="mobile-menu-cont">
 				<i className="fa-solid fa-bars fa-xl" onClick={openMobileDropdown}></i>
 			</div>
-			{showMobileDropdown && (
+
+			{/* Mobile Logged out User Dropdown */}
+			{!sessionUser && showMobileDropdown && (
 				<div className="mobile-menu-dropdown-cont">
 					<NavLink
 						className="mobile-nav-bar-signup-btn mobile-menu-divs"
@@ -144,7 +172,7 @@ const NavBar = () => {
 						exact={true}
 						activeClassName="active"
 					>
-						<i className="fa-solid fa-user"></i>
+						<i className="fa-regular fa-circle-user"></i>
 						Log In
 					</NavLink>
 					<NavLink
@@ -156,7 +184,35 @@ const NavBar = () => {
 					</NavLink>
 				</div>
 			)}
-
+			{/* Mobile Logged in User Dropdown */}
+			{sessionUser && showMobileDropdown && (
+				<div className="mobile-menu-dropdown-cont">
+					<NavLink
+						className="mobile-dropdown-restaurants mobile-menu-divs"
+						to="/restaurants"
+					>
+						<i className="fa-solid fa-utensils"></i>
+						Restaurants
+					</NavLink>
+					<NavLink
+						className="nav-bar-restaurants mobile-menu-divs"
+						to="/restaurants/new"
+					>
+						<i class="fa-solid fa-plus"></i>
+						New Restaurant
+					</NavLink>
+					{/* <div className="drop-down-divs mobile-menu-divs">
+						<div className="drop-down-icons">
+							<i className="fa-regular fa-circle-user fa-xl"></i>
+						</div>
+						<p>About Me</p>
+					</div> */}
+					<div className="mobile-menu-divs" onClick={onLogout}>
+							<i className="fa fa-arrow-right-from-bracket fa-lg"></i>
+						Logout
+					</div>
+				</div>
+			)}
 			{/* Logged out User Nav Right */}
 			{!sessionUser && (
 				<div className="nav-bar-right">

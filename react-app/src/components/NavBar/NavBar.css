@@ -166,6 +166,7 @@
 		flex-direction: column;
 		border: none;
 		position: fixed;
+		z-index: 4;
 	}
 	.nav-bar-right {
 		display: none;
@@ -241,10 +242,11 @@
 		padding: 15px;
 	}
 	.mobile-menu-divs i {
-		margin-right: 20px;
+		margin-right: 15px;
 	}
 	.mobile-nav-bar-signup-btn,
 	.mobile-nav-bar-signup-btn i{
 		color: rgba(224, 7, 7, 1);
 	}
+
 }

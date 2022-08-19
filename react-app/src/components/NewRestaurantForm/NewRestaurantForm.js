@@ -168,7 +168,7 @@ export default function NewRestaurantForm() {
 	// if (!isLoaded) return "Loading Map...";
 
 	return (
-		<div className="login-signup-cont">
+		<div className="login-signup-cont new-biz-form-cont">
 			{errors.length > 0 && firstSubmit && (
 				<div className="login-errors">
 					<div>
