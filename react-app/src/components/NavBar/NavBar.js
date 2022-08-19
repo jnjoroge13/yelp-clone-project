@@ -211,7 +211,7 @@ const NavBar = () => {
 					</div>
 				</div>
 			)}
-			
+
 			{/* Logged out User Nav Right */}
 			{!sessionUser && (
 				<div className="nav-bar-right">

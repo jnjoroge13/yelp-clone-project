@@ -85,6 +85,9 @@
 }
 .add-review-textarea{
 	width: 80%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 .add-review-textarea textarea{
 	width: 100%;
@@ -109,7 +112,10 @@
 	margin-bottom: 10px;
 	width: 50%;
 }
-
+.biz-review{
+	display: flex;
+	word-break: break-all;
+}
 
 @media (max-width: 850px) {
 	.all-reviews-cont{
