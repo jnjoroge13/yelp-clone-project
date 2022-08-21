@@ -1,17 +1,8 @@
 .biz-cont {
 	display: flex;
 	justify-content: center;
-	/* width: 80%; */
-	/* border: 1px solid black; */
-	min-width: 650px;
-	/* gap: 50px; */
-	width: 100%;
-	/* height: 70vh; */
-	/* height: calc(100vh - 151px); */
 	flex-grow: 1;
-
-	overflow:auto;
-	/* overflow-y: scroll; */
+	overflow: auto;
 }
 
 .biz-list-cont {
@@ -20,28 +11,19 @@
 	flex-direction: column;
 	align-items: center;
 	gap: 24px;
-	/* border: 2px solid black; */
-	width: 50%;
-	min-width: 700px;
 	height: 99%;
-	/* overflow: hidden;
-	overflow-y: scroll; */
 }
 
 .biz-list-single {
 	text-decoration: none;
 	padding: 24px;
 	display: flex;
-	height: 225px;
 	border: 1.4px solid #ebebeb;
 	border-radius: 5px;
 	gap: 32px;
 	justify-content: center;
 	align-items: center;
-	width: 780px;
-	/* width:820px; */
 	transition: box-shadow 0.3s;
-	min-width: 650px;
 }
 
 .biz-list-single:hover {
@@ -52,11 +34,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+	width: 80%;
+	height: 100%;
 }
 .biz-image {
-	width: 20%;
-	min-width: 225px;
-	max-width: 235px;
 	border-radius: 5px;
 }
 .biz-image img {
@@ -65,8 +46,7 @@ height: 200px; */
 	aspect-ratio: 1 / 1;
 	width: 100%;
 	border-radius: 5px;
-    object-fit:cover;
-
+	object-fit: cover;
 }
 
 .biz-message {
@@ -75,13 +55,10 @@ height: 200px; */
 }
 .biz-message div {
 	color: rgba(110, 112, 114, 1);
+	word-break: break-word;
 }
 .biz-message i {
 	padding-top: 4px;
-}
-.biz-info-cont {
-	width: 80%;
-	height: 100%;
 }
 
 .biz-info-cont h3 span:hover {
@@ -127,7 +104,8 @@ height: 200px; */
 	font-size: 14px;
 }
 
-.biz-star-rating {
+.biz-star-rating,
+.all-biz-star-rating {
 	width: 120px;
 	height: auto;
 }
@@ -138,12 +116,92 @@ height: 200px; */
 	gap: 10px;
 	color: rgba(110, 112, 114, 1);
 }
-.all-biz-map-cont{
+.all-biz-map-cont {
 	/* border: 2px solid black; */
 	position: sticky;
 	top: 0;
 	height: 100%;
 	width: 50%;
 	box-shadow: 0 0 5px #0000001a;
+}
+@media (min-width: 851px) {
+	.biz-cont {
+		min-width: 650px;
+		width: 100%;
+	}
+	.biz-list-cont {
+		width: 50%;
+		min-width: 700px;
+	}
+	.biz-list-single {
+		width: 780px;
+		min-width: 650px;
+		height: 225px;
 
+	}
+	.biz-image {
+		width: 20%;
+		min-width: 225px;
+		max-width: 235px;
+	}
+}
+@media (max-width: 850px) {
+	.biz-cont {
+		justify-content: baseline;
+		align-items: center;
+		min-width: none;
+		width: 100%;
+		padding-top: 100px;
+		padding-bottom: 44px;
+	}
+	.biz-list-cont {
+		padding: 0px;
+		min-width: 100%;
+		width: 100%;
+		gap: 0px;
+	}
+	.biz-list-single-cont {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+	.biz-list-single {
+		width: 100%;
+		padding: 12px 12px;
+		border-radius: 0px;
+		border: none;
+		border-top: 1.4px solid #ebebeb;
+		gap: 10px;
+	}
+	.biz-image {
+		width: 78px;
+		display: flex;
+		justify-content: flex-start;
+		height: 100%;
+		padding-top: 5px;
+	}
+	.biz-image img {
+		height: 78px;
+	}
+	.biz-info-cont h3,
+	.biz-info-cont h3 span {
+		font-size: 16px;
+	}
+	.all-biz-star-rating{
+		width: 82px;
+		height: auto;
+	}
+	.biz-info-cont{
+		gap:10px;
+
+	}
+	.biz-rating-cont,
+	.biz-cuisine-tag,
+	.biz-cuisine,
+	.interpunct,
+	.biz-hour,
+	.biz-hour span,
+	.biz-message div{
+		font-size: 0.85rem;
+	}
 }
