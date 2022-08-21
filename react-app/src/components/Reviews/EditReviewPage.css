@@ -1,18 +1,34 @@
 .edit-review-cont {
 	flex: 1;
 	display: flex;
-    flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
 
 .edit-review-form {
-	width: 60vw;
-	height: 40vh;
+
     /* background-color: aqua; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 25px;
+}
+
+@media (min-width: 851px){
+    .edit-review-form{
+        width: 60vw;
+        height: 40vh;
+    }
+}
+@media (max-width: 850px){
+    .edit-review-cont{
+        padding-top: 140px;
+        height: 100%;
+        width: 100%;
+    }
+    .edit-review-form{
+        height: 100%;
+        width: 80%;
+    }
 }
