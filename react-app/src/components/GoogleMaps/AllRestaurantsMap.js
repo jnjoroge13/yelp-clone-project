@@ -11,7 +11,8 @@ const libraries = ["places"];
 
 const mapContainerStyle = {
 	height: "100%",
-	width: "100%"
+	width: "100%",
+
 };
 
 const center = {
@@ -22,6 +23,7 @@ const center = {
 const options = {
 	disableDefaultUI: true,
 	zoomControl: true,
+	styles: [{ elementType: "labels", featureType: "poi.business", stylers: [{ visibility: "off", }] }]
 };
 export default function AllRestaurantsMap() {
 	const key = useSelector((state) => state.maps.key);

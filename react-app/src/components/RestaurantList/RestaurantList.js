@@ -14,7 +14,7 @@ import twoandOneHalfStars from "../assets/2.5-stars.png";
 import threeandOneHalfStars from "../assets/3.5-stars.png";
 import fourandOneHalfStars from "../assets/4.5-stars.png";
 import AllRestaurantsMap from "../GoogleMaps/AllRestaurantsMap";
-import './RestaurantList.css'
+import "./RestaurantList.css";
 
 export default function RestaurantList() {
 	const history = useHistory();
@@ -39,7 +39,7 @@ export default function RestaurantList() {
 		const firstReview = restaurantReviews[restaurantReviews.length - 1]?.review;
 
 		if (firstReview?.length > 136) {
-			return (firstReview.slice(0, 136) + "...");
+			return firstReview.slice(0, 136) + "...";
 		}
 		return firstReview;
 		// console.log(firstReview)
@@ -92,7 +92,10 @@ export default function RestaurantList() {
 				{restaurantArray &&
 					restaurantArray.map((restaurant) => (
 						<div key={restaurant.id} className="biz-list-single-cont">
-							<NavLink className="biz-list-single" to={`/restaurants/${restaurant.id}`}>
+							<NavLink
+								className="biz-list-single"
+								to={`/restaurants/${restaurant.id}`}
+							>
 								<div className="biz-image">
 									<img src={restaurant.image} />
 								</div>
@@ -102,21 +105,34 @@ export default function RestaurantList() {
 									</h3>
 									<div className="biz-rating-cont">
 										<img
-											className="biz-star-rating"
-											width="108"
-											height="20"
+											className="all-biz-star-rating"
 											src={getRatingImg(restaurant.id)}
 										/>
-										{getNumberRatings(restaurant.id)}
+										<>
+											{getNumberRatings(restaurant.id)} {" "} {getNumberRatings(restaurant.id)==1?'review':'reviews'}
+										</>{" "}
 									</div>
 									<div className="biz-cuisine">
-										<span className="biz-cuisine-tag">{restaurant.cuisine}</span> {restaurant.priceRange}<span className="interpunct">{" · "}</span>
+										<span className="biz-cuisine-tag">
+											{restaurant.cuisine}
+										</span>{" "}
+										{restaurant.priceRange}
+										<span className="interpunct">{" · "}</span>
 										{restaurant.zipCode}
 									</div>
-									<div className="biz-hour"><span>Hours:</span> {restaurant.hours}</div>
+									<div className="biz-hour">
+										<span>Hours:</span> {restaurant.hours}
+									</div>
 									<div className="biz-message">
 										<i className="fa-regular fa-message" />
-										{getOneReview(restaurant.id) && <div>"{getOneReview(restaurant.id)}" {getOneReview(restaurant.id)?.length>136 && (<span className='biz-message-more'>more</span>)}</div>}
+										{getOneReview(restaurant.id) && (
+											<div>
+												"{getOneReview(restaurant.id)}"{" "}
+												{getOneReview(restaurant.id)?.length > 136 && (
+													<span className="biz-message-more">more</span>
+												)}
+											</div>
+										)}
 										{!getOneReview(restaurant.id) && <div>No Reviews</div>}
 									</div>
 								</div>
