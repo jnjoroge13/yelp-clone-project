@@ -9,16 +9,16 @@ export default function HomePage() {
 	return (
 		<div className="home-page">
 			<div className="home-page-image">{/* <img src={homePageImage}/> */}</div>
-			{/* <div className="home-page-categories">
-				<div className="categories-div"><p>🥡</p> Chinese </div>
-				<div className="categories-div"><p>🥘</p> Korean </div>
-				<div className="categories-div"><p>🍝</p> Italian </div>
-				<div className="categories-div"><p>🧁</p> Bakery </div>
-				<div className="categories-div"><p>☕</p> Cafe </div>
-				<div className="categories-div"><p>🦞</p> Seafood </div>
-				<div className="categories-div"><p>🌮</p> Mexican </div>
-				<div className="categories-div"><p>🍳</p> Brunch </div>
-			</div> */}
+			<div className="home-page-categories">
+				<div className="categories-div" onClick={()=>history.push('/search/chinese')}><p>🥡</p> Chinese </div>
+				<div className="categories-div" onClick={()=>history.push('/search/korean')}><p>🥘</p> Korean </div>
+				<div className="categories-div" onClick={()=>history.push('/search/italian')}><p>🍝</p> Italian </div>
+				<div className="categories-div" onClick={()=>history.push('/search/bakery')}><p>🧁</p> Bakery </div>
+				<div className="categories-div" onClick={()=>history.push('/search/cafe')}><p>☕</p> Cafe </div>
+				<div className="categories-div" onClick={()=>history.push('/search/seafood')}><p>🦞</p> Seafood </div>
+				<div className="categories-div" onClick={()=>history.push('/search/mexican')}><p>🌮</p> Mexican </div>
+				<div className="categories-div" onClick={()=>history.push('/search/brunch')}><p>🍳</p> Brunch </div>
+			</div>
 		</div>
 	);
 }

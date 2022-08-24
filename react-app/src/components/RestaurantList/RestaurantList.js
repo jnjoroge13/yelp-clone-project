@@ -17,7 +17,6 @@ import AllRestaurantsMap from "../GoogleMaps/AllRestaurantsMap";
 import "./RestaurantList.css";
 
 export default function RestaurantList() {
-	const history = useHistory();
 	const dispatch = useDispatch();
     const restaurantSelector = useSelector((state) => state.restaurants);
     const restaurantArray = Object.values(restaurantSelector)
