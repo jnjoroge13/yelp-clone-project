@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { thunkGetRestaurants } from "../../store/restaurants";
 import { thunkGetAllReviews } from "../../store/reviews";
 import zeroStars from "../assets/0-stars.png";
@@ -14,14 +14,16 @@ import twoandOneHalfStars from "../assets/2.5-stars.png";
 import threeandOneHalfStars from "../assets/3.5-stars.png";
 import fourandOneHalfStars from "../assets/4.5-stars.png";
 import AllRestaurantsMap from "../GoogleMaps/AllRestaurantsMap";
-import "./RestaurantList.css";
+import "../RestaurantList/RestaurantList.css";
 
-export default function RestaurantList() {
-	const dispatch = useDispatch();
+export default function SearchPage() {
+	const history = useHistory();
+    const dispatch = useDispatch();
     const restaurantSelector = useSelector((state) => state.restaurants);
     const restaurantArray = Object.values(restaurantSelector)
-	const allReviews = Object.values(useSelector((state) => state.reviews));
-
+    const {searchValue} = useParams()
+    const allReviews = Object.values(useSelector((state) => state.reviews));
+    const searchRestaurantsArray = restaurantArray?.filter((restaurant) => restaurant.name.toUpperCase().includes(searchValue.toUpperCase()) || restaurant.cuisine.toUpperCase().includes(searchValue.toUpperCase()))
 	useEffect(() => {
 		dispatch(thunkGetRestaurants());
 		dispatch(thunkGetAllReviews());
@@ -85,8 +87,8 @@ export default function RestaurantList() {
 	return (
 		<div className="biz-cont">
 			<div className="biz-list-cont">
-				{restaurantArray &&
-					restaurantArray.map((restaurant) => (
+				{searchRestaurantsArray &&
+					searchRestaurantsArray.map((restaurant) => (
 						<div key={restaurant.id} className="biz-list-single-cont">
 							<NavLink
 								className="biz-list-single"
@@ -136,7 +138,7 @@ export default function RestaurantList() {
 						</div>
 					))}
 			</div>
-			<AllRestaurantsMap restaurantsArray={restaurantArray} />
+			<AllRestaurantsMap restaurantsArray={searchRestaurantsArray} />
 		</div>
 	);
 }

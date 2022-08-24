@@ -30,6 +30,9 @@ const NavBar = () => {
 		setShowMobileDropdown(!showMobileDropdown);
 		history.push("/");
 	};
+	const onSubmit = () => {
+		history.push(`/search/${search}/`)
+	}
 	useEffect(() => {
 		if (!showDropdown) return;
 		const closeDropdown = () => {
@@ -132,7 +135,7 @@ const NavBar = () => {
 				<img className="navbar-logo" src={whiteLogo} />
 			</NavLink>
 			<div className="search-bar-cont">
-				<form className="search-bar">
+				<form className="search-bar" onSubmit={onSubmit}>
 					<div className="mobile-search-bar-icon">
 						<i className=" mobile-search-icon fa fa-search fa-sm"></i>
 					</div>
@@ -140,11 +143,12 @@ const NavBar = () => {
 						type="text"
 						id="search"
 						name="search"
+						value={search}
 						placeholder="Search by Cuisine or Restaurant Name"
 						onChange={(e) => setSearch(e.target.value)}
 					/>
-					<div className="search-bar-icon">
-						<i className=" search-icon fa fa-search fa-xl"></i>
+					<div className="search-bar-icon" onClick={onSubmit}>
+						<i className=" search-icon fa fa-search fa-xl" ></i>
 					</div>
 				</form>
 			</div>

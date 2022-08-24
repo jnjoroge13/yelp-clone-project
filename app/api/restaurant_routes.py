@@ -58,7 +58,7 @@ def restaurant(restaurant_id):
 def update_restaurant(restaurant_id):
     # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', restaurant_id)
     restaurant = Restaurant.query.get(restaurant_id)
-    # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', playlist.to_dict())
+    # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', restaurant.to_dict())
     form = AddRestaurant()
     restaurant.name=form.data['name'],
     restaurant.description=form.data['description'],
@@ -86,6 +86,12 @@ def delete_restaurant(restaurant_id):
 def get_google_map_api():
     # print('------------',os.environ.get('GOOGLE_MAPS_API_KEY'))
     return {'googleMapsAPIKey': os.environ.get('GOOGLE_MAPS_API_KEY')}
+
+
+
+
+
+
 # @restaurant_routes.route("/image", methods=["POST"])
 # @login_required
 # def upload_image():
