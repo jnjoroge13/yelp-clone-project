@@ -13,6 +13,7 @@ import HomePage from "./components/HomePage/HomePage";
 import SingleRestaurant from "./components/singleRestaurant/singleRestaurant";
 import EditReviewForm from "./components/Reviews/EditReviewPage";
 import User from "./components/User";
+import SearchPage from "./components/Search/Search";
 import Footer from "./components/Footer/Footer";
 import { authenticate } from "./store/session";
 import { thunkGetAllReviews } from "./store/reviews";
@@ -69,6 +70,9 @@ function App() {
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<User />
 				</ProtectedRoute>
+				<Route path="/search/:searchValue" exact={true}>
+					<SearchPage />
+				</Route>
 				<Route path="/" exact={true}>
 					<HomePage />
 				</Route>

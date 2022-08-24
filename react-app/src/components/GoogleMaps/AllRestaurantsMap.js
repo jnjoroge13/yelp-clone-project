@@ -25,11 +25,8 @@ const options = {
 	zoomControl: true,
 	styles: [{ elementType: "labels", featureType: "poi.business", stylers: [{ visibility: "off", }] }]
 };
-export default function AllRestaurantsMap() {
-	const key = useSelector((state) => state.maps.key);
-	const restaurantSelector = useSelector((state) => state.restaurants);
-	const restaurantArray = Object.values(restaurantSelector);
-	const markers = restaurantArray.map((restaurant) => ({
+export default function AllRestaurantsMap( prop ) {
+	const markers = prop.restaurantsArray.map((restaurant) => ({
 		id: restaurant.id,
 		name: restaurant.name,
 		lat: Number(restaurant.lat),
