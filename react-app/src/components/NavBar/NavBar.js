@@ -30,8 +30,9 @@ const NavBar = () => {
 		setShowMobileDropdown(!showMobileDropdown);
 		history.push("/");
 	};
-	const onSubmit = () => {
-		history.push(`/search/${search}/`)
+	const onSubmit = (e) => {
+		e.preventDefault()
+		search?history.push(`/search/${search}/`):history.push(`/restaurants/`)
 	}
 	useEffect(() => {
 		if (!showDropdown) return;
@@ -136,7 +137,7 @@ const NavBar = () => {
 			</NavLink>
 			<div className="search-bar-cont">
 				<form className="search-bar" onSubmit={onSubmit}>
-					<div className="mobile-search-bar-icon">
+					<div className="mobile-search-bar-icon" onClick={onSubmit}>
 						<i className=" mobile-search-icon fa fa-search fa-sm"></i>
 					</div>
 					<input

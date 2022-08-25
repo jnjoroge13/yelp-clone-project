@@ -124,6 +124,10 @@ height: 200px; */
 	width: 50%;
 	box-shadow: 0 0 5px #0000001a;
 }
+.search-results-header{
+	font-size: 1.3rem;
+	font-weight: 700;
+}
 @media (min-width: 851px) {
 	.biz-cont {
 		min-width: 650px;
@@ -184,8 +188,12 @@ height: 200px; */
 		height: 78px;
 	}
 	.biz-info-cont h3,
+	.search-results-header,
 	.biz-info-cont h3 span {
 		font-size: 16px;
+	}
+	.search-results-header{
+		padding: 5px;
 	}
 	.all-biz-star-rating{
 		width: 82px;
