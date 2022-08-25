@@ -85,8 +85,9 @@ export default function SearchPage() {
 	};
 	let i = 1;
 	return (
-		<div className="biz-cont">
+        <div className="biz-cont">
 			<div className="biz-list-cont">
+                <div className="search-results-header">{searchRestaurantsArray?.length} {searchRestaurantsArray?.length === 1 ? 'result' : 'results'} found for "{ searchValue}"</div>
 				{searchRestaurantsArray &&
 					searchRestaurantsArray.map((restaurant) => (
 						<div key={restaurant.id} className="biz-list-single-cont">
