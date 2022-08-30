@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkAddRestaurant } from "../../store/restaurants";
 import { thunkGetOneRestaurant } from "../../store/restaurants";
 import signinImage from "../assets/yelp-signin-image.png";
+import loadingImage from "../assets/loading.gif";
 import "./NewRestaurantForm.css";
 import { useHistory } from "react-router-dom";
 import {
@@ -31,6 +32,7 @@ export default function NewRestaurantForm() {
 	const history = useHistory();
 	const key = useSelector((state) => state.maps.key);
 	const sessionUser = useSelector((state) => state.session.user);
+	const hiddenFileInput = useRef(null);
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [cuisine, setCuisine] = useState("Chinese");
@@ -47,8 +49,7 @@ export default function NewRestaurantForm() {
 	const [closeMinutes, setCloseMinutes] = useState("00");
 	const [openAmPm, setOpenAmPm] = useState("AM");
 	const [closeAmPm, setCloseAmPm] = useState("PM");
-	// const [showErrors, SetShowErrors] = useState(false);
-	const [imageError, setImageError] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const [firstSubmit, setFirstSubmit] = useState(false);
 
@@ -71,11 +72,11 @@ export default function NewRestaurantForm() {
 		return re.test(phoneNumber);
 	};
 
-	const validateImageExt = (img) => {
-		let re =
-			/(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i;
-		return re.test(img);
-	};
+	// const validateImageExt = (img) => {
+	// 	let re =
+	// 		/(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i;
+	// 	return re.test(img);
+	// };
 	function onlySpaces(str) {
 		return /^\s*$/.test(str);
 	}
@@ -89,9 +90,9 @@ export default function NewRestaurantForm() {
 			errors.push("Restaurant must have a description");
 		if (!selectedAddress.length)
 			errors.push("Must select an address from the dropdown options");
-		if (!validateImageExt(image))
-			errors.push("Image must be a png, jpg, or jpeg");
-		if (imageError) errors.push("Image Url is corrupted");
+		// if (!validateImageExt(image))
+		// 	errors.push("Image must be a png, jpg, or jpeg");
+		// if (imageError) errors.push("Image Url is corrupted");
 		if (!validatePhoneNumber(phoneNumber))
 			errors.push("Phone number not valid");
 		setErrors(errors);
@@ -106,52 +107,42 @@ export default function NewRestaurantForm() {
 		phoneNumber,
 		priceRange,
 		image,
-		imageError,
 	]);
-
-	function checkImage(url) {
-		const image = new Image();
-		image.src = url;
-		setTimeout(() => {
-			if (image.width > 0) {
-				setImageError(false);
-				// console.log("good image");
-			} else {
-				setImageError(true);
-				// console.log("bad image");
-			}
-		}, 100);
-	}
-	useEffect(() => {
-		if (image) {
-			checkImage(image);
-		}
-	}, [image]);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		setFirstSubmit(true);
-		// SetShowErrors(true);
-		if (!imageError && !errors.length) {
-			const hours = `${openHour}:${openMinutes} ${openAmPm} - ${closeHour}:${closeMinutes} ${closeAmPm}`;
-			const restaurant = {
-				name,
-				description,
-				cuisine,
-				address: selectedAddress,
-				zipCode,
-				lat,
-				lng,
-				phoneNumber,
-				priceRange,
-				hours,
-				image,
-			};
+		setLoading(true);
+		const formData = new FormData();
+		formData.append("image", image);
+		const res = await fetch("/api/restaurants/image", {
+			method: "POST",
+			body: formData,
+		});
+		if (res.ok) {
+			const jsonRes = await res.json();
+			setLoading(false);
+			if (!loading && !errors.length) {
+				const hours = `${openHour}:${openMinutes} ${openAmPm} - ${closeHour}:${closeMinutes} ${closeAmPm}`;
+				const restaurant = {
+					name,
+					description,
+					cuisine,
+					address: selectedAddress,
+					zipCode,
+					lat,
+					lng,
+					phoneNumber,
+					priceRange,
+					hours,
+					image: jsonRes.image,
+				};
 
-			const response = await dispatch(thunkAddRestaurant(restaurant));
+				const response = await dispatch(thunkAddRestaurant(restaurant));
 
-			if (response === "Restaurant Added") {
-				history.push("/restaurants");
+				if (response === "Restaurant Added") {
+					history.push("/restaurants");
+				}
 			}
 		}
 	};
@@ -159,14 +150,23 @@ export default function NewRestaurantForm() {
 	const clearErrors = () => {
 		setFirstSubmit(false);
 	};
-	// const { isLoaded, loadError } = useLoadScript({
-	// 	googleMapsApiKey: key,
-	// 	libraries,
-	// });
+	const handleClick = (e) => {
+		e.preventDefault();
+		hiddenFileInput.current.click();
+	};
 
-	// if (loadError) return "Error loading maps";
-	// if (!isLoaded) return "Loading Map...";
+	// const uploadImage = (e) => {
+	// 	setImageLoading(true)
+	// 	const formData = new FormData();
+	// 	formData.append("image", e.target.files[0]);
+	// 	const res = await fetch("/api/restaurants/image", {
+	// 		method: "POST",
+	// 		body: formData,
+	// 	});
+	// 	if (res.ok) {
 
+	// 	}
+	// }
 	return (
 		<div className="login-signup-cont new-biz-form-cont">
 			{errors.length > 0 && firstSubmit && (
@@ -257,14 +257,16 @@ export default function NewRestaurantForm() {
 						</ComboboxList>
 					</ComboboxPopover>
 				</Combobox>
-				<div className="form-email">
+				<div className="form-image">
 					<input
-						placeholder="Image Url"
-						value={image}
-						required={true}
-						onChange={(e) => setImage(e.target.value)}
+						type="file"
+						accept="image/png, image/jpg, image/jpeg"
+						ref={hiddenFileInput}
+						style={{ display: "none" }}
+						onChange={(e) => setImage(e.target.files[0])}
 					/>
-					{imageError && <p>Invalid Image Url</p>}
+					<button onClick={handleClick}>Upload Image</button>
+					<div>{image?.name}</div>
 				</div>
 				<div className="form-email">
 					<input
@@ -365,106 +367,13 @@ export default function NewRestaurantForm() {
 				<div>
 					<button>Submit</button>
 				</div>
+				{loading && <div>
+					<img src={loadingImage} />
+				</div>}
 			</form>
 			<div className="login-signup-image-cont">
 				<img src={signinImage} />
 			</div>
 		</div>
 	);
-}
-//AWS Image Upload
-{
-	/* <div> */
-}
-{
-	/* <label>Image:</label> */
-}
-{
-	/* <input */
-}
-{
-	/* // type="file" */
-}
-{
-	/* // id="files" */
-}
-{
-	/* // className="hidden" */
-}
-{
-	/* // onChange={(e) => setImage(e.target.files[0])} */
-}
-{
-	/* // /> */
-}
-{
-	/* <label for="files">Select file</label> */
-}
-{
-	/* {image && <p>{image.name}</p>} */
-}
-{
-	/* {imageLoading && ( */
-}
-{
-	/* // <p> */
-}
-{
-	/* Uploading{" "} */
-}
-{
-	/* <img src="https://i.gifer.com/ZZ5H.gif" alt="Uploading"></img> */
-}
-{
-	/* </p> */
-}
-{
-	/* // )} */
-}
-{
-	/* </div> */
-}
-
-//AWS Image Upload onSubmit
-// const formData = new FormData();
-// formData.append("image", image);
-// setImageLoading(true);
-// const res = await fetch("/api/restaurants/image", {
-// method: "POST",
-// body: formData,
-// });
-// if (res.ok) {
-// const jsonRes = await res.json();
-// setImageLoading(false);
-
-//Plain Address inputs
-{
-	/* <div>
-	<input
-		placeholder="address"
-		value={address}
-		onChange={(e) => setAddress(e.target.value)}
-	/>
-</div>
-<div>
-	<input
-		placeholder="city"
-		value={city}
-		onChange={(e) => setCity(e.target.value)}
-	/>
-</div>
-<div>
-	<input
-		placeholder="state"
-		value={state}
-		onChange={(e) => setState(e.target.value)}
-	/>
-</div>
-<div>
-	<input
-		placeholder="zipcode"
-		value={zipCode}
-		onChange={(e) => setZipCode(e.target.value)}
-	/>
-</div> */
 }
