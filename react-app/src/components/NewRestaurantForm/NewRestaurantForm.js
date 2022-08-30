@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkAddRestaurant } from "../../store/restaurants";
 import { thunkGetOneRestaurant } from "../../store/restaurants";
 import signinImage from "../assets/yelp-signin-image.png";
+import loadingImage from "../assets/loading.gif";
 import "./NewRestaurantForm.css";
 import { useHistory } from "react-router-dom";
 import {
@@ -48,8 +49,8 @@ export default function NewRestaurantForm() {
 	const [closeMinutes, setCloseMinutes] = useState("00");
 	const [openAmPm, setOpenAmPm] = useState("AM");
 	const [closeAmPm, setCloseAmPm] = useState("PM");
-	// const [showErrors, SetShowErrors] = useState(false);
-	const [imageError, setImageError] = useState(false);
+	const [showErrors, SetShowErrors] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const [firstSubmit, setFirstSubmit] = useState(false);
 
@@ -72,11 +73,11 @@ export default function NewRestaurantForm() {
 		return re.test(phoneNumber);
 	};
 
-	const validateImageExt = (img) => {
-		let re =
-			/(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i;
-		return re.test(img);
-	};
+	// const validateImageExt = (img) => {
+	// 	let re =
+	// 		/(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i;
+	// 	return re.test(img);
+	// };
 	function onlySpaces(str) {
 		return /^\s*$/.test(str);
 	}
@@ -90,9 +91,9 @@ export default function NewRestaurantForm() {
 			errors.push("Restaurant must have a description");
 		if (!selectedAddress.length)
 			errors.push("Must select an address from the dropdown options");
-		if (!validateImageExt(image))
-			errors.push("Image must be a png, jpg, or jpeg");
-		if (imageError) errors.push("Image Url is corrupted");
+		// if (!validateImageExt(image))
+		// 	errors.push("Image must be a png, jpg, or jpeg");
+		// if (imageError) errors.push("Image Url is corrupted");
 		if (!validatePhoneNumber(phoneNumber))
 			errors.push("Phone number not valid");
 		setErrors(errors);
@@ -107,69 +108,68 @@ export default function NewRestaurantForm() {
 		phoneNumber,
 		priceRange,
 		image,
-		imageError,
+		// imageError,
 	]);
-
-	function checkImage(url) {
-		const image = new Image();
-		image.src = url;
-		setTimeout(() => {
-			if (image.width > 0) {
-				setImageError(false);
-				// console.log("good image");
-			} else {
-				setImageError(true);
-				// console.log("bad image");
-			}
-		}, 100);
-	}
-	useEffect(() => {
-		console.log(image)
-	}, [image]);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		setFirstSubmit(true);
-		// SetShowErrors(true);
-		// if (!imageError && !errors.length) {
-		// 	const hours = `${openHour}:${openMinutes} ${openAmPm} - ${closeHour}:${closeMinutes} ${closeAmPm}`;
-		// 	const restaurant = {
-		// 		name,
-		// 		description,
-		// 		cuisine,
-		// 		address: selectedAddress,
-		// 		zipCode,
-		// 		lat,
-		// 		lng,
-		// 		phoneNumber,
-		// 		priceRange,
-		// 		hours,
-		// 		image,
-		// 	};
-
-		// 	const response = await dispatch(thunkAddRestaurant(restaurant));
-
-		// 	if (response === "Restaurant Added") {
-		// 		history.push("/restaurants");
-		// 	}
-		// }
+		setLoading(true);
 		const formData = new FormData();
 		formData.append("image", image);
 		const res = await fetch("/api/restaurants/image", {
 			method: "POST",
 			body: formData,
 		});
+		if (res.ok) {
+			const jsonRes = await res.json();
+			setLoading(false);
+			SetShowErrors(true);
+			if (!loading && !errors.length) {
+				const hours = `${openHour}:${openMinutes} ${openAmPm} - ${closeHour}:${closeMinutes} ${closeAmPm}`;
+				const restaurant = {
+					name,
+					description,
+					cuisine,
+					address: selectedAddress,
+					zipCode,
+					lat,
+					lng,
+					phoneNumber,
+					priceRange,
+					hours,
+					image: jsonRes.image,
+				};
+
+				const response = await dispatch(thunkAddRestaurant(restaurant));
+
+				if (response === "Restaurant Added") {
+					history.push("/restaurants");
+				}
+			}
+		}
 	};
 	// };
 	const clearErrors = () => {
 		setFirstSubmit(false);
 	};
-	const handleClick = e => {
-        e.preventDefault();
+	const handleClick = (e) => {
+		e.preventDefault();
 		hiddenFileInput.current.click();
-		console.log(image)
-      };
+	};
 
+	// const uploadImage = (e) => {
+	// 	setImageLoading(true)
+	// 	const formData = new FormData();
+	// 	formData.append("image", e.target.files[0]);
+	// 	const res = await fetch("/api/restaurants/image", {
+	// 		method: "POST",
+	// 		body: formData,
+	// 	});
+	// 	if (res.ok) {
+
+	// 	}
+	// }
 	return (
 		<div className="login-signup-cont new-biz-form-cont">
 			{errors.length > 0 && firstSubmit && (
@@ -265,12 +265,11 @@ export default function NewRestaurantForm() {
 						type="file"
 						accept="image/*"
 						ref={hiddenFileInput}
-						style={{ display: 'none' }}
-						onChange={(e)=>setImage(e.target.files[0])}
+						style={{ display: "none" }}
+						onChange={(e) => setImage(e.target.files[0])}
 					/>
 					<button onClick={handleClick}>Upload Image</button>
 					<div>{image?.name}</div>
-
 				</div>
 				<div className="form-email">
 					<input
@@ -371,6 +370,9 @@ export default function NewRestaurantForm() {
 				<div>
 					<button>Submit</button>
 				</div>
+				{loading && <div>
+					<img src={loadingImage} />
+				</div>}
 			</form>
 			<div className="login-signup-image-cont">
 				<img src={signinImage} />
