@@ -49,7 +49,6 @@ export default function NewRestaurantForm() {
 	const [closeMinutes, setCloseMinutes] = useState("00");
 	const [openAmPm, setOpenAmPm] = useState("AM");
 	const [closeAmPm, setCloseAmPm] = useState("PM");
-	const [showErrors, SetShowErrors] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const [firstSubmit, setFirstSubmit] = useState(false);
@@ -108,7 +107,6 @@ export default function NewRestaurantForm() {
 		phoneNumber,
 		priceRange,
 		image,
-		// imageError,
 	]);
 
 	const onSubmit = async (e) => {
@@ -124,7 +122,6 @@ export default function NewRestaurantForm() {
 		if (res.ok) {
 			const jsonRes = await res.json();
 			setLoading(false);
-			SetShowErrors(true);
 			if (!loading && !errors.length) {
 				const hours = `${openHour}:${openMinutes} ${openAmPm} - ${closeHour}:${closeMinutes} ${closeAmPm}`;
 				const restaurant = {
@@ -263,7 +260,7 @@ export default function NewRestaurantForm() {
 				<div className="form-image">
 					<input
 						type="file"
-						accept="image/*"
+						accept="image/png, image/jpg, image/jpeg"
 						ref={hiddenFileInput}
 						style={{ display: "none" }}
 						onChange={(e) => setImage(e.target.files[0])}

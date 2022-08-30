@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkAddRestaurant } from "../../store/restaurants";
 import { thunkGetOneRestaurant } from "../../store/restaurants";
 import { thunkEditRestaurant } from "../../store/restaurants";
 import { useHistory, useParams } from "react-router-dom";
 import signinImage from "../assets/yelp-signin-image.png";
+import loadingImage from "../assets/loading.gif";
 import {
 	GoogleMap,
 	useLoadScript,
-	useJsApiLoader
+	useJsApiLoader,
 } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
 	getGeocode,
@@ -32,17 +33,21 @@ export function EditRestaurantForm() {
 	const history = useHistory();
 	const { restaurantId } = useParams();
 	useEffect(() => {
-		thunkGetOneRestaurant(restaurantId)
-	},[dispatch])
-	const currentResaurant = useSelector((state) => state.restaurants[restaurantId]);
+		thunkGetOneRestaurant(restaurantId);
+	}, [dispatch]);
+	const currentResaurant = useSelector(
+		(state) => state.restaurants[restaurantId]
+	);
 	// console.log(currentResaurant)
 	const key = useSelector((state) => state.maps.key);
 	const sessionUser = useSelector((state) => state.session.user);
-	const isOwner = sessionUser?.id == currentResaurant?.user.id
+	const isOwner = sessionUser?.id == currentResaurant?.user.id;
+	const hiddenFileInput = useRef(null);
 	const [name, setName] = useState(currentResaurant?.name);
 	const [description, setDescription] = useState(currentResaurant?.description);
 	const [cuisine, setCuisine] = useState(currentResaurant?.cuisine);
 	const [image, setImage] = useState(currentResaurant?.image);
+	const [imageChange, setImageChange] = useState(false);
 	const [address, setAddress] = useState(currentResaurant?.address);
 	const [selectedAddress, setSelectedAddress] = useState(true);
 	const [lat, setLat] = useState(currentResaurant?.lat);
@@ -56,11 +61,10 @@ export function EditRestaurantForm() {
 	const [closeMinutes, setCloseMinutes] = useState("00");
 	const [openAmPm, setOpenAmPm] = useState("AM");
 	const [closeAmPm, setCloseAmPm] = useState("PM");
-	// const [showErrors, SetShowErrors] = useState(false);
-	const [imageError, setImageError] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const [firstSubmit, setFirstSubmit] = useState(false);
-	console.log(zipCode)
+	console.log(zipCode);
 	useEffect(() => {
 		setName(currentResaurant?.name);
 		setDescription(currentResaurant?.description);
@@ -75,7 +79,7 @@ export function EditRestaurantForm() {
 	//Google Places Address
 	const {
 		ready,
-		value=currentResaurant?.name,
+		value = currentResaurant?.name,
 		suggestions: { status, data },
 		setValue,
 		clearSuggestions,
@@ -91,10 +95,6 @@ export function EditRestaurantForm() {
 		return re.test(phoneNumber);
 	};
 
-	const validateImageExt = (img) => {
-		let re = /(http[s]*:\/\/)([a-z\-_0-9\/.]+)\.([a-z.]{2,3})\/([a-z0-9\-_\/._~:?#\[\]@!$&'()*+,;=%]*)([a-z0-9]+\.)(jpg|jpeg|png)/i;
-		return re.test(img);
-	};
 	function onlySpaces(str) {
 		return /^\s*$/.test(str);
 	}
@@ -102,59 +102,90 @@ export function EditRestaurantForm() {
 		const errors = [];
 		if (onlySpaces(name)) errors.push("Restaurant must have a name");
 		if (name?.length > 50) errors.push("Name must be 50 characters or less");
-		if (onlySpaces(description)) errors.push("Restaurant must have a description");
-		if (description?.length > 355) errors.push('Description must be under 355 character')
-		if (!selectedAddress) errors.push('Must select an address from the dropdown options')
-		if (!validateImageExt(image)) errors.push('Image must be a png, jpg, or jpeg')
-		if(imageError) errors.push('Image Url is corrupted')
-		if (!validatePhoneNumber(phoneNumber)) errors.push('Phone number not valid')
+		if (onlySpaces(description))
+			errors.push("Restaurant must have a description");
+		if (description?.length > 355)
+			errors.push("Description must be under 355 character");
+		if (!selectedAddress)
+			errors.push("Must select an address from the dropdown options");
+		if (!validatePhoneNumber(phoneNumber))
+			errors.push("Phone number not valid");
 		setErrors(errors);
-	}, [name, description, cuisine, selectedAddress,zipCode,lat,lng,phoneNumber,priceRange,image,imageError]);
-
-	function checkImage(url) {
-		const image = new Image();
-		image.src = url;
-		setTimeout(() => {
-			if (image.width > 0) {
-				setImageError(false);
-				// console.log("good image");
-			} else {
-				setImageError(true);
-				// console.log("bad image");
-			}
-		}, 100);
-	}
-	useEffect(() => {
-		if (image) {
-			checkImage(image);
-		}
-	}, [image]);
+	}, [
+		name,
+		description,
+		cuisine,
+		selectedAddress,
+		zipCode,
+		lat,
+		lng,
+		phoneNumber,
+		priceRange,
+		image,
+	]);
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		setFirstSubmit(true);
-		// SetShowErrors(true);
-		if (!imageError && !errors.length) {
-			const hours = `${openHour}:${openMinutes} ${openAmPm} - ${closeHour}:${closeMinutes} ${closeAmPm}`;
-			const restaurant = {
-				name,
-				description,
-				cuisine,
-				address,
-				zipCode,
-				lat,
-				lng,
-				phoneNumber,
-				priceRange,
-				hours,
-				image,
-				id:restaurantId
-			};
+		if (imageChange) {
+			setLoading(true);
+			const formData = new FormData();
+			formData.append("image", image);
+			const res = await fetch("/api/restaurants/image", {
+				method: "POST",
+				body: formData,
+			});
+			if (res.ok) {
+				const jsonRes = await res.json();
+				setLoading(false);
+				if (!loading && !errors.length) {
+					const hours = `${openHour}:${openMinutes} ${openAmPm} - ${closeHour}:${closeMinutes} ${closeAmPm}`;
+					const restaurant = {
+						name,
+						description,
+						cuisine,
+						address: selectedAddress,
+						zipCode,
+						lat,
+						lng,
+						phoneNumber,
+						priceRange,
+						hours,
+						image: jsonRes.image,
+						id:restaurantId
+					};
 
-			const response = await dispatch(thunkEditRestaurant(restaurant));
+					const response = await dispatch(thunkEditRestaurant(restaurant));
 
-			if (response === "Restaurant Updated") {
-				history.push(`/restaurants/${restaurantId}`);
+					if (response === "Restaurant Updated") {
+						history.push(`/restaurants/${restaurantId}`);
+					}
+				}
+			}
+		} else {
+			setLoading(false);
+			if (!loading && !errors.length) {
+				const hours = `${openHour}:${openMinutes} ${openAmPm} - ${closeHour}:${closeMinutes} ${closeAmPm}`;
+				const restaurant = {
+					name,
+					description,
+					cuisine,
+					address: selectedAddress,
+					zipCode,
+					lat,
+					lng,
+					phoneNumber,
+					priceRange,
+					hours,
+					image,
+					id:restaurantId
+				};
+
+				const response = await dispatch(thunkEditRestaurant(restaurant));
+
+				if (response === "Restaurant Updated") {
+					history.push(`/restaurants/${restaurantId}`);
+				}
 			}
 		}
 	};
@@ -162,9 +193,14 @@ export function EditRestaurantForm() {
 	const clearErrors = () => {
 		setFirstSubmit(false);
 	};
+	const handleClick = (e) => {
+		e.preventDefault();
+		hiddenFileInput.current.click();
+	};
 	if (!isOwner) {
-		return(<h1>NOT AUTHORIZED</h1>)
+		return <h1>NOT AUTHORIZED</h1>;
 	}
+	console.log(image);
 	return (
 		<div className="login-signup-cont">
 			{errors.length > 0 && firstSubmit && (
@@ -180,7 +216,7 @@ export function EditRestaurantForm() {
 				</div>
 			)}
 			<form className="login-signup-form-cont" onSubmit={onSubmit}>
-			<div className="login-signup-header">
+				<div className="login-signup-header">
 					<h3>Edit Business</h3>
 					<p className="signup-text">Connect with your local community</p>
 				</div>
@@ -202,7 +238,11 @@ export function EditRestaurantForm() {
 					/>
 				</div>
 				<div>
-					<select className="form-cuisine-price" value={cuisine} onChange={(e) => setCuisine(e.target.value)}>
+					<select
+						className="form-cuisine-price"
+						value={cuisine}
+						onChange={(e) => setCuisine(e.target.value)}
+					>
 						<option>Chinese</option>
 						<option>Burgers</option>
 						<option>Korean</option>
@@ -229,7 +269,7 @@ export function EditRestaurantForm() {
 							const results = await getGeocode({ address });
 							const { lat, lng } = await getLatLng(results[0]);
 							const mapsZipCode = await getZipCode(results[0]);
-							console.log(mapsZipCode)
+							console.log(mapsZipCode);
 							setLat(lat);
 							setLng(lng);
 							setZipCode(mapsZipCode);
@@ -240,11 +280,10 @@ export function EditRestaurantForm() {
 				>
 					<ComboboxInput
 						value={value.length ? value : currentResaurant?.address}
-
 						onChange={(e) => {
-							setSelectedAddress(false)
-							if(!e.target.value.length) setValue(' ')
-							if(e.target.value.length) setValue(e.target.value)
+							setSelectedAddress(false);
+							if (!e.target.value.length) setValue(" ");
+							if (e.target.value.length) setValue(e.target.value);
 						}}
 						disabled={!ready}
 						placeholder="Address"
@@ -259,14 +298,19 @@ export function EditRestaurantForm() {
 						</ComboboxList>
 					</ComboboxPopover>
 				</Combobox>
-				<div className="form-email">
+				<div className="form-image">
 					<input
-						placeholder="Image Url"
-						value={image}
-						required={true}
-						onChange={(e) => setImage(e.target.value)}
+						type="file"
+						accept="image/png, image/jpg, image/jpeg"
+						ref={hiddenFileInput}
+						style={{ display: "none" }}
+						onChange={(e) => {
+							setImage(e.target.files[0])
+							setImageChange(true)
+						}}
 					/>
-					{imageError && <p>Invalid Image Url</p>}
+					<button onClick={handleClick}>Upload Image</button>
+					<div>{image?.name}</div>
 				</div>
 				<div className="form-email">
 					<input
@@ -359,6 +403,9 @@ export function EditRestaurantForm() {
 				<div>
 					<button>Submit</button>
 				</div>
+				{loading && <div>
+					<img src={loadingImage} />
+				</div>}
 			</form>
 			<div className="login-signup-image-cont">
 				<img src={signinImage} />
