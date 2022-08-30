@@ -40,8 +40,7 @@ export default function SingleRestaurant() {
 	console.log(restaurant);
 	const style = {
 		backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0,0),rgba(0, 0, 0,0),57%, rgba(0, 0, 0,0.9)), url(${restaurant?.image})`,
-		backgroundPosition: "center",
-		backgroundSize: "scale-down",
+		backgroundSize: "auto 432px",
 	};
 	const openAddReviewForm = () => {
 		setAddReview(true);
