@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkAddRestaurant } from "../../store/restaurants";
 import { thunkGetOneRestaurant } from "../../store/restaurants";
@@ -31,6 +31,7 @@ export default function NewRestaurantForm() {
 	const history = useHistory();
 	const key = useSelector((state) => state.maps.key);
 	const sessionUser = useSelector((state) => state.session.user);
+	const hiddenFileInput = useRef(null);
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [cuisine, setCuisine] = useState("Chinese");
@@ -123,9 +124,7 @@ export default function NewRestaurantForm() {
 		}, 100);
 	}
 	useEffect(() => {
-		if (image) {
-			checkImage(image);
-		}
+		console.log(image)
 	}, [image]);
 
 	const onSubmit = async (e) => {
@@ -155,23 +154,21 @@ export default function NewRestaurantForm() {
 		// 	}
 		// }
 		const formData = new FormData();
-            formData.append('image', image)
-            const res = await fetch('/api/restaurants/image', {
-                method: 'POST',
-                body: formData
-            })
+		formData.append("image", image);
+		const res = await fetch("/api/restaurants/image", {
+			method: "POST",
+			body: formData,
+		});
 	};
 	// };
 	const clearErrors = () => {
 		setFirstSubmit(false);
 	};
-	// const { isLoaded, loadError } = useLoadScript({
-	// 	googleMapsApiKey: key,
-	// 	libraries,
-	// });
-
-	// if (loadError) return "Error loading maps";
-	// if (!isLoaded) return "Loading Map...";
+	const handleClick = e => {
+        e.preventDefault();
+		hiddenFileInput.current.click();
+		console.log(image)
+      };
 
 	return (
 		<div className="login-signup-cont new-biz-form-cont">
@@ -263,17 +260,17 @@ export default function NewRestaurantForm() {
 						</ComboboxList>
 					</ComboboxPopover>
 				</Combobox>
-				{/* <div className="form-email">
+				<div className="form-image">
 					<input
-						placeholder="Image Url"
-						value={image}
-						required={true}
-						onChange={(e) => setImage(e.target.value)}
+						type="file"
+						accept="image/*"
+						ref={hiddenFileInput}
+						style={{ display: 'none' }}
+						onChange={(e)=>setImage(e.target.files[0])}
 					/>
-					{imageError && <p>Invalid Image Url</p>}
-				</div> */}
-				 <div className="form-email">
-				 	<input type="file" onChange={(e) => setImage(e.target.files[0])} />
+					<button onClick={handleClick}>Upload Image</button>
+					<div>{image?.name}</div>
+
 				</div>
 				<div className="form-email">
 					<input
@@ -380,100 +377,4 @@ export default function NewRestaurantForm() {
 			</div>
 		</div>
 	);
-}
-//AWS Image Upload
-{
-	/* <div> */
-}
-{
-	/* <label>Image:</label> */
-}
-{
-	/* <input */
-}
-{
-	/* // type="file" */
-}
-{
-	/* // id="files" */
-}
-{
-	/* // className="hidden" */
-}
-{
-	/* // onChange={(e) => setImage(e.target.files[0])} */
-}
-{
-	/* // /> */
-}
-{
-	/* <label for="files">Select file</label> */
-}
-{
-	/* {image && <p>{image.name}</p>} */
-}
-{
-	/* {imageLoading && ( */
-}
-{
-	/* // <p> */
-}
-{
-	/* Uploading{" "} */
-}
-{
-	/* <img src="https://i.gifer.com/ZZ5H.gif" alt="Uploading"></img> */
-}
-{
-	/* </p> */
-}
-{
-	/* // )} */
-}
-{
-	/* </div> */
-}
-
-//AWS Image Upload onSubmit
-// const formData = new FormData();
-// formData.append("image", image);
-// setImageLoading(true);
-// const res = await fetch("/api/restaurants/image", {
-// method: "POST",
-// body: formData,
-// });
-// if (res.ok) {
-// const jsonRes = await res.json();
-// setImageLoading(false);
-
-//Plain Address inputs
-{
-	/* <div>
-	<input
-		placeholder="address"
-		value={address}
-		onChange={(e) => setAddress(e.target.value)}
-	/>
-</div>
-<div>
-	<input
-		placeholder="city"
-		value={city}
-		onChange={(e) => setCity(e.target.value)}
-	/>
-</div>
-<div>
-	<input
-		placeholder="state"
-		value={state}
-		onChange={(e) => setState(e.target.value)}
-	/>
-</div>
-<div>
-	<input
-		placeholder="zipcode"
-		value={zipCode}
-		onChange={(e) => setZipCode(e.target.value)}
-	/>
-</div> */
 }

@@ -35,7 +35,23 @@
     margin-right: 5px;
 }
 
-
+.form-image{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.form-image button{
+    background-color: transparent;
+    border: 1.6px solid rgb(201, 200, 200);
+    color: rgba(224,7,7,1);
+}
+.form-image button:hover{
+    background-color: rgb(201, 200, 200,0.3);
+}
+.form-image div{
+}
 @media (max-width: 850px){
     .new-biz-form-cont{
         overflow-y: scroll;
