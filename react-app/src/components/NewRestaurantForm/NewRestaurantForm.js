@@ -144,6 +144,8 @@ export default function NewRestaurantForm() {
 					history.push("/restaurants");
 				}
 			}
+		} else {
+			console.log(res)
 		}
 	};
 	// };
