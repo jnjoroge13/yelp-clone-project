@@ -132,28 +132,34 @@ export default function NewRestaurantForm() {
 		e.preventDefault();
 		setFirstSubmit(true);
 		// SetShowErrors(true);
-		if (!imageError && !errors.length) {
-			const hours = `${openHour}:${openMinutes} ${openAmPm} - ${closeHour}:${closeMinutes} ${closeAmPm}`;
-			const restaurant = {
-				name,
-				description,
-				cuisine,
-				address: selectedAddress,
-				zipCode,
-				lat,
-				lng,
-				phoneNumber,
-				priceRange,
-				hours,
-				image,
-			};
+		// if (!imageError && !errors.length) {
+		// 	const hours = `${openHour}:${openMinutes} ${openAmPm} - ${closeHour}:${closeMinutes} ${closeAmPm}`;
+		// 	const restaurant = {
+		// 		name,
+		// 		description,
+		// 		cuisine,
+		// 		address: selectedAddress,
+		// 		zipCode,
+		// 		lat,
+		// 		lng,
+		// 		phoneNumber,
+		// 		priceRange,
+		// 		hours,
+		// 		image,
+		// 	};
 
-			const response = await dispatch(thunkAddRestaurant(restaurant));
+		// 	const response = await dispatch(thunkAddRestaurant(restaurant));
 
-			if (response === "Restaurant Added") {
-				history.push("/restaurants");
-			}
-		}
+		// 	if (response === "Restaurant Added") {
+		// 		history.push("/restaurants");
+		// 	}
+		// }
+		const formData = new FormData();
+            formData.append('image', image)
+            const res = await fetch('/api/restaurants/image', {
+                method: 'POST',
+                body: formData
+            })
 	};
 	// };
 	const clearErrors = () => {
@@ -257,7 +263,7 @@ export default function NewRestaurantForm() {
 						</ComboboxList>
 					</ComboboxPopover>
 				</Combobox>
-				<div className="form-email">
+				{/* <div className="form-email">
 					<input
 						placeholder="Image Url"
 						value={image}
@@ -265,6 +271,9 @@ export default function NewRestaurantForm() {
 						onChange={(e) => setImage(e.target.value)}
 					/>
 					{imageError && <p>Invalid Image Url</p>}
+				</div> */}
+				 <div className="form-email">
+				 	<input type="file" onChange={(e) => setImage(e.target.files[0])} />
 				</div>
 				<div className="form-email">
 					<input
