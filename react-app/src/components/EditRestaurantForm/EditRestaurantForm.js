@@ -38,7 +38,6 @@ export function EditRestaurantForm() {
 	const currentResaurant = useSelector(
 		(state) => state.restaurants[restaurantId]
 	);
-	// console.log(currentResaurant)
 	const key = useSelector((state) => state.maps.key);
 	const sessionUser = useSelector((state) => state.session.user);
 	const isOwner = sessionUser?.id == currentResaurant?.user.id;
@@ -64,7 +63,6 @@ export function EditRestaurantForm() {
 	const [loading, setLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const [firstSubmit, setFirstSubmit] = useState(false);
-	console.log(zipCode);
 	useEffect(() => {
 		setName(currentResaurant?.name);
 		setDescription(currentResaurant?.description);
@@ -200,7 +198,6 @@ export function EditRestaurantForm() {
 	if (!isOwner) {
 		return <h1>NOT AUTHORIZED</h1>;
 	}
-	console.log(image);
 	return (
 		<div className="login-signup-cont">
 			{errors.length > 0 && firstSubmit && (
@@ -260,7 +257,6 @@ export function EditRestaurantForm() {
 				<Combobox
 					className="form-email"
 					onSelect={async (address) => {
-						// console.log(address);
 						setValue(address, false);
 						setSelectedAddress(true);
 						setAddress(address);
@@ -269,12 +265,10 @@ export function EditRestaurantForm() {
 							const results = await getGeocode({ address });
 							const { lat, lng } = await getLatLng(results[0]);
 							const mapsZipCode = await getZipCode(results[0]);
-							console.log(mapsZipCode);
 							setLat(lat);
 							setLng(lng);
 							setZipCode(mapsZipCode);
 						} catch {
-							console.log("error");
 						}
 					}}
 				>

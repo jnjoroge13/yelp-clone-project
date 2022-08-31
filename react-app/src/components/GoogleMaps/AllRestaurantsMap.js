@@ -33,7 +33,6 @@ export default function AllRestaurantsMap( prop ) {
 		lng: Number(restaurant.lng),
 	}));
 	const [selected, setSelected] = useState(null);
-	// console.log(key)
 	// const { isLoaded, loadError } = useLoadScript({
 	// 	googleMapsApiKey: key,
 	// 	libraries,

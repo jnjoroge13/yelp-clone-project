@@ -38,8 +38,6 @@ export default function RestaurantList() {
 			return firstReview.slice(0, 136) + "...";
 		}
 		return firstReview;
-		// console.log(firstReview)
-		// console.log(firstReview?.length)
 	};
 	const getNumberRatings = (restaurantId) => {
 		const restaurantReviews = allReviews.filter(
