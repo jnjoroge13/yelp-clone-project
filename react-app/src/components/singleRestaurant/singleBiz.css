@@ -103,6 +103,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: end;
+	background-size: auto 100%;
 }
 .single-biz-top-stars {
 	display: flex;
