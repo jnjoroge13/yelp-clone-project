@@ -42,7 +42,6 @@ const SignUpForm = () => {
 			errors.push("Email length must be 255 characters or less.");
 		if (password.length > 255)
 			errors.push("Password length must be 255 characters or less.");
-		console.log(errors);
 		setErrors(errors);
 	}, [username, email, password, repeatPassword]);
 
@@ -65,7 +64,6 @@ const SignUpForm = () => {
 	// 		errors.push("Email length must be 255 characters or less.");
 	// 	if (password.length > 255)
 	// 		errors.push("Password length must be 255 characters or less.");
-	// 	console.log(errors);
 	// 	setErrors(errors);
 	// };
 	const onSignUp = async (e) => {
@@ -74,7 +72,6 @@ const SignUpForm = () => {
 		if (!errors.length) {
 			const data = await dispatch(signUp(username, email, password));
 			if (data) {
-				console.log(data)
 				setErrors(data);
 			}
 		}

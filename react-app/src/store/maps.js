@@ -10,7 +10,6 @@ export const thunkGetKey = () => async (dispatch) => {
             method: 'GET',
         });
         const data = await res.json();
-    console.log(`from reducer line13 ${data}`);
     dispatch(actionGetKey(data.googleMapsAPIKey));
 };
 

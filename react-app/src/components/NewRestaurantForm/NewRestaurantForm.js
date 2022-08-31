@@ -227,7 +227,6 @@ export default function NewRestaurantForm() {
 				<Combobox
 					className="form-email"
 					onSelect={async (address) => {
-						// console.log(address);
 						setValue(address, false);
 						setSelectedAddress(address);
 						clearSuggestions();
