@@ -10,6 +10,7 @@ import { EditRestaurantForm } from "./components/EditRestaurantForm/EditRestaura
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import HomePage from "./components/HomePage/HomePage";
+import ProfilePage from "./components/ProfilePage/ProfilePage"
 import SingleRestaurant from "./components/singleRestaurant/singleRestaurant";
 import EditReviewForm from "./components/Reviews/EditReviewPage";
 import User from "./components/User";
@@ -66,6 +67,9 @@ function App() {
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
+				</ProtectedRoute>
+				<ProtectedRoute path="/profiles/:userId" exact={true}>
+					<ProfilePage />
 				</ProtectedRoute>
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<User />
