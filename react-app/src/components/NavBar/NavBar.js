@@ -259,12 +259,12 @@ const NavBar = () => {
 						/>
 						{showDropdown && (
 							<div className="drop-down-menu">
-								{/* <div className="drop-down-divs">
+								<NavLink className="drop-down-divs" to={`/profiles/${sessionUser.id}`}>
 									<div className="drop-down-icons">
 										<i className="fa-regular fa-circle-user fa-xl"></i>
 									</div>
 									<p>About Me</p>
-								</div> */}
+								</NavLink>
 								<div className="drop-down-divs" onClick={onLogout}>
 									<div className="drop-down-icons">
 										<i className="fa fa-arrow-right-from-bracket fa-lg"></i>
